@@ -49,3 +49,77 @@ update_id: 10000
 	from id: 290563423, is_bot: False, first_name: Darya, last_name: Yakimova, username: jadarya, language_code: 
 	date: 1441645532
 	text: /inline
+
+INFO | 09.09.2019 10:26:24 | Microsoft.AspNetCore.Http.Internal.DefaultHttpRequest
+INFO | 09.09.2019 10:26:25 | 
+update_id: 10000
+	message_id: 1365
+	chat id: 290563423, first_name: Darya, last_name: Yakimova, type: private
+	from id: 290563423, is_bot: False, first_name: Darya, last_name: Yakimova, username: jadarya, language_code: 
+	date: 1441645532
+	text: /inline
+
+INFO | 09.09.2019 10:27:50 | Microsoft.AspNetCore.Http.Internal.DefaultHttpRequest
+INFO | 09.09.2019 10:55:57 | {
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 09.09.2019 10:55:57 | 
+update_id: 10000
+	message_id: 1365
+	chat id: 290563423, first_name: Darya, last_name: Yakimova, type: private
+	from id: 290563423, is_bot: False, first_name: Darya, last_name: Yakimova, username: jadarya, language_code: 
+	date: 1441645532
+	text: /inline
+
+INFO | 09.09.2019 11:05:34 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 09.09.2019 11:05:34 | INPUT MESSAGE
+
+update_id: 10000
+	message_id: 1365
+	chat id: 290563423, first_name: Darya, last_name: Yakimova, type: private
+	from id: 290563423, is_bot: False, first_name: Darya, last_name: Yakimova, username: jadarya, language_code: 
+	date: 1441645532
+	text: /inline
+
+INFO | 09.09.2019 11:05:34 | RESPONSE TO USER
+{"chat_id":290563423,"text":"inline menu","reply_markup":"{\"inline_keyboard\":[[{\"text\":\"url1_1\",\"url\":\"ya.ru\",\"callback_data\":\"\"},{\"text\":\"url1_2\",\"url\":\"yandex.ru\",\"callback_data\":\"\"}]]}"}
+INFO | 10.09.2019 12:07:28 | 
+INFO | 10.09.2019 12:08:37 | 
+INFO | 10.09.2019 12:08:51 | 

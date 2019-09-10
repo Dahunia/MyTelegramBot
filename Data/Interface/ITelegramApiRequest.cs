@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using MyTelegramBot.Dtos;
+using MyTelegramBot.Dtos.Telegram;
 
 namespace MyTelegramBot.Data.Work.Interface
 {

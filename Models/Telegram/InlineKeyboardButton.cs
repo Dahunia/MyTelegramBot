@@ -6,7 +6,7 @@ namespace MyTelegramBot.Models.Telegram
         {
             this.text = text;
             this.url = url;
-            this.callback_data = callback_data == "" ? text : callback_data;
+            this.callback_data = callback_data;// == "" ? text : callback_data;
         }
 
         public string text { get; set; }

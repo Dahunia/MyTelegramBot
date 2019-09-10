@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MyTelegramBot.Dtos
+namespace MyTelegramBot.Dtos.Telegram
 {
     public class UpdateForCreationDto
     {

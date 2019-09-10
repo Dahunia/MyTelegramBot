@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using MyTelegramBot.Data.Work.Interface;
-using MyTelegramBot.Dtos;
+using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

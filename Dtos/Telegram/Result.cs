@@ -1,14 +1,12 @@
-using System.Collections.Generic;
-
-namespace MyTelegramBot.Dtos
+namespace MyTelegramBot.Dtos.Telegram
 {
-    public class MessageForCreationDto
-    {        
+    public class Result
+    {
         public long update_id { get; set; }
         public Message message { get; set; }
 
         public override string ToString() {
-            return $"\nupdate_id: {update_id}\n" +
+            return $"update_id: {update_id}\n" +
                 message.ToString();
         }
     }

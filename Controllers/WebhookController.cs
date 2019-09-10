@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyTelegramBot.Data.Work;
-using MyTelegramBot.Dtos;
 using MyTelegramBot.Dtos.Markets.Binance;
 using MyTelegramBot.Data.Interface;
 using System;
@@ -12,6 +11,8 @@ using MyTelegramBot.Models.Settings;
 using MyTelegramBot.Models.Telegram;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using MyTelegramBot.Helpers;
+using MyTelegramBot.Dtos.Telegram;
 
 namespace MyTelegramBot.Controllers
 {
@@ -38,9 +39,28 @@ namespace MyTelegramBot.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(MessageForCreationDto messageForCreationDto)
         {
-            var messageForSend = await CreateMessageForSend(messageForCreationDto.message);
-            await LogInformation(messageForCreationDto.ToString());
+            string request = HttpContext.Request.ReadRequestBody();
+            var obj = JsonConvert.DeserializeObject(request);
+            CallbackQuery cq = null;
+            MessageForCreationDto m = null;
+            if ((cq = obj as CallbackQuery) != null)
+            {
+                int i = 1;
+            }
 
+            if ((m = obj as MessageForCreationDto) != null)
+            {
+                int j = 2;
+            }
+
+            return StatusCode(201);
+            await LogInformation("INPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
+            
+            var messageForSend = await CreateMessageForSend(messageForCreationDto.message);
+            
+            await LogInformation("INPUT MESSAGE\n" + messageForCreationDto.ToString());
+            await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageForSend));
+            
             var response = await _telegramRequest.SendMessage(messageForSend);   
             return StatusCode(201);
         }

@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyTelegramBot.Dtos.Telegram;
 
 namespace MyTelegramBot
 {
@@ -45,6 +46,12 @@ namespace MyTelegramBot
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddSingleton<IReceiver, FileReceiver>();
             services.AddSingleton<IMyLogger, MyLogger>();
+
+         /*    services.AddRouting(options => {
+                options.ConstraintMap["inputMessage"] = typeof(MessageForCreationDto);
+                options.ConstraintMap["inputCallbackQuery"] = typeof(CallbackQuery);
+                //options.ConstraintMap.Add("inputMessage", typeof(MessageForCreationDto));
+            }); */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
