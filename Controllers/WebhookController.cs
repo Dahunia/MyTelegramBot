@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using MyTelegramBot.Helpers;
 using MyTelegramBot.Dtos.Telegram;
+using System.Text.RegularExpressions;
 
 namespace MyTelegramBot.Controllers
 {
@@ -37,28 +38,15 @@ namespace MyTelegramBot.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(MessageForCreationDto messageForCreationDto)
+        public async Task<IActionResult> Index(IncomingRequestDto incomingRequestDto)
         {
-            string request = HttpContext.Request.ReadRequestBody();
-            var obj = JsonConvert.DeserializeObject(request);
-            CallbackQuery cq = null;
-            MessageForCreationDto m = null;
-            if ((cq = obj as CallbackQuery) != null)
-            {
-                int i = 1;
-            }
+            //string request = HttpContext.Request.ReadRequestBody();
 
-            if ((m = obj as MessageForCreationDto) != null)
-            {
-                int j = 2;
-            }
-
-            return StatusCode(201);
             await LogInformation("INPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
             
-            var messageForSend = await CreateMessageForSend(messageForCreationDto.message);
+            var messageForSend = await CreateMessageForSend(incomingRequestDto.message);
             
-            await LogInformation("INPUT MESSAGE\n" + messageForCreationDto.ToString());
+            //await LogInformation("INPUT MESSAGE\n" + incomingRequestDto.ToString());
             await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageForSend));
             
             var response = await _telegramRequest.SendMessage(messageForSend);   

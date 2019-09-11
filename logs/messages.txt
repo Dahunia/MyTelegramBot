@@ -123,3 +123,52 @@ INFO | 09.09.2019 11:05:34 | RESPONSE TO USER
 INFO | 10.09.2019 12:07:28 | 
 INFO | 10.09.2019 12:08:37 | 
 INFO | 10.09.2019 12:08:51 | 
+INFO | 11.09.2019 01:36:40 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 11.09.2019 01:36:40 | INPUT MESSAGE
+MyTelegramBot.Dtos.Telegram.IncomingRequestDto
+INFO | 11.09.2019 01:36:40 | RESPONSE TO USER
+{"chat_id":290563423,"text":"inline menu","reply_markup":"{\"inline_keyboard\":[[{\"text\":\"url1_1\",\"url\":\"ya.ru\",\"callback_data\":\"\"},{\"text\":\"url1_2\",\"url\":\"yandex.ru\",\"callback_data\":\"\"}]]}"}
+INFO | 11.09.2019 01:38:23 | 
+INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 11.09.2019 01:38:23 | RESPONSE TO USER
+{"chat_id":290563423,"text":"inline menu","reply_markup":"{\"inline_keyboard\":[[{\"text\":\"url1_1\",\"url\":\"ya.ru\",\"callback_data\":\"\"},{\"text\":\"url1_2\",\"url\":\"yandex.ru\",\"callback_data\":\"\"}]]}"}

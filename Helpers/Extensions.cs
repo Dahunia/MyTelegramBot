@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 
 namespace MyTelegramBot.Helpers
@@ -22,6 +23,8 @@ namespace MyTelegramBot.Helpers
                 body = reader.ReadToEnd();
             }
             return body;
+            //return body.Replace("\t", "").Replace("\n", "");
+            //return Regex.Replace(body, "[^a-zA-Z0-9_.]", "", RegexOptions.Compiled);
         }
     }
 }
