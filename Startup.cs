@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MyTelegramBot.Data.Interface;
+﻿using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Data.Work;
 using MyTelegramBot.Data.Work.Interface;
 using MyTelegramBot.Models.Settings;
@@ -14,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyTelegramBot.Dtos.Telegram;
+using MyTelegramBot.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MyTelegramBot
 {
@@ -35,8 +33,11 @@ namespace MyTelegramBot
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
+         
+            services.AddDbContext<ProductContext>(options =>
+            
+                options.UseSqlite("Data Source=ProductDatabase.db")//Configuration.GetConnectionString("DefaultConnection"))
+            );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Setting Telegram
