@@ -5,17 +5,19 @@ using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using MyTelegramBot.Data.Interface;
 using Newtonsoft.Json;
 
 namespace MyTelegramBot.Data.Work
 {
     public class ApiGetingData<T>
     {
-    
+        private readonly IMyLogger _filelogger;
         private readonly ILogger _logger;
-        public ApiGetingData(ILogger logger)
+        public ApiGetingData(ILogger logger, IMyLogger filelogger)
         {
             _logger = logger;
+            _filelogger = filelogger;
         }
 
         public async Task<T> GetDataAsync(
@@ -36,20 +38,20 @@ namespace MyTelegramBot.Data.Work
             string proxy = null) 
         {
             WebClient web = new WebClient();            
-            _logger.LogInformation($"Using proxy {proxy}");
+            await LogInformation($"Using proxy {proxy}");
             web.Proxy = new WebProxy(proxy);
-            var parameters = GetParameters(entity);
+            var parameters = await GetParameters(entity);
             
-            _logger.LogInformation($"Was send url: {url} with count of parameters: {parameters.Count}");
+            await LogInformation($"Was send url: {url} with count of parameters: {parameters.Count}");
             return await web.UploadValuesTaskAsync(url, parameters);
         }
-        private NameValueCollection GetParameters(T entity) {
+        private async Task<NameValueCollection> GetParameters(T entity) {
             var parameters = new NameValueCollection();
             Type type = entity.GetType();
 
             foreach(PropertyInfo property in type.GetProperties()) 
             {
-                _logger.LogInformation($"Added {property.Name} " +$"with value: {property.GetValue(entity, null)?.ToString()}");
+                await LogInformation($"Added {property.Name} " +$"with value: {property.GetValue(entity, null)?.ToString()}");
 
                 parameters.Add(
                     property.Name, 
@@ -67,6 +69,12 @@ namespace MyTelegramBot.Data.Work
             throw new Exception();
             //url = url.Replace("pair", pair);
             // .Replace("&limit=count", limit != "" ? $"&limit={limit}" : "");
+        }
+
+        public async Task LogInformation(string message) 
+        {
+            _logger.LogInformation(message);
+            await _filelogger.WriteInformationAsync(message);
         }
     }
 }

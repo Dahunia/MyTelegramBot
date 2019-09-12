@@ -7,6 +7,7 @@ using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MyTelegramBot.Data.Interface;
 
 namespace MyTelegramBot.Data.Work
 {
@@ -14,13 +15,14 @@ namespace MyTelegramBot.Data.Work
     {
         private readonly TelegramSettings _telegramConfig;
         private readonly ILogger<TelegramApiRequest> _logger;
-
+        private readonly IMyLogger _filelogger;
         public TelegramApiRequest(
             IOptions<TelegramSettings> telegramConfig,
             ILogger<TelegramApiRequest> logger)
         {
             _telegramConfig = telegramConfig.Value;
             _logger = logger;
+            _filelogger = _filelogger;
         }
 
         public async Task<byte[]> SendMessage(MessageForSendDto message) 
@@ -61,7 +63,7 @@ namespace MyTelegramBot.Data.Work
 
         private async Task<T> GetRequest<T>(string url) {
             
-            var getRequest = new ApiGetingData<T>(_logger);
+            var getRequest = new ApiGetingData<T>(_logger, _filelogger);
 
             var response = await getRequest.GetDataAsync(
                 url,
@@ -73,7 +75,7 @@ namespace MyTelegramBot.Data.Work
 
         private async Task<byte[]> SendRequest<T>(string url, T entity) {
 
-            var sendRequest = new ApiGetingData<T>(_logger);
+            var sendRequest = new ApiGetingData<T>(_logger, _filelogger);
 
             return await sendRequest.SendDataAsync(
                 entity,
@@ -82,6 +84,11 @@ namespace MyTelegramBot.Data.Work
                     _telegramConfig.Proxies.FirstOrDefault() :
                     null
             );
+        }
+        public async Task<byte[]> AnswerCallbackQuery(AnswerCallbackQueryDto answerCallbackQuery) 
+        {
+            string url = GetUrl("answerCallbackQuery");
+            return await SendRequest(url, answerCallbackQuery);
         }
     }
 }

@@ -1,3 +1,5 @@
+using MyTelegramBot.Models.Telegram;
+
 namespace MyTelegramBot.Dtos.Telegram
 {
     public class Message
@@ -7,7 +9,7 @@ namespace MyTelegramBot.Dtos.Telegram
         public Chat chat { get; set; }
         public int date { get; set; }
         public string text { get; set; }
-
+        public InlineKeyboardMarkup reply_markup { get; set; }
         public override string ToString() {
             return $"\tmessage_id: {message_id}\n" +
                 chat.ToString() + "\n" +

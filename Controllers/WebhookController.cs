@@ -40,19 +40,38 @@ namespace MyTelegramBot.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(IncomingRequestDto incomingRequestDto)
         {
-            //string request = HttpContext.Request.ReadRequestBody();
-
             await LogInformation("INPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
+
+            if (incomingRequestDto.message != null)
+                await AnswerIsMessage(incomingRequestDto.message);
+
+            if (incomingRequestDto.callback_query != null)
+                await AnswerIsCallbackQuery(incomingRequestDto.callback_query);
+
+            return StatusCode(201);
+        }
+        private async Task AnswerIsCallbackQuery(Callback_Query callback_query)
+        {
+            AnswerCallbackQueryDto answerQuery = new AnswerCallbackQueryDto {
+                callback_query_id = callback_query.id,
+                text = callback_query.data
+                //Sample Ожидание... или Ваши данные переданы
+            };
+
+            await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(answerQuery));
             
-            var messageForSend = await CreateMessageForSend(incomingRequestDto.message);
-            
-            //await LogInformation("INPUT MESSAGE\n" + incomingRequestDto.ToString());
+            var response = await _telegramRequest.AnswerCallbackQuery(answerQuery);   
+        }
+
+        private async Task AnswerIsMessage(Message message) 
+        {       
+            var messageForSend = await CreateMessageForSend(message);
+
             await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageForSend));
             
             var response = await _telegramRequest.SendMessage(messageForSend);   
-            return StatusCode(201);
         }
-          private async Task<MessageForSendDto> CreateMessageForSend(Message message) {
+        private async Task<MessageForSendDto> CreateMessageForSend(Message message) {
             var messageForSend = new MessageForSendDto() {
                 chat_id = message.chat.id
             };
@@ -74,7 +93,7 @@ namespace MyTelegramBot.Controllers
                     string symbol = message.text.ToUpper();
                     string url = Binance24hrUrl.Replace("pair", symbol);
                     try {        
-                        var get24hrTicker = new ApiGetingData<_24hrTickerDto>(_logger);
+                        var get24hrTicker = new ApiGetingData<_24hrTickerDto>(_logger, _filelogger);
                         var ticker = await get24hrTicker.GetDataAsync(url);
 
                         messageForSend.text = ticker.ToString();
@@ -101,8 +120,8 @@ namespace MyTelegramBot.Controllers
             return JsonConvert.SerializeObject(new TelegramButtons(keyboard));
         }
         private string GetInlineButtons(long chat_id) {
-            var key1 = new InlineKeyboardButton("url1_1", "ya.ru");
-            var key2 = new InlineKeyboardButton("url1_2", "yandex.ru");
+            var key1 = new InlineKeyboardButton("url1_1", "", "ya.ru");
+            var key2 = new InlineKeyboardButton("url1_2", "", "yandex.ru");
             List<InlineKeyboardButton> keyboardButtons = new List<InlineKeyboardButton>() {
                 key1,
                 key2
