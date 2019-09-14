@@ -3,11 +3,11 @@ using MyTelegramBot.Models.Telegram;
 
 namespace MyTelegramBot.Data
 {
-    public class ProductContext : DbContext
+    public class DataContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public ProductContext(DbContextOptions<ProductContext> options)
+        public DataContext(DbContextOptions<DataContext> options)
             :base(options)
         {   
             Database.EnsureCreated();

@@ -13,7 +13,8 @@ namespace MyTelegramBot.Data.Work
         public readonly string _fileName;
 
         public FileReceiver(IOptions<AppSettings> _appConfig) {
-            _fileName = _appConfig.Value.FileLoggerName;
+            _fileName = _appConfig.Value.FileLoggerName
+                .Replace("date", System.DateTime.Now.ToString("yyyy-MM-dd"));
         }
         public FileReceiver(string fileName) => _fileName = fileName;
         public string Read()

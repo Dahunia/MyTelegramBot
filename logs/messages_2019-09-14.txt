@@ -1,0 +1,169 @@
+﻿
+INFO | 14.09.2019 11:57:12 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 14.09.2019 11:57:16 | RESPONSE TO USER
+{"chat_id":290563423,"text":"inline menu","reply_markup":"{\"inline_keyboard\":[[{\"text\":\"url1_1\",\"url\":\"\",\"callback_data\":\"ya.ru\"},{\"text\":\"url1_2\",\"url\":\"\",\"callback_data\":\"yandex.ru\"}]]}"}
+INFO | 14.09.2019 11:57:16 | Using proxy 46.30.41.33:3128
+INFO | 14.09.2019 11:57:16 | Added chat_id with value: 290563423
+INFO | 14.09.2019 11:57:16 | Added text with value: inline menu
+INFO | 14.09.2019 11:57:16 | Added reply_markup with value: {"inline_keyboard":[[{"text":"url1_1","url":"","callback_data":"ya.ru"},{"text":"url1_2","url":"","callback_data":"yandex.ru"}]]}
+INFO | 14.09.2019 11:57:16 | Was send url: https://api.telegram.org/bot988216202:AAHSpqEi_rLpAS9_rdY2_q_GAXXLFvFx__4/sendMessage with count of parameters: 3
+INFO | 14.09.2019 11:57:21 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 14.09.2019 11:57:24 | RESPONSE TO USER
+{"chat_id":290563423,"text":"inline menu","reply_markup":"{\"inline_keyboard\":[[{\"text\":\"url1_1\",\"url\":\"\",\"callback_data\":\"ya.ru\"},{\"text\":\"url1_2\",\"url\":\"\",\"callback_data\":\"yandex.ru\"}]]}"}
+INFO | 14.09.2019 11:57:24 | Using proxy 46.30.41.33:3128
+INFO | 14.09.2019 11:57:24 | Added chat_id with value: 290563423
+INFO | 14.09.2019 11:57:24 | Added text with value: inline menu
+INFO | 14.09.2019 11:57:24 | Added reply_markup with value: {"inline_keyboard":[[{"text":"url1_1","url":"","callback_data":"ya.ru"},{"text":"url1_2","url":"","callback_data":"yandex.ru"}]]}
+INFO | 14.09.2019 11:57:24 | Was send url: https://api.telegram.org/bot988216202:AAHSpqEi_rLpAS9_rdY2_q_GAXXLFvFx__4/sendMessage with count of parameters: 3
+INFO | 14.09.2019 02:49:39 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 14.09.2019 03:01:30 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 14.09.2019 03:01:30 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 14.09.2019 03:06:12 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 14.09.2019 03:17:30 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 14.09.2019 03:17:45 | RESPONSE TO USER
+{"chat_id":290563423,"text":"inline menu","reply_markup":"{\"inline_keyboard\":[[{\"text\":\"url1_1\",\"url\":\"\",\"callback_data\":\"ya.ru\"},{\"text\":\"url1_2\",\"url\":\"\",\"callback_data\":\"yandex.ru\"}]]}"}
+INFO | 14.09.2019 03:17:45 | Using proxy 46.30.41.33:3128
+INFO | 14.09.2019 03:17:45 | Added chat_id with value: 290563423
+INFO | 14.09.2019 03:17:45 | Added text with value: inline menu
+INFO | 14.09.2019 03:17:45 | Added reply_markup with value: {"inline_keyboard":[[{"text":"url1_1","url":"","callback_data":"ya.ru"},{"text":"url1_2","url":"","callback_data":"yandex.ru"}]]}
+INFO | 14.09.2019 03:17:45 | Was send url: https://api.telegram.org/bot988216202:AAHSpqEi_rLpAS9_rdY2_q_GAXXLFvFx__4/sendMessage with count of parameters: 3

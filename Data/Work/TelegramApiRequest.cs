@@ -18,11 +18,12 @@ namespace MyTelegramBot.Data.Work
         private readonly IMyLogger _filelogger;
         public TelegramApiRequest(
             IOptions<TelegramSettings> telegramConfig,
-            ILogger<TelegramApiRequest> logger)
+            ILogger<TelegramApiRequest> logger,
+            IMyLogger filelogger)
         {
             _telegramConfig = telegramConfig.Value;
             _logger = logger;
-            _filelogger = _filelogger;
+            _filelogger = filelogger;
         }
 
         public async Task<byte[]> SendMessage(MessageForSendDto message) 
@@ -30,31 +31,7 @@ namespace MyTelegramBot.Data.Work
             string url = GetUrl("sendMessage");
             return await SendRequest(url, message);
         }
-        public async Task<UpdateForCreationDto> GetUpdate() 
-        {
-            var url = GetUrl("getUpdates");
-            var lastUpdateId = _telegramConfig.LastUpdate;
-            var query = HttpUtility.ParseQueryString("");
-            
-            if (lastUpdateId != 0) {
-                query["offset"] = lastUpdateId.ToString();
-
-                url += "?" + query.ToString();
-            }
-
-            var update = await GetRequest<UpdateForCreationDto>(url);
-
-            _logger.LogInformation(url + "\n");
-            
-            if (update.result.Count() > 0 ) {
-                 _telegramConfig.LastUpdate = update.result.LastOrDefault().update_id + 1;
-            }
-            else { 
-                _telegramConfig.LastUpdate = 0;
-            }
-
-            return update;
-        }   
+        
         private string GetUrl(string method) {
             return _telegramConfig.BaseEndpoint
                 .Replace("<token>", _telegramConfig.Token)
@@ -85,10 +62,35 @@ namespace MyTelegramBot.Data.Work
                     null
             );
         }
-        public async Task<byte[]> AnswerCallbackQuery(AnswerCallbackQueryDto answerCallbackQuery) 
+        public async Task<byte[]> SendCallback(AnswerCallbackQueryDto answerCallbackQuery) 
         {
             string url = GetUrl("answerCallbackQuery");
             return await SendRequest(url, answerCallbackQuery);
         }
+        public async Task<UpdateForCreationDto> GetUpdate() 
+        {
+            var url = GetUrl("getUpdates");
+            var lastUpdateId = _telegramConfig.LastUpdate;
+            var query = HttpUtility.ParseQueryString("");
+            
+            if (lastUpdateId != 0) {
+                query["offset"] = lastUpdateId.ToString();
+
+                url += "?" + query.ToString();
+            }
+
+            var update = await GetRequest<UpdateForCreationDto>(url);
+
+            _logger.LogInformation(url + "\n");
+            
+            if (update.result.Count() > 0 ) {
+                 _telegramConfig.LastUpdate = update.result.LastOrDefault().update_id + 1;
+            }
+            else { 
+                _telegramConfig.LastUpdate = 0;
+            }
+
+            return update;
+        }   
     }
 }

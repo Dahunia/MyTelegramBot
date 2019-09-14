@@ -7,6 +7,6 @@ namespace MyTelegramBot.Data.Work.Interface
     {
         //Task<UpdateForCreationDto> GetUpdate();
         Task<byte[]> SendMessage(MessageForSendDto message);
-        Task<byte[]> AnswerCallbackQuery(AnswerCallbackQueryDto answerCallbackQuery);
+        Task<byte[]> SendCallback(AnswerCallbackQueryDto answerCallbackQuery);
     }
 }

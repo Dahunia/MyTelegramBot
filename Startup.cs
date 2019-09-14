@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Data;
 using Microsoft.EntityFrameworkCore;
+using MyTelegramBot.Checkers.Messages;
+using System;
 
 namespace MyTelegramBot
 {
@@ -34,7 +36,7 @@ namespace MyTelegramBot
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
          
-            services.AddDbContext<ProductContext>(options =>
+            services.AddDbContext<DataContext>(options =>
             
                 options.UseSqlite("Data Source=ProductDatabase.db")//Configuration.GetConnectionString("DefaultConnection"))
             );
@@ -48,16 +50,31 @@ namespace MyTelegramBot
             services.AddSingleton<IReceiver, FileReceiver>();
             services.AddSingleton<IMyLogger, MyLogger>();
 
-         /*    services.AddRouting(options => {
-                options.ConstraintMap["inputMessage"] = typeof(MessageForCreationDto);
-                options.ConstraintMap["inputCallbackQuery"] = typeof(CallbackQuery);
-                //options.ConstraintMap.Add("inputMessage", typeof(MessageForCreationDto));
+            services.AddTransient<IDataRepository, DataRepository>();
+            services.AddTransient<CallbackChecker>();
+            services.AddTransient<SimpleCommandChecker>();
+          /*   services.AddTransient<IChecker>( (provider) => {
+                var callbackChecker = provider.GetService<CallbackChecker>();
+                var simpleChecker = provider.GetService<SimpleCommandChecker>();
+            
+                callbackChecker.SetNext(simpleChecker);
+
+                return callbackChecker;
             }); */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            //IServiceProvider provider,
+            IApplicationBuilder app, 
+            IHostingEnvironment env)
         {
+            //Setting checker Telegram
+          /*   var callbackChecker = (CallbackChecker)provider.GetService<IChecker>();
+            var simpleChecker = (SimpleCommandChecker)provider.GetService<SimpleCommandChecker>();
+            
+            callbackChecker.SetNext(simpleChecker); */
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
