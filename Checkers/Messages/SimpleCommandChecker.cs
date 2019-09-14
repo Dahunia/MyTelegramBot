@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -15,6 +16,8 @@ namespace MyTelegramBot.Checkers.Messages
     public class SimpleCommandChecker : AbstractChecker
     {
         private const string Binance24hrUrl = "https://api.binance.com/api/v1/ticker/24hr?symbol=pair";
+        private readonly string[] commands = 
+            {"/start", "/remove", "/inline", "/cat"};
         public SimpleCommandChecker(
             ILoggerFactory loggerFactory, 
             IMyLogger filelogger, 
@@ -25,13 +28,17 @@ namespace MyTelegramBot.Checkers.Messages
         public override async Task<object> Checker(IncomingRequestDto incomingRequest)
         {
             var incommingMessageDto = incomingRequest.message;
-            if (incommingMessageDto != null)
+            if (incommingMessageDto != null 
+                && 
+                commands.Contains(incommingMessageDto?.text))
             {
                 var messageForSend = await CreateMessageForSend(incommingMessageDto);
 
                 await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageForSend));
                 
-                var response = await _telegramRequest.SendMessage(messageForSend);   
+                var response = await _telegramRequest.SendMessage(messageForSend);
+
+                return response;
             }
 
             return base.Checker(incomingRequest);
@@ -55,8 +62,6 @@ namespace MyTelegramBot.Checkers.Messages
                     messageForSend.text = "inline menu";
                     messageForSend.reply_markup = GetInlineButtons(message.chat.id);
                     break;
-                case "/cat":
-
                 default:
                     string symbol = message.text.ToUpper();
                     string url = Binance24hrUrl.Replace("pair", symbol);
