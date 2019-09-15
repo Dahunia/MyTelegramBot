@@ -26,7 +26,7 @@ namespace MyTelegramBot.Checkers.Messages
             var incomingMessageDto = incomingRequestDto.message;
             if (incomingMessageDto != null
                 && 
-                incomingMessageDto.text == "/product")
+                incomingMessageDto.Text == "/product")
             {
 
                 var messageForSend = await CreateMessageForSend(incomingMessageDto);
@@ -39,12 +39,12 @@ namespace MyTelegramBot.Checkers.Messages
             }
             return base.Checker(incomingRequestDto);
         }
-        private async Task<MessageForSendDto> CreateMessageForSend(Message message)
+        private async Task<MessageForSendDto> CreateMessageForSend(MessageDto message)
         {
              var messageForSend = new MessageForSendDto() {
-                chat_id = message.chat.id
+                chat_id = message.Chat.Id
             };
-            switch (message.text.ToLower()) {
+            switch (message.Text.ToLower()) {
                 case "/cat":
                     messageForSend.text = "Категории";
                     

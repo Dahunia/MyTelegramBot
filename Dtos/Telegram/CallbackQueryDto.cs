@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Routing;
 
 namespace MyTelegramBot.Dtos.Telegram
 {
-    public class CallbackQuery
+    public class CallbackQueryDto
     {
         public string id { get; set; }
-        public From from { get; set; }
-        public Message message { get; set; }
+        public FromDto from { get; set; }
+        public MessageDto message { get; set; }
         public string chat_instance { get; set; }
         public string data { get; set; }
     }
