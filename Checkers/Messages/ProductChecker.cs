@@ -39,9 +39,9 @@ namespace MyTelegramBot.Checkers.Messages
             }
             return base.Checker(incomingRequestDto);
         }
-        private async Task<MessageForSendDto> CreateMessageForSend(MessageDto message)
+        private async Task<MessageForSendDto<InlineKeyboardMarkup>> CreateMessageForSend(MessageDto message)
         {
-             var messageForSend = new MessageForSendDto() {
+             var messageForSend = new MessageForSendDto<InlineKeyboardMarkup>() {
                 chat_id = message.Chat.Id
             };
             switch (message.Text.ToLower()) {

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Data.Work.Interface;
 using MyTelegramBot.Dtos.Telegram;
+using MyTelegramBot.Models.Telegram;
 
 namespace MyTelegramBot.Checkers.Messages
 {
@@ -41,6 +42,23 @@ namespace MyTelegramBot.Checkers.Messages
         {
             _logger.LogInformation(message);
             await _filelogger.WriteInformationAsync(message);
+        }
+        private async Task<MessageForSendDto<InlineKeyboardMarkup>> CreateMessageForSend(MessageDto message)
+        {
+             var messageForSend = new MessageForSendDto<InlineKeyboardMarkup>() {
+                chat_id = message.Chat.Id
+            };
+            switch (message.Text.ToLower()) {
+                case "/cat":
+                    messageForSend.text = "Категории";
+                    
+                    var inlineKeyboard = new InlineKeyboardMarkup();
+                    
+                    //messageForSend.reply_markup = 
+                    //    GetInlineButtons(message.chat.id);
+                    break;
+            }
+            return messageForSend;
         }
     }
 }

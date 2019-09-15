@@ -25,48 +25,59 @@ namespace MyTelegramBot.Checkers.Messages
             ITelegramApiRequest telegramRequest) 
             : base(loggerFactory, filelogger, telegramRequest)
         {}
-
         public override async Task<object> Checker(IncomingRequestDto incomingRequest)
         {
             var incommingMessageDto = incomingRequest.message;
-            if (incommingMessageDto != null 
-                && 
-                commands.Contains(incommingMessageDto?.Text))
+            if (incommingMessageDto != null ) {
+                var userDto = incommingMessageDto.From;
+                
+            }
+            if (commands.Contains(incommingMessageDto?.Text))
             {
                 var messageForSend = await CreateMessageForSend(incommingMessageDto);
-
-                await LogInformation("RESPONSE TO USER\n" + messageForSend.GetDump());
-                
                 var response = await _telegramRequest.SendMessage(messageForSend);
+              
+                await LogInformation("RESPONSE TO USER\n" + messageForSend.GetDump());
+                await LogInformation("RESPONSE OF REQUEST" + JsonConvert.DeserializeObject(response).GetDump());
 
                 return response;
             }
             return base.Checker(incomingRequest);
         }
-
-         private async Task<MessageForSendDto> CreateMessageForSend(MessageDto message) {
+        private async Task<MessageForSendDto<object>> CreateMessageForSend(MessageDto message) 
+        {
+            MessageForSendDto<object> messageForSend;
             var chatId = message.Chat.Id;
             var messageText = message.Text;
-            var messageForSend = new MessageForSendDto() {
-                chat_id = chatId
-            };
             switch (messageText.ToLower()) {
                 case "/start":
-                    messageForSend.text = "Наберите валютную пару Binance или " +
-                        "выберите из примерных предложенных.";
-                    //messageForSend.reply_markup = GetButtons(chatId);
+                    messageForSend = new MessageForSendDto<object>() {
+                            chat_id = chatId,
+                            text = "Наберите валютную пару Binance или " +
+                                "выберите из примерных предложенных.",
+                            reply_markup = GetButtons(chatId)
+                        };
                     break;
                 case "/remove":
-                    messageForSend.text = "Удаление клавиатуры";
-                    //messageForSend.reply_markup = JsonConvert.SerializeObject(new TelegramRemoveButtons());
+                    messageForSend = new MessageForSendDto<object>() {
+                        chat_id = chatId,
+                        text = "Удаление клавиатуры",
+                        reply_markup = new TelegramRemoveButtons()
+                    };
                     break;
                 case "/inline":
-                    messageForSend.text = "inline menu";
-                    messageForSend.reply_markup = GetInlineButtons(chatId);
+                   messageForSend = new MessageForSendDto<object>() {
+                        chat_id = chatId,
+                        text = "inline menu",
+                        reply_markup = GetInlineButtons(chatId)
+                    };
                     break;
                 default:
                     string symbol = messageText.ToUpper();
                     string url = Binance24hrUrl.Replace("pair", symbol);
+                    messageForSend = new MessageForSendDto<object>() {
+                        chat_id = chatId
+                    };
                     try {        
                         var get24hrTicker = new ApiGetingData<_24hrTickerDto>(_logger, _filelogger);
                         var ticker = await get24hrTicker.GetDataAsync(url);
@@ -77,14 +88,13 @@ namespace MyTelegramBot.Checkers.Messages
                     } catch(Exception ex) {
                         await LogInformation(ex.Message);
 
-                        messageForSend.text = $"Пары на Binance {messageText} не существует";
+                        messageForSend.text  = $"Пары на Binance {messageText} не существует";
                     }
                     break;
             }
             return messageForSend;
         }
-
-        private string GetButtons(long chat_id)
+        private TelegramButtons GetButtons(long chat_id)
         {
             List<string> keyboardButton1 = new List<string>() { "BNBUSDT", "BNBBTC", "BNBETH" };
             List<string> keyboardButton2 = new List<string>() { "BTCUSDT", "ETHUSDT", "LTCUSDT" };
@@ -92,7 +102,8 @@ namespace MyTelegramBot.Checkers.Messages
                 keyboardButton1,
                 keyboardButton2
             };
-            return JsonConvert.SerializeObject(new TelegramButtons(keyboard));
+            //return JsonConvert.SerializeObject(new TelegramButtons(keyboard));
+            return new TelegramButtons(keyboard);
         }
         private InlineKeyboardMarkup GetInlineButtons(long chat_id) {
             var key1 = new InlineKeyboardButton("url1_1", "", "ya.ru");

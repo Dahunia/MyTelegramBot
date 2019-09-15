@@ -32,18 +32,32 @@ namespace MyTelegramBot.Data.Work
 
             return JsonConvert.DeserializeObject<T>(data_str);
         }
-        public async Task<byte[]> SendDataAsync(
+        public async Task<string> SendDataAsync(
             T entity,
             string url,
             string proxy = null) 
         {
-            WebClient web = new WebClient();            
-            await LogInformation($"Using proxy {proxy}");
+            WebClient web = new WebClient();  
+            web.Headers[HttpRequestHeader.ContentType] = "application/json";
             web.Proxy = new WebProxy(proxy);
-            var parameters = await GetParameters(entity);
+            //var parameters = await GetParameters(entity);
             
-            await LogInformation($"Was send url: {url} with count of parameters: {parameters.Count}");
-            return await web.UploadValuesTaskAsync(url, parameters);
+            var jsonData = JsonConvert.SerializeObject(entity);
+            var response = await web.UploadStringTaskAsync(url, "POST", jsonData);
+            
+            await LogInformation($"Using proxy {proxy}");
+            await LogInformation($"SEND TO USER JSON SERIALIZED DATA {jsonData}");
+            //await LogInformation($"Sent to url: {url} with count of parameters: {parameters.Count}");
+            return response;
+        }//return await web.UploadValuesTaskAsync(url, parameters);
+        public Task<T> GetDataAsync(string urlApi, string[] parameters, string proxy)
+        {
+            throw new Exception();
+        }
+        public async Task LogInformation(string message) 
+        {
+            _logger.LogInformation(message);
+            await _filelogger.WriteInformationAsync(message);
         }
         private async Task<NameValueCollection> GetParameters(T entity) {
             var parameters = new NameValueCollection();
@@ -51,13 +65,16 @@ namespace MyTelegramBot.Data.Work
 
             foreach(PropertyInfo property in type.GetProperties()) 
             {
-                //await LogInformation($"Added {property.Name} " +$"with value: {property.GetValue(entity, null)?.ToString()}");
-                if (property.PropertyType.ToString().StartsWith("System") || property.GetValue(entity, null) == null) {
-                    await LogInformation($"Added {property.Name} " + 
-                    $"with value: {property.GetValue(entity, null)?.ToString()}");
-                } else {
-                    await LogInformation($"Added {property.Name} " +
-                        $"with value: {JsonConvert.SerializeObject(property.GetValue(entity, null))}");
+                if (//!property.GetType().Equals(typeof(object))
+                    !property.PropertyType.ToString().StartsWith("System.Object")
+                    &&
+                    (property.PropertyType.ToString().StartsWith("System") 
+                    || property.GetValue(entity, null) == null)) {
+                    await LogInformation($"Parameter: name->'{property.Name}', " + 
+                    $"value->'{property.GetValue(entity, null)?.ToString()}'");
+                } else { 
+                await LogInformation($"Parameter: name->{property.Name}, " +
+                    $"value->{JsonConvert.SerializeObject(property.GetValue(entity, null))}");
                 }
                 parameters.Add(
                     property.Name, 
@@ -69,21 +86,8 @@ namespace MyTelegramBot.Data.Work
             }
             return parameters;
         }
-        public Task<T> GetDataAsync(string urlApi, string[] parameters, string proxy)
-        {
-            throw new Exception();
-            //url = url.Replace("pair", pair);
-            // .Replace("&limit=count", limit != "" ? $"&limit={limit}" : "");
-        }
-
-        public async Task LogInformation(string message) 
-        {
-            _logger.LogInformation(message);
-            await _filelogger.WriteInformationAsync(message);
-        }
     }
 }
-
 /* 
 if (property.PropertyType.ToString().StartsWith("System") || property.GetValue(entity, null) == null) {
     _logger.LogInformation($"Added {property.Name} " +

@@ -26,7 +26,8 @@ namespace MyTelegramBot.Data.Work
             _filelogger = filelogger;
         }
 
-        public async Task<byte[]> SendMessage(MessageForSendDto message) 
+        public async Task<string> SendMessage<TButton>(MessageForSendDto<TButton> message) 
+            where TButton: class
         {
             string url = GetUrl("sendMessage");
             return await SendRequest(url, message);
@@ -50,7 +51,7 @@ namespace MyTelegramBot.Data.Work
             return response;
         } 
 
-        private async Task<byte[]> SendRequest<T>(string url, T entity) {
+        private async Task<string> SendRequest<T>(string url, T entity) {
 
             var sendRequest = new ApiGetingData<T>(_logger, _filelogger);
 
@@ -62,7 +63,7 @@ namespace MyTelegramBot.Data.Work
                     null
             );
         }
-        public async Task<byte[]> SendCallback(AnswerCallbackQueryDto answerCallbackQuery) 
+        public async Task<string> SendCallback(AnswerCallbackQueryDto answerCallbackQuery) 
         {
             string url = GetUrl("answerCallbackQuery");
             return await SendRequest(url, answerCallbackQuery);

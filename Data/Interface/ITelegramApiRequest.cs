@@ -6,7 +6,7 @@ namespace MyTelegramBot.Data.Work.Interface
     public interface ITelegramApiRequest
     {
         //Task<UpdateForCreationDto> GetUpdate();
-        Task<byte[]> SendMessage(MessageForSendDto message);
-        Task<byte[]> SendCallback(AnswerCallbackQueryDto answerCallbackQuery);
+        Task<string> SendMessage<TButton>(MessageForSendDto<TButton> message) where TButton: class;
+        Task<string> SendCallback(AnswerCallbackQueryDto answerCallbackQuery);
     }
 }

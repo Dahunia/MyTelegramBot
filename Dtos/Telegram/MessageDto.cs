@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace MyTelegramBot.Dtos.Telegram
 {
-    public class MessageDto
+    public class MessageDto//<TButton> where TButton : class
     {
         [JsonProperty("message_id")]
         public long MessageId { get; set; }
@@ -15,6 +15,6 @@ namespace MyTelegramBot.Dtos.Telegram
         public ulong Date { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }
-        public InlineKeyboardMarkup reply_markup { get; set; }
+        //public TButton reply_markup { get; set; }
     }
 }
