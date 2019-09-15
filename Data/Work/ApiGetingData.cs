@@ -51,17 +51,22 @@ namespace MyTelegramBot.Data.Work
 
             foreach(PropertyInfo property in type.GetProperties()) 
             {
-                await LogInformation($"Added {property.Name} " +$"with value: {property.GetValue(entity, null)?.ToString()}");
-
+                //await LogInformation($"Added {property.Name} " +$"with value: {property.GetValue(entity, null)?.ToString()}");
+                if (property.PropertyType.ToString().StartsWith("System") || property.GetValue(entity, null) == null) {
+                    await LogInformation($"Added {property.Name} " + 
+                    $"with value: {property.GetValue(entity, null)?.ToString()}");
+                } else {
+                    await LogInformation($"Added {property.Name} " +
+                        $"with value: {JsonConvert.SerializeObject(property.GetValue(entity, null))}");
+                }
                 parameters.Add(
                     property.Name, 
-                    property.GetValue(entity, null)?.ToString()
-                    /*  property.PropertyType.ToString().StartsWith("System") || property.GetValue(entity, null) == null ?
-                        property.GetValue(entity, null)?.ToString() :
-                        JsonConvert.SerializeObject(property.GetValue(entity, null)) */
+                    //property.GetValue(entity, null)?.ToString()
+                    property.PropertyType.ToString().StartsWith("System") || property.GetValue(entity, null) == null ?
+                    property.GetValue(entity, null)?.ToString() :
+                    JsonConvert.SerializeObject(property.GetValue(entity, null))
                 );
             }
-
             return parameters;
         }
         public Task<T> GetDataAsync(string urlApi, string[] parameters, string proxy)

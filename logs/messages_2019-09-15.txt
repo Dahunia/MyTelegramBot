@@ -69,3 +69,82 @@ INFO | 15.09.2019 10:33:17 | INPUT REQUEST
 		"text":"/inline"
 	}
 }
+INFO | 15.09.2019 10:53:00 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 15.09.2019 10:53:00 | RESPONSE TO USER
+{
+  "chat_id": 290563423,
+  "text": "inline menu",
+  "reply_markup": "{\"inline_keyboard\":[[{\"text\":\"url1_1\",\"url\":\"\",\"callback_data\":\"ya.ru\"},{\"text\":\"url1_2\",\"url\":\"\",\"callback_data\":\"yandex.ru\"}]]}"
+}
+INFO | 15.09.2019 10:53:00 | Using proxy 46.30.41.33:3128
+INFO | 15.09.2019 10:53:00 | Added chat_id with value: 290563423
+INFO | 15.09.2019 10:53:00 | Added text with value: inline menu
+INFO | 15.09.2019 10:53:00 | Added reply_markup with value: {"inline_keyboard":[[{"text":"url1_1","url":"","callback_data":"ya.ru"},{"text":"url1_2","url":"","callback_data":"yandex.ru"}]]}
+INFO | 15.09.2019 10:53:00 | Was send url: https://api.telegram.org/bot988216202:AAHSpqEi_rLpAS9_rdY2_q_GAXXLFvFx__4/sendMessage with count of parameters: 3
+INFO | 15.09.2019 11:05:00 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 15.09.2019 11:05:00 | RESPONSE TO USER
+{
+  "chat_id": 290563423,
+  "text": "inline menu",
+  "reply_markup": {
+    "inline_keyboard": [
+      [
+        {
+          "text": "url1_1",
+          "url": "",
+          "callback_data": "ya.ru"
+        },
+        {
+          "text": "url1_2",
+          "url": "",
+          "callback_data": "yandex.ru"
+        }
+      ]
+    ]
+  }
+}
+INFO | 15.09.2019 11:05:00 | Using proxy 46.30.41.33:3128
+INFO | 15.09.2019 11:05:00 | Added chat_id with value: 290563423
+INFO | 15.09.2019 11:05:00 | Added text with value: inline menu
+INFO | 15.09.2019 11:05:00 | Added reply_markup with value: MyTelegramBot.Models.Telegram.InlineKeyboardMarkup
+INFO | 15.09.2019 11:05:00 | Was send url: https://api.telegram.org/bot988216202:AAHSpqEi_rLpAS9_rdY2_q_GAXXLFvFx__4/sendMessage with count of parameters: 3

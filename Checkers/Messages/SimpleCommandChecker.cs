@@ -54,11 +54,11 @@ namespace MyTelegramBot.Checkers.Messages
                 case "/start":
                     messageForSend.text = "Наберите валютную пару Binance или " +
                         "выберите из примерных предложенных.";
-                    messageForSend.reply_markup = GetButtons(chatId);
+                    //messageForSend.reply_markup = GetButtons(chatId);
                     break;
                 case "/remove":
                     messageForSend.text = "Удаление клавиатуры";
-                    messageForSend.reply_markup = JsonConvert.SerializeObject(new TelegramRemoveButtons());
+                    //messageForSend.reply_markup = JsonConvert.SerializeObject(new TelegramRemoveButtons());
                     break;
                 case "/inline":
                     messageForSend.text = "inline menu";
@@ -94,7 +94,7 @@ namespace MyTelegramBot.Checkers.Messages
             };
             return JsonConvert.SerializeObject(new TelegramButtons(keyboard));
         }
-        private string GetInlineButtons(long chat_id) {
+        private InlineKeyboardMarkup GetInlineButtons(long chat_id) {
             var key1 = new InlineKeyboardButton("url1_1", "", "ya.ru");
             var key2 = new InlineKeyboardButton("url1_2", "", "yandex.ru");
             List<InlineKeyboardButton> keyboardButtons = new List<InlineKeyboardButton>() {
@@ -106,7 +106,8 @@ namespace MyTelegramBot.Checkers.Messages
             };
             var inlineMarkup = new InlineKeyboardMarkup(buttons);
 
-            return JsonConvert.SerializeObject(inlineMarkup);
+            //return JsonConvert.SerializeObject(inlineMarkup);
+            return inlineMarkup;
         }
     }
 }

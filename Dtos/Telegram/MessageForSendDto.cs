@@ -1,3 +1,5 @@
+using MyTelegramBot.Models.Telegram;
+
 namespace MyTelegramBot.Dtos.Telegram
 {
     public class MessageForSendDto
@@ -5,6 +7,7 @@ namespace MyTelegramBot.Dtos.Telegram
         public long chat_id { get; set; }
         public string text { get; set; }
         //public TelegramButtons reply_markup { get; set; }
-        public string reply_markup { get; set; }
+        //public string reply_markup { get; set; }
+        public InlineKeyboardMarkup reply_markup { get; set; }
     }
 }
