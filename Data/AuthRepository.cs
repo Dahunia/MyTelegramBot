@@ -9,7 +9,7 @@ namespace MyTelegramBot.Data
         private readonly DataContext _context;
 
         public AuthRepository(DataContext context) => _context = context;
-        
+
         public Task<User> Login(string user, string chat)
         {
             throw new System.NotImplementedException();

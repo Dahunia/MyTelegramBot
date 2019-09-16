@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using MyTelegramBot.Dtos.Telegram;
 
-namespace MyTelegramBot.Data.Work.Interface
+namespace MyTelegramBot.Data.Interface
 {
     public interface ITelegramApiRequest
     {

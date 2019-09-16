@@ -1,19 +1,17 @@
 ﻿using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Data.Work;
-using MyTelegramBot.Data.Work.Interface;
 using MyTelegramBot.Models.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Data;
 using Microsoft.EntityFrameworkCore;
 using MyTelegramBot.Checkers.Messages;
 using System;
+using MyTelegramBot.Checkers.Callback;
 
 namespace MyTelegramBot
 {
@@ -51,6 +49,7 @@ namespace MyTelegramBot
             services.AddSingleton<IMyLogger, MyLogger>();
 
             services.AddTransient<IDataRepository, DataRepository>();
+            services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<CallbackChecker>();
             services.AddTransient<SimpleCommandChecker>();
 

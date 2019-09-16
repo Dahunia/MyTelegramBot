@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Data.Work;
-using MyTelegramBot.Data.Work.Interface;
 using MyTelegramBot.Dtos.Markets.Binance;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
@@ -14,27 +13,24 @@ using MyTelegramBot.Helpers;
 
 namespace MyTelegramBot.Checkers.Messages
 {
-    public class SimpleCommandChecker : AbstractChecker
+    public class SimpleCommandChecker : AbstractMessageChecker
     {
         private const string Binance24hrUrl = "https://api.binance.com/api/v1/ticker/24hr?symbol=pair";
         private readonly string[] commands = 
             {"/start", "/remove", "/inline", "/cat"};
+        private readonly IDataRepository _repo;
         public SimpleCommandChecker(
-            ILoggerFactory loggerFactory, 
-            IMyLogger filelogger, 
-            ITelegramApiRequest telegramRequest) 
-            : base(loggerFactory, filelogger, telegramRequest)
-        {}
-        public override async Task<object> Checker(IncomingRequestDto incomingRequest)
+            IDataRepository repo,
+            IServiceProvider provider)//ILoggerFactory loggerFactory, IMyLogger filelogger, ITelegramApiRequest telegramRequest) 
+            : base(provider)
+            => _repo = repo;
+        public override async Task<object> Checker(MessageDto incomingMessageDto)
         {
-            var incommingMessageDto = incomingRequest.message;
-            if (incommingMessageDto != null ) {
-                var userDto = incommingMessageDto.From;
-                
-            }
-            if (commands.Contains(incommingMessageDto?.Text))
+            var userDto = incomingMessageDto.From;
+
+            if (commands.Contains(incomingMessageDto?.Text))
             {
-                var messageForSend = await CreateMessageForSend(incommingMessageDto);
+                var messageForSend = await CreateMessageForSend(incomingMessageDto);
                 var response = await _telegramRequest.SendMessage(messageForSend);
               
                 await LogInformation("RESPONSE TO USER\n" + messageForSend.GetDump());
@@ -42,7 +38,7 @@ namespace MyTelegramBot.Checkers.Messages
 
                 return response;
             }
-            return base.Checker(incomingRequest);
+            return base.Checker(incomingMessageDto);
         }
         private async Task<MessageForSendDto<object>> CreateMessageForSend(MessageDto message) 
         {

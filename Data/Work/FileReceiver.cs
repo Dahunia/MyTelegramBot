@@ -35,15 +35,25 @@ namespace MyTelegramBot.Data.Work
         {
             //Encoding.RegisterProvider(CodepPagesEncodingProvider.Instance);
             //Encoding.GetEncoding("windows-1251");
-            string tempfile = Path.GetTempFileName();
-
-            using(var writer = new StreamWriter(tempfile, true, Encoding.UTF8))
-            using(var reader = new StreamReader(_fileName))
+            if (!File.Exists(_fileName) ) 
             {
-                await writer.WriteAsync(info);
-                await writer.WriteAsync( await reader.ReadToEndAsync() );
+                using(StreamWriter sw = new StreamWriter(_fileName, true, Encoding.UTF8))
+                {
+                    await sw.WriteLineAsync(info);
+                }
             }
-            File.Copy(tempfile, _fileName, true);
+            else 
+            {
+                string tempfile = Path.GetTempFileName();
+
+                using(var writer = new StreamWriter(tempfile, true, Encoding.UTF8))
+                using(var reader = new StreamReader(_fileName))
+                {
+                    await writer.WriteAsync(info);
+                    await writer.WriteAsync( await reader.ReadToEndAsync() );
+                }
+                File.Copy(tempfile, _fileName, true);
+            }
         }
     }
 }

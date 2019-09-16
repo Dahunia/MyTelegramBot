@@ -1,0 +1,152 @@
+﻿
+INFO | 16.09.2019 09:32:28 | RESPONSE TO USER
+{"callback_query_id":"1247960399920044442","text":"yandex.ru"}
+INFO | 16.09.2019 09:32:28 | INPUT REQUEST 
+{
+  "update_id": 103524658,
+  "callback_query": {
+    "id": "1247960399920044442",
+    "from": {
+      "id": 290563423,
+      "is_bot": false,
+      "first_name": "Darya",
+      "last_name": "Yakimova",
+      "username": "jadarya",
+      "language_code": "ru"
+    },
+    "message": {
+      "message_id": 31,
+      "from": {
+        "id": 988216202,
+        "is_bot": true,
+        "first_name": "DashaBot",
+        "username": "JadaryaBot"
+      },
+      "chat": {
+        "id": 290563423,
+        "first_name": "Darya",
+        "last_name": "Yakimova",
+        "username": "jadarya",
+        "type": "private"
+      },
+      "date": 1568205863,
+      "text": "inline menu",
+      "reply_markup": {
+        "inline_keyboard": [
+          [
+            {
+              "text": "url1_1",
+              "callback_data": "ya.ru"
+            },
+            {
+              "text": "url1_2",
+              "callback_data": "yandex.ru"
+            }
+          ]
+        ]
+      }
+    },
+    "chat_instance": "1360325188801529965",
+    "data": "yandex.ru"
+  }
+}
+INFO | 16.09.2019 09:30:46 | RESPONSE OF REQUEST{
+  "ok": true,
+  "result": {
+    "message_id": 52,
+    "from": {
+      "id": 988216202,
+      "is_bot": true,
+      "first_name": "DashaBot",
+      "username": "JadaryaBot"
+    },
+    "chat": {
+      "id": 290563423,
+      "first_name": "Darya",
+      "last_name": "Yakimova",
+      "username": "jadarya",
+      "type": "private"
+    },
+    "date": 1568637038,
+    "text": "inline menu",
+    "reply_markup": {
+      "inline_keyboard": [
+        [
+          {
+            "text": "url1_1",
+            "callback_data": "ya.ru"
+          },
+          {
+            "text": "url1_2",
+            "callback_data": "yandex.ru"
+          }
+        ]
+      ]
+    }
+  }
+}
+INFO | 16.09.2019 09:30:46 | RESPONSE TO USER
+{
+  "chat_id": 290563423,
+  "text": "inline menu",
+  "reply_markup": {
+    "inline_keyboard": [
+      [
+        {
+          "text": "url1_1",
+          "url": "",
+          "callback_data": "ya.ru"
+        },
+        {
+          "text": "url1_2",
+          "url": "",
+          "callback_data": "yandex.ru"
+        }
+      ]
+    ]
+  }
+}
+INFO | 16.09.2019 09:30:40 | SEND TO USER JSON SERIALIZED DATA {"chat_id":290563423,"text":"inline menu","reply_markup":{"inline_keyboard":[[{"text":"url1_1","url":"","callback_data":"ya.ru"},{"text":"url1_2","url":"","callback_data":"yandex.ru"}]]}}
+INFO | 16.09.2019 09:30:40 | Using proxy 46.30.41.33:3128
+INFO | 16.09.2019 09:30:10 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 16.09.2019 09:27:03 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}

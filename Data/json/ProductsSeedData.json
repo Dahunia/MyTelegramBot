@@ -6,6 +6,13 @@
         ,"CategoryId": "1"
         ,"Price": "100"
     }
+    , { 
+        "CodeLanguage": "en"
+        ,"Name": "Coca-cola"
+        ,"Description": "Coca-cola classic. 1л"
+        ,"CategoryId": "1"
+        ,"Price": "10$"
+    }
     ,{
         "CodeLanguage": "ru"
         ,"Name": "Сок апельсиновый"

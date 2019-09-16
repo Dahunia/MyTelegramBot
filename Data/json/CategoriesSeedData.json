@@ -8,8 +8,8 @@
     {
         "Id": 11,
         "CodeLanguage": "en",
-        "Name": "Напитки"
-        ,"Parent": "7"
+        "Name": "Juices"
+        ,"Parent": "77"
     },
     {
         "Id": 2,
@@ -18,15 +18,33 @@
         ,"Parent": "7"
     },
     {
+        "Id": 22,
+        "CodeLanguage": "en",
+        "Name": "Coffee"
+        ,"Parent": "77"
+    },
+    {
         "Id": 3,
         "CodeLanguage": "ru",
         "Name": "Супы"
         ,"Parent": "7"
     },
     {
+        "Id": 33,
+        "CodeLanguage": "en",
+        "Name": "Soups"
+        ,"Parent": "77"
+    },
+    {
         "Id": 4,
         "CodeLanguage": "ru",
         "Name": "Услуги"
+        ,"Parent": "0"
+    },
+    {
+        "Id": 44,
+        "CodeLanguage": "en",
+        "Name": "Services"
         ,"Parent": "0"
     },
     {
@@ -36,9 +54,21 @@
         ,"Parent": "0"
     }
     , {
+        "Id": 55,
+        "CodeLanguage": "en",
+        "Name": "Portfolio"
+        ,"Parent": "0"
+    }
+    , {
         "Id": 6,
         "CodeLanguage": "ru",
         "Name": "Примеры"
+        ,"Parent": "0"
+    }
+    , {
+        "Id": 66,
+        "CodeLanguage": "en",
+        "Name": "Samples"
         ,"Parent": "0"
     }
     , {
@@ -48,10 +78,22 @@
         ,"Parent": "0"
     }
     , {
+        "Id": 77,
+        "CodeLanguage": "en",
+        "Name": "Food Ordering"
+        ,"Parent": "0"
+    }
+    , {
         "Id": 8,
         "CodeLanguage": "ru",
         "Name": "Написание ботова для Whatsapp"
         ,"Parent": "4"
+    }
+    , {
+        "Id": 88,
+        "CodeLanguage": "en",
+        "Name": "Build a Whatsapp bot"
+        ,"Parent": "44"
     }
     , {
         "Id": 9,
@@ -60,16 +102,34 @@
         ,"Parent": "4"
     }
     , {
+        "Id": 99,
+        "CodeLanguage": "en",
+        "Name": "Build a Telegram bot" 
+        ,"Parent": "44"
+    }
+    , {
         "Id": 10,
         "CodeLanguage": "ru",
         "Name": "Написание ботова для Viber"
         ,"Parent": "4"
     }
     , {
+        "Id": 10,
+        "CodeLanguage": "en",
+        "Name": "Build a Viber bot"
+        ,"Parent": "44"
+    }
+    , {
         "Id": 11,
         "CodeLanguage": "ru",
         "Name": "Написание ботова для Vk"
         ,"Parent": "4"
+    }
+    , {
+        "Id": 111,
+        "CodeLanguage": "en",
+        "Name": "Build a Vk bot"
+        ,"Parent": "44"
     }
     , {
         "Id": 12,
@@ -84,6 +144,12 @@
         ,"Parent": "4"
     }
     , {
+        "Id": 133,
+        "CodeLanguage": "en",
+        "Name": "Build and use API Services. A bot for trading on cryptoburges."
+        ,"Parent": "44"
+    }
+    , {
         "Id": 14,
         "CodeLanguage": "ru",
         "Name": "Написание парсеров(avito, gis и др.сайтов)"
@@ -93,6 +159,12 @@
         "Id": 15,
         "CodeLanguage": "ru",
         "Name": "Написание приложений для Windows(Word, Excel и др)"
+        ,"Parent": "4"
+    }
+    , {
+        "Id": 155,
+        "CodeLanguage": "en",
+        "Name": "Build Windows programms(Word, Excel and so on)"
         ,"Parent": "4"
     }
 ]

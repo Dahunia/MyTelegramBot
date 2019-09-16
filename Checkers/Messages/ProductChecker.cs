@@ -2,31 +2,23 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MyTelegramBot.Data.Interface;
-using MyTelegramBot.Data.Work.Interface;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
 using Newtonsoft.Json;
 
 namespace MyTelegramBot.Checkers.Messages
 {
-    public class ProductChecker : AbstractChecker
+    public class ProductChecker : AbstractMessageChecker
     {
         private readonly string[] commands = {"/product", "/cat"};
         private readonly IDataRepository _repo;
-        public ProductChecker(
-            ILoggerFactory loggerFactory, 
-            IMyLogger filelogger, 
-            ITelegramApiRequest telegramRequest,
-            IDataRepository repo) 
-            : base(loggerFactory, filelogger, telegramRequest) =>
+        public ProductChecker(IServiceProvider provider,IDataRepository repo)//ILoggerFactory loggerFactory, IMyLogger filelogger, ITelegramApiRequest telegramRequest) 
+            : base(provider) =>
             _repo = repo;
 
-        public override async Task<object> Checker(IncomingRequestDto incomingRequestDto) 
+        public override async Task<object> Checker(MessageDto incomingMessageDto) 
         {
-            var incomingMessageDto = incomingRequestDto.message;
-            if (incomingMessageDto != null
-                && 
-                incomingMessageDto.Text == "/product")
+            if (incomingMessageDto?.Text == "/product")
             {
 
                 var messageForSend = await CreateMessageForSend(incomingMessageDto);
@@ -37,7 +29,7 @@ namespace MyTelegramBot.Checkers.Messages
 
                 return response;
             }
-            return base.Checker(incomingRequestDto);
+            return base.Checker(incomingMessageDto);
         }
         private async Task<MessageForSendDto<InlineKeyboardMarkup>> CreateMessageForSend(MessageDto message)
         {

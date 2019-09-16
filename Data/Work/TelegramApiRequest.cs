@@ -2,12 +2,11 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using MyTelegramBot.Data.Work.Interface;
+using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Settings;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using MyTelegramBot.Data.Interface;
 
 namespace MyTelegramBot.Data.Work
 {
