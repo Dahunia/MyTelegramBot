@@ -8,6 +8,7 @@ namespace MyTelegramBot.Models.Telegram
         public string Key { get; set; }
         public string CodeLanguage { get; set; }
         public string Name { get; set; }
+        public int Parent { get; set; }
         public List<Product> Products { get; set; }
     }
 }
