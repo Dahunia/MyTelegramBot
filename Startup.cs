@@ -53,28 +53,18 @@ namespace MyTelegramBot
             services.AddTransient<IDataRepository, DataRepository>();
             services.AddTransient<CallbackChecker>();
             services.AddTransient<SimpleCommandChecker>();
-          /*   services.AddTransient<IChecker>( (provider) => {
-                var callbackChecker = provider.GetService<CallbackChecker>();
-                var simpleChecker = provider.GetService<SimpleCommandChecker>();
-            
-                callbackChecker.SetNext(simpleChecker);
 
-                return callbackChecker;
-            }); */
+            // Setting BD
+            services.AddTransient<Seed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            //IServiceProvider provider,
             IApplicationBuilder app, 
-            IHostingEnvironment env)
+            IHostingEnvironment env
+            //,IServiceProvider provider
+            ,Seed seed)
         {
-            //Setting checker Telegram
-          /*   var callbackChecker = (CallbackChecker)provider.GetService<IChecker>();
-            var simpleChecker = (SimpleCommandChecker)provider.GetService<SimpleCommandChecker>();
-            
-            callbackChecker.SetNext(simpleChecker); */
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -87,6 +77,7 @@ namespace MyTelegramBot
             }
 
             //app.UseHttpsRedirection();
+            seed.SeedCategories();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
@@ -99,3 +90,9 @@ namespace MyTelegramBot
         }
     }
 }
+
+//Setting checker Telegram
+/*   var callbackChecker = (CallbackChecker)provider.GetService<IChecker>();
+var simpleChecker = (SimpleCommandChecker)provider.GetService<SimpleCommandChecker>();
+
+callbackChecker.SetNext(simpleChecker); */

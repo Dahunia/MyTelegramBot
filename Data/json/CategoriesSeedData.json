@@ -1,0 +1,32 @@
+[
+    {
+        "Id": 1,
+        "CodeLanguage": "ru",
+        "Name": "Напитки"
+    },
+    {
+        "Id": 2,
+        "CodeLanguage": "ru",
+        "Name": "Кофе"
+    },
+    {
+        "Id": 3,
+        "CodeLanguage": "ru",
+        "Name": "Супы"
+    },
+    {
+        "Id": 4,
+        "CodeLanguage": "ru",
+        "Name": "Услуги"
+    },
+    {
+        "Id": 5,
+        "CodeLanguage": "ru",
+        "Name": "Портфолио"
+    }
+    , {
+        "Id": 6,
+        "CodeLanguage": "ru",
+        "Name": "Примеры"
+    }
+]
