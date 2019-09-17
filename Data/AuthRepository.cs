@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MyTelegramBot.Data.Interface;
+using MyTelegramBot.Interface;
 using MyTelegramBot.Models.Telegram;
 
 namespace MyTelegramBot.Data
@@ -44,5 +44,8 @@ namespace MyTelegramBot.Data
                 return true;
             return false;
         }
+        public async Task<User> GetUser(long userId) =>
+            await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+      
     }
 }

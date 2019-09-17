@@ -1,5 +1,6 @@
-﻿using MyTelegramBot.Data.Interface;
-using MyTelegramBot.Data.Work;
+﻿using MyTelegramBot.Interface;
+using MyTelegramBot.Web;
+using MyTelegramBot.Log;
 using MyTelegramBot.Models.Settings;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -51,6 +52,7 @@ namespace MyTelegramBot
             services.AddTransient<IDataRepository, DataRepository>();
             services.AddTransient<IAuthRepository, AuthRepository>();
             services.AddTransient<CallbackChecker>();
+            services.AddTransient<DataChecker>();
             services.AddTransient<SimpleCommandChecker>();
 
             // Setting BD
@@ -60,10 +62,10 @@ namespace MyTelegramBot
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
-            IHostingEnvironment env
+            IApplicationBuilder app
             //,IServiceProvider provider
-            ,Seed seed)
+            ,Seed seed
+            ,IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -77,7 +79,7 @@ namespace MyTelegramBot
             }
 
             //app.UseHttpsRedirection();
-            seed.SeedCategories();
+            seed.SeedProducts();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

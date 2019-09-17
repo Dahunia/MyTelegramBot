@@ -8,6 +8,8 @@ namespace MyTelegramBot.Models.Telegram
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set;}
-        public List<Message> Messages { get; set; }
+        //Полученные сообщения
+        public ICollection<Message> MessagesReceived { get; set; }
+        //public List<User> FromUsers { get; set;}
     }
 }

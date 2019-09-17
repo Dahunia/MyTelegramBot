@@ -16,5 +16,11 @@ namespace MyTelegramBot.Dtos.Telegram
         public string UserName { get; set; }
         [JsonProperty("language_code")]
         public string LanguageCode { get; set; }
+        public System.DateTime Created { get; set; }
+        public System.DateTime LastActive { get; set; }
+        public FromDto() {
+            Created = System.DateTime.Now;
+            LastActive = System.DateTime.Now;
+        }
     }
 }

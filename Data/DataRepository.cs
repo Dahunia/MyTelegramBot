@@ -2,8 +2,9 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using MyTelegramBot.Data.Interface;
+using MyTelegramBot.Interface;
 using MyTelegramBot.Models.Telegram;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace MyTelegramBot.Data
 {
@@ -12,8 +13,8 @@ namespace MyTelegramBot.Data
         private readonly DataContext _context;
 
         public DataRepository(DataContext context) => _context = context;
-        public void Add<T>(T entity) where T : class => _context.Add(entity);
-
+        public EntityEntry<T> Add<T>(T entity) where T : class => _context.Add(entity);
+        public async Task<bool> SaveAll() => await _context.SaveChangesAsync() > 0;
         public void Delete<T>(T entity) where T : class => _context.Remove(entity);
         public async Task<IEnumerable<Category>> GetCategories()
         {
@@ -38,6 +39,12 @@ namespace MyTelegramBot.Data
             
             return products;
         }
-        public async Task<bool> SaveAll() => await _context.SaveChangesAsync() > 0;
+
+        public async Task<bool> MessageExists(long messageId)
+        {
+            if (await _context.Messages.AnyAsync(m => m.MessageId == messageId))
+                return true;
+            return false;
+        }
     }
 }

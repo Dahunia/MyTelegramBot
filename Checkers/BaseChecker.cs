@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using MyTelegramBot.Data.Interface;
+using MyTelegramBot.Interface;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MyTelegramBot.Checkers

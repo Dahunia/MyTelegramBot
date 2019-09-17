@@ -11,7 +11,7 @@ namespace MyTelegramBot.Data
     {
         private readonly DataContext _context;
         public Seed(DataContext context) => _context = context;
-        public void SeedCategories() 
+        public void SeedProducts() 
         {
             var categoriesData = System.IO.File.ReadAllText("Data/json/CategoriesSeedData.json");
             var categories = JsonConvert.DeserializeObject<List<Category>>(categoriesData);

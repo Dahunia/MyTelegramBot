@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using MyTelegramBot.Data.Interface;
+using MyTelegramBot.Interface;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
 using Newtonsoft.Json;
@@ -15,20 +15,18 @@ namespace MyTelegramBot.Checkers.Messages
             : base(provider) =>
             _repo = repo;
 
-        public override async Task<object> Checker(MessageDto incomingMessageDto) 
+        public override async Task<string> Checker(MessageDto incomingMessageDto) 
         {
-            if (incomingMessageDto?.Text == "/product")
+            switch(incomingMessageDto?.Text.ToLower()) 
             {
+                case "/cat":
+                    var messageForSend = await CreateMessageForSend(incomingMessageDto);   
+                    var response = await _telegramRequest.SendMessage(messageForSend);
 
-                var messageForSend = await CreateMessageForSend(incomingMessageDto);
-
-                await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageForSend));
-                
-                var response = await _telegramRequest.SendMessage(messageForSend);
-
-                return response;
+                    await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageForSend));
+                    return response;
             }
-            return base.Checker(incomingMessageDto);
+            return await base.Checker(incomingMessageDto);
         }
         private async Task<MessageForSendDto<InlineKeyboardMarkup>> CreateMessageForSend(MessageDto message)
         {

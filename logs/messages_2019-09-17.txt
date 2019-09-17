@@ -1,0 +1,164 @@
+﻿
+INFO | 17.09.2019 04:58:47 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 17.09.2019 01:43:53 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 17.09.2019 01:37:07 | RESPONSE OF REQUEST{
+  "ok": true,
+  "result": {
+    "message_id": 53,
+    "from": {
+      "id": 988216202,
+      "is_bot": true,
+      "first_name": "DashaBot",
+      "username": "JadaryaBot"
+    },
+    "chat": {
+      "id": 290563423,
+      "first_name": "Darya",
+      "last_name": "Yakimova",
+      "username": "jadarya",
+      "type": "private"
+    },
+    "date": 1568695019,
+    "text": "inline menu",
+    "reply_markup": {
+      "inline_keyboard": [
+        [
+          {
+            "text": "url1_1",
+            "callback_data": "ya.ru"
+          },
+          {
+            "text": "url1_2",
+            "callback_data": "yandex.ru"
+          }
+        ]
+      ]
+    }
+  }
+}
+INFO | 17.09.2019 01:37:07 | RESPONSE TO USER
+{
+  "chat_id": 290563423,
+  "text": "inline menu",
+  "reply_markup": {
+    "inline_keyboard": [
+      [
+        {
+          "text": "url1_1",
+          "url": "",
+          "callback_data": "ya.ru"
+        },
+        {
+          "text": "url1_2",
+          "url": "",
+          "callback_data": "yandex.ru"
+        }
+      ]
+    ]
+  }
+}
+INFO | 17.09.2019 01:37:02 | SEND TO USER JSON SERIALIZED DATA {"chat_id":290563423,"text":"inline menu","reply_markup":{"inline_keyboard":[[{"text":"url1_1","url":"","callback_data":"ya.ru"},{"text":"url1_2","url":"","callback_data":"yandex.ru"}]]}}
+INFO | 17.09.2019 01:37:02 | Using proxy 46.30.41.33:3128
+INFO | 17.09.2019 01:35:57 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 17.09.2019 01:33:47 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
+INFO | 17.09.2019 01:30:02 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}

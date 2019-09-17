@@ -1,4 +1,3 @@
-using MyTelegramBot.Models.Telegram;
 using Newtonsoft.Json;
 
 namespace MyTelegramBot.Dtos.Telegram
@@ -15,6 +14,8 @@ namespace MyTelegramBot.Dtos.Telegram
         public ulong Date { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }
-        //public TButton reply_markup { get; set; }
+        public System.DateTime MessageSent { get; set; }
+        public MessageDto() =>
+            MessageSent = System.DateTime.Now;
     }
 }

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
-using MyTelegramBot.Data.Interface;
+using MyTelegramBot.Interface;
 using MyTelegramBot.Helpers;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Checkers.Messages;
@@ -31,11 +31,11 @@ namespace MyTelegramBot.Controllers
             _filelogger = filelogger; 
             //_checker = checker;
 
-            _messageChecker = provider.GetService<SimpleCommandChecker>();
+            _messageChecker = provider.GetService<DataChecker>();
+            _messageChecker
+                .SetNext( provider.GetService<SimpleCommandChecker>() );
+
             _callbackChecker = provider.GetService<CallbackChecker>();
-            
-            //_messageChecker = callbackChecker
-            //  .SetNext(simpleChecker);
         }
 
         [HttpPost]
@@ -43,16 +43,16 @@ namespace MyTelegramBot.Controllers
         {
             await LogInformation("INPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
 
-            object checkResult;
+            string checkResult = "";
             if (incomingRequestDto.message != null) {
-                checkResult = _messageChecker.Checker(incomingRequestDto.message);
+                checkResult = await _messageChecker.Checker(incomingRequestDto.message);
             }
             if (incomingRequestDto.callback_query != null) {
-                checkResult = _callbackChecker.Checker(incomingRequestDto.callback_query);
+                //checkResult = await _callbackChecker.Checker(incomingRequestDto.callback_query);
             }
 
+            await LogInformation($"SENT RESPONSE \n {checkResult}");
             return StatusCode(201);
-
         }
         public async Task LogInformation(string message) 
         {

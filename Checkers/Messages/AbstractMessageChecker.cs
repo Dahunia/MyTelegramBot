@@ -18,14 +18,14 @@ namespace MyTelegramBot.Checkers.Messages
 
             return checker;
         }
-        public virtual async Task<object> Checker(MessageDto incomingMessageDto)
+        public virtual async Task<string> Checker(MessageDto incomingMessageDto)
         {
             if (this._nextChecker != null)
             {
                 return await this._nextChecker.Checker(incomingMessageDto);
             }
             else {
-                return null;
+                return "";
             }
         }/* 
         private async Task<MessageForSendDto<InlineKeyboardMarkup>> CreateMessageForSend(MessageDto message)

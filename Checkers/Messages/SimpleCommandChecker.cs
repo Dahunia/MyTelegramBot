@@ -2,8 +2,8 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using MyTelegramBot.Data.Interface;
-using MyTelegramBot.Data.Work;
+using MyTelegramBot.Interface;
+using MyTelegramBot.Web;
 using MyTelegramBot.Dtos.Markets.Binance;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
@@ -22,7 +22,7 @@ namespace MyTelegramBot.Checkers.Messages
             IDataRepository repo,
             IServiceProvider provider): base(provider)
             => _repo = repo;
-        public override async Task<object> Checker(MessageDto incomingMessageDto)
+        public override async Task<string> Checker(MessageDto incomingMessageDto)
         {
             var userDto = incomingMessageDto.From;
 
@@ -36,7 +36,7 @@ namespace MyTelegramBot.Checkers.Messages
 
                 return response;
             }
-            return base.Checker(incomingMessageDto);
+            return await base.Checker(incomingMessageDto);
         }
         private async Task<MessageForSendDto<object>> CreateMessageForSend(MessageDto message) 
         {

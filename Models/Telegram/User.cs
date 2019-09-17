@@ -10,6 +10,10 @@ namespace MyTelegramBot.Models.Telegram
         public string FirstName { get; set; }
         public string UserName { get; set; }
         public string LanguageCode { get; set; }
-        public List<Message> Messages { get; set; }
+        public System.DateTime Created { get; set; }
+        public System.DateTime LastActive { get; set; }
+        public ICollection<Message> MessagesSent { get; set; } // Отправил
+        //public List<Chat> SentToChats { get; set; }
+        //public List<Message> MessageReceived { get; set; } // Получил
     }
 }
