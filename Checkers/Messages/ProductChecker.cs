@@ -22,8 +22,7 @@ namespace MyTelegramBot.Checkers.Messages
                 case "/cat":
                     var messageForSend = await CreateMessageForSend(incomingMessageDto);   
                     var response = await _telegramRequest.SendMessage(messageForSend);
-
-                    await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageForSend));
+                    
                     return response;
             }
             return await base.Checker(incomingMessageDto);

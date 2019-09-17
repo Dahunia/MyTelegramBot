@@ -31,8 +31,7 @@ namespace MyTelegramBot.Checkers.Messages
                 var messageForSend = await CreateMessageForSend(incomingMessageDto);
                 var response = await _telegramRequest.SendMessage(messageForSend);
               
-                await LogInformation("RESPONSE TO USER\n" + messageForSend.GetDump());
-                await LogInformation("RESPONSE OF REQUEST" + JsonConvert.DeserializeObject(response).GetDump());
+                await LogInformation("SENT TO USER\n" + messageForSend.GetDump());
 
                 return response;
             }
