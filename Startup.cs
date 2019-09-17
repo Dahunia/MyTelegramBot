@@ -10,8 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using MyTelegramBot.Data;
 using Microsoft.EntityFrameworkCore;
 using MyTelegramBot.Checkers.Messages;
-using System;
 using MyTelegramBot.Checkers.Callback;
+using AutoMapper;
 
 namespace MyTelegramBot
 {
@@ -54,6 +54,7 @@ namespace MyTelegramBot
             services.AddTransient<SimpleCommandChecker>();
 
             // Setting BD
+            services.AddAutoMapper(typeof(Startup));
             services.AddTransient<Seed>();
         }
 

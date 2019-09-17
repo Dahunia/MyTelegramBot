@@ -1,4 +1,25 @@
 ﻿
+INFO | 16.09.2019 11:07:43 | INPUT REQUEST 
+{
+	"update_id":10000,
+	"message":{
+		"date":1441645532,
+		"chat":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "type":"private"
+		},
+		"message_id":1365,
+		"from":{
+			 "last_name":"Yakimova",
+			 "id":290563423,
+			 "first_name":"Darya",
+			 "username":"jadarya"
+		},
+		"text":"/inline"
+	}
+}
 INFO | 16.09.2019 09:32:28 | RESPONSE TO USER
 {"callback_query_id":"1247960399920044442","text":"yandex.ru"}
 INFO | 16.09.2019 09:32:28 | INPUT REQUEST 

@@ -1,127 +1,142 @@
 [
     {
-        "CodeLanguage": "ru"
+        "Id": 1
+        ,"CodeLanguage": "ru"
         ,"Name": "Coca-cola"
         ,"Description": "Coca-cola классическая. 1л"
         ,"CategoryId": "1"
         ,"Price": "100"
     }
     , { 
-        "CodeLanguage": "en"
+        "Id": 2
+        ,"CodeLanguage": "en"
         ,"Name": "Coca-cola"
         ,"Description": "Coca-cola classic. 1л"
-        ,"CategoryId": "1"
-        ,"Price": "10$"
+        ,"CategoryId": "2"
+        ,"Price": "10"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 3
+        ,"CodeLanguage": "ru"
         ,"Name": "Сок апельсиновый"
         ,"Description": "Сок апельсиновый. 1л"
         ,"CategoryId": "1"
         ,"Price": "90"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 4
+        ,"CodeLanguage": "ru"
         ,"Name": "Молочный коктейль"
         ,"Description": "Молочный коктейль ванильный. 1л"
         ,"CategoryId": "1"
         ,"Price": "111"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 5
+        ,"CodeLanguage": "ru"
         ,"Name": "Кофе крепкое"
         ,"Description": "Кофе крепкое. 1ст"
         ,"CategoryId": "2"
         ,"Price": "200"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 6
+        ,"CodeLanguage": "ru"
         ,"Name": "Кофе со сливками"
         ,"Description": "Кофе со сливками. 1ст"
-        ,"CategoryId": "2"
+        ,"CategoryId": "3"
         ,"Price": "220"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 7
+        ,"CodeLanguage": "ru"
         ,"Name": "Cуп пюре"
         ,"Description": "Суп пюре с грибами. 1 порция"
-        ,"CategoryId": "3"
+        ,"CategoryId": "5"
         ,"Price": "120"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 8
+        ,"CodeLanguage": "ru"
         ,"Name": "Суп с лапшой"
         ,"Description": "Суп с домашней лапшой. 1 порция"
-        ,"CategoryId": "3"
+        ,"CategoryId": "5"
         ,"Price": "120"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 9
+        ,"CodeLanguage": "ru"
         ,"Name": "Борщ"
         ,"Description": "Борщ наваристый. 1ст"
-        ,"CategoryId": "3"
+        ,"CategoryId": "5"
         ,"Price": "70"
     }
     ,{
-        "CodeLanguage": "ru"
-        ,"Name": ""
+        "Id": 10
+        ,"CodeLanguage": "ru"
+        ,"Name": "Кофе со сливками и корицей"
         ,"Description": "Кофе со сливками. 1ст"
-        ,"CategoryId": "4"
+        ,"CategoryId": "3"
         ,"Price": "220"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 11
+        ,"CodeLanguage": "ru"
         ,"Name": "Кофе со сливками"
         ,"Description": "Кофе со сливками. 1ст"
-        ,"CategoryId": "2"
+        ,"CategoryId": "3"
         ,"Price": "220"
     }
-    ,{
-        "CodeLanguage": "ru"
+    ,{   "Id": 12
+        ,"CodeLanguage": "ru"
         ,"Name": "Простой бот для Whatsapp"
         ,"Description": 
             "-Ответы на команды пользователя;\n-Отправка по команде файлов, текста, локации\n-Помощь в размещении бот\n-Консультация по боту Whatsapp"
-        ,"CategoryId": "8"
+        ,"CategoryId": "15"
         ,"Price": "6000"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 13
+        ,"CodeLanguage": "ru"
         ,"Name": "-Админпанель для бота Whatsapp"
         ,"Description": 
             "-Сохранение принятых сообщений в БД, -отображение БД в виде таблице, -поск по таблице, выгрузка в Excel(Word или др.)"
-        ,"CategoryId": "8"
+        ,"CategoryId": "15"
         ,"Price": "10000"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 14
+        ,"CodeLanguage": "ru"
         ,"Name": "-Отправка писем на почту Whatsapp"
         ,"Description": 
             "-Возможность отпрвки письма на указаную почту-Редактирование почтовых адресов"
-        ,"CategoryId": "8"
+        ,"CategoryId": "15"
         ,"Price": "2000"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 15
+        ,"CodeLanguage": "ru"
         ,"Name": "-Работа по распанию Whatsapp"
         ,"Description": 
             "-Возможность отравки письма(сообщения, файла) по расписанию-Возможность создавать периодическую отправку, например каждый 10 минут или в определенный день:час:минута"
-        ,"CategoryId": "8"
+        ,"CategoryId": "15"
         ,"Price": "2000"
     }
     ,{
-        "CodeLanguage": "ru"
+        "Id": 16
+        ,"CodeLanguage": "ru"
         ,"Name": "-Рассылка сообщений в Whatsapp"
         ,"Description": 
             "Рассылка сообщений. 5000 сообщений"
-        ,"CategoryId": "8"
+        ,"CategoryId": "15"
         ,"Price": "3000"
     }
-    ,{
-        "CodeLanguage": "ru"
+    ,{  "Id": 17
+        ,"CodeLanguage": "ru"
         ,"Name": "-Дополнительные возможности Whatsapp"
         ,"Description": 
             "Выполнение каких-то дополнительных услуг"
-        ,"CategoryId": "8"
+        ,"CategoryId": "15"
         ,"Price": "1000"
     }
 ]

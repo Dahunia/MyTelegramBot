@@ -5,8 +5,9 @@ namespace MyTelegramBot.Data.Interface
 {
     public interface IAuthRepository
     {
-        Task<User> Register(User user, Chat chat);
+        Task<User> Register(User user);
+        Task<Chat> Register(Chat chat);
         Task<User> Login(string user, string chat);
-        Task<User> UserExists(string username, string chatId);
+        Task<bool> UserExists(long userId);
     }
 }

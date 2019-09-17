@@ -11,13 +11,8 @@ namespace MyTelegramBot.Checkers
         protected readonly ILogger<BaseChecker> _logger;
         protected readonly IMyLogger _filelogger;
         protected readonly ITelegramApiRequest _telegramRequest;
-        public BaseChecker(
-            IServiceProvider provider
-       /*      ILoggerFactory loggerFactory, 
-            IMyLogger filelogger,
-            ITelegramApiRequest telegramRequest */)
+        protected BaseChecker(IServiceProvider provider)
         {
-            //_logger = loggerFactory.CreateLogger<BaseChecker>();
             _logger = provider.GetService<ILoggerFactory>()
                 .CreateLogger<BaseChecker>();
             _filelogger = provider.GetService<IMyLogger>();

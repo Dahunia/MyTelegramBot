@@ -12,6 +12,7 @@
     <PackageReference Include="nlog.config" Version="4.6.7"/>
     <PackageReference Include="nlog.web.aspnetcore" Version="4.8.4"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6"/>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0"/>
   </ItemGroup>
   <ItemGroup>
     <Content Update="NLog.config" CopyToOutputDirectory="PreserveNewest"/>

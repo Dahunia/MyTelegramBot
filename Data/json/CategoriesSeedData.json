@@ -3,168 +3,174 @@
         "Id": 1,
         "CodeLanguage": "ru",
         "Name": "Напитки"
-        ,"Parent": "7"
-    },
-    {
-        "Id": 11,
-        "CodeLanguage": "en",
-        "Name": "Juices"
-        ,"Parent": "77"
+        ,"Parent": "13"
     },
     {
         "Id": 2,
-        "CodeLanguage": "ru",
-        "Name": "Кофе"
-        ,"Parent": "7"
-    },
-    {
-        "Id": 22,
         "CodeLanguage": "en",
-        "Name": "Coffee"
-        ,"Parent": "77"
+        "Name": "Juices"
+        ,"Parent": "14"
     },
     {
         "Id": 3,
         "CodeLanguage": "ru",
-        "Name": "Супы"
-        ,"Parent": "7"
-    },
-    {
-        "Id": 33,
-        "CodeLanguage": "en",
-        "Name": "Soups"
-        ,"Parent": "77"
+        "Name": "Кофе"
+        ,"Parent": "13"
     },
     {
         "Id": 4,
+        "CodeLanguage": "en",
+        "Name": "Coffee"
+        ,"Parent": "14"
+    },
+    {
+        "Id": 5,
+        "CodeLanguage": "ru",
+        "Name": "Супы"
+        ,"Parent": "13"
+    },
+    {
+        "Id": 6,
+        "CodeLanguage": "en",
+        "Name": "Soups"
+        ,"Parent": "14"
+    },
+    {
+        "Id": 7,
         "CodeLanguage": "ru",
         "Name": "Услуги"
         ,"Parent": "0"
     },
     {
-        "Id": 44,
+        "Id": 8,
         "CodeLanguage": "en",
         "Name": "Services"
         ,"Parent": "0"
     },
     {
-        "Id": 5,
+        "Id": 9,
         "CodeLanguage": "ru",
         "Name": "Портфолио"
         ,"Parent": "0"
     }
     , {
-        "Id": 55,
+        "Id": 10,
         "CodeLanguage": "en",
         "Name": "Portfolio"
         ,"Parent": "0"
     }
     , {
-        "Id": 6,
+        "Id": 11,
         "CodeLanguage": "ru",
         "Name": "Примеры"
         ,"Parent": "0"
     }
     , {
-        "Id": 66,
+        "Id": 12,
         "CodeLanguage": "en",
         "Name": "Samples"
         ,"Parent": "0"
     }
     , {
-        "Id": 7,
+        "Id": 13,
         "CodeLanguage": "ru",
         "Name": "Еда на заказ"
         ,"Parent": "0"
     }
     , {
-        "Id": 77,
+        "Id": 14,
         "CodeLanguage": "en",
         "Name": "Food Ordering"
         ,"Parent": "0"
     }
     , {
-        "Id": 8,
-        "CodeLanguage": "ru",
-        "Name": "Написание ботова для Whatsapp"
-        ,"Parent": "4"
-    }
-    , {
-        "Id": 88,
-        "CodeLanguage": "en",
-        "Name": "Build a Whatsapp bot"
-        ,"Parent": "44"
-    }
-    , {
-        "Id": 9,
-        "CodeLanguage": "ru",
-        "Name": "Написание ботова для Telegram"
-        ,"Parent": "4"
-    }
-    , {
-        "Id": 99,
-        "CodeLanguage": "en",
-        "Name": "Build a Telegram bot" 
-        ,"Parent": "44"
-    }
-    , {
-        "Id": 10,
-        "CodeLanguage": "ru",
-        "Name": "Написание ботова для Viber"
-        ,"Parent": "4"
-    }
-    , {
-        "Id": 10,
-        "CodeLanguage": "en",
-        "Name": "Build a Viber bot"
-        ,"Parent": "44"
-    }
-    , {
-        "Id": 11,
-        "CodeLanguage": "ru",
-        "Name": "Написание ботова для Vk"
-        ,"Parent": "4"
-    }
-    , {
-        "Id": 111,
-        "CodeLanguage": "en",
-        "Name": "Build a Vk bot"
-        ,"Parent": "44"
-    }
-    , {
-        "Id": 12,
-        "CodeLanguage": "ru",
-        "Name": "Написание ботова для Instagram"
-        ,"Parent": "4"
-    }
-    , {
-        "Id": 13,
-        "CodeLanguage": "ru",
-        "Name": "Работа с api Криптобирж, брокерских комп. и др"
-        ,"Parent": "4"
-    }
-    , {
-        "Id": 133,
-        "CodeLanguage": "en",
-        "Name": "Build and use API Services. A bot for trading on cryptoburges."
-        ,"Parent": "44"
-    }
-    , {
-        "Id": 14,
-        "CodeLanguage": "ru",
-        "Name": "Написание парсеров(avito, gis и др.сайтов)"
-        ,"Parent": "4"
-    }
-    , {
         "Id": 15,
         "CodeLanguage": "ru",
-        "Name": "Написание приложений для Windows(Word, Excel и др)"
-        ,"Parent": "4"
+        "Name": "Написание ботова для Whatsapp"
+        ,"Parent": "7"
     }
     , {
-        "Id": 155,
+        "Id": 16,
+        "CodeLanguage": "en",
+        "Name": "Build a Whatsapp bot"
+        ,"Parent": "8"
+    }
+    , {
+        "Id": 17,
+        "CodeLanguage": "ru",
+        "Name": "Написание ботова для Telegram"
+        ,"Parent": "7"
+    }
+    , {
+        "Id": 18,
+        "CodeLanguage": "en",
+        "Name": "Build a Telegram bot" 
+        ,"Parent": "8"
+    }
+    , {
+        "Id": 19,
+        "CodeLanguage": "ru",
+        "Name": "Написание ботова для Viber"
+        ,"Parent": "7"
+    }
+    , {
+        "Id": 20,
+        "CodeLanguage": "en",
+        "Name": "Build a Viber bot"
+        ,"Parent": "8"
+    }
+    , {
+        "Id": 21,
+        "CodeLanguage": "ru",
+        "Name": "Написание ботова для Vk"
+        ,"Parent": "7"
+    }
+    , {
+        "Id": 22,
+        "CodeLanguage": "en",
+        "Name": "Build a Vk bot"
+        ,"Parent": "8"
+    }
+    , {
+        "Id": 23,
+        "CodeLanguage": "ru",
+        "Name": "Написание ботова для Instagram"
+        ,"Parent": "7"
+    }
+    , {
+        "Id": 24,
+        "CodeLanguage": "ru",
+        "Name": "Работа с api Криптобирж, брокерских комп. и др"
+        ,"Parent": "7"
+    }
+    , {
+        "Id": 25,
+        "CodeLanguage": "en",
+        "Name": "Build and use API Services. A bot for trading on cryptoburges."
+        ,"Parent": "8"
+    }
+    , {
+        "Id": 26,
+        "CodeLanguage": "ru",
+        "Name": "Написание парсеров(avito, gis и др.сайтов)"
+        ,"Parent": "7"
+    }
+    , {
+        "Id": 27,
+        "CodeLanguage": "ru",
+        "Name": "Написание приложений для Windows(Word, Excel и др)"
+        ,"Parent": "7"
+    }
+    , {
+        "Id": 28,
         "CodeLanguage": "en",
         "Name": "Build Windows programms(Word, Excel and so on)"
-        ,"Parent": "4"
+        ,"Parent": "8"
+    }
+    , {
+        "Id": 29,
+        "CodeLanguage": "en",
+        "Name": "Build a parser"
+        ,"Parent": "8"
     }
 ]

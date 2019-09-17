@@ -1,8 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using MyTelegramBot.Dtos.Telegram;
-using MyTelegramBot.Models.Telegram;
 
 namespace MyTelegramBot.Checkers.Messages
 {
@@ -10,7 +8,7 @@ namespace MyTelegramBot.Checkers.Messages
     {
         private IMessageChecker _nextChecker;
 
-        public AbstractMessageChecker(IServiceProvider provider)//ILoggerFactory loggerFactory, IMyLogger filelogger, ITelegramApiRequest telegramRequest) 
+        public AbstractMessageChecker(IServiceProvider provider)
             : base(provider)
         {}
 

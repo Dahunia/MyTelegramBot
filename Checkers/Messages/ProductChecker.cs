@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
@@ -12,7 +11,7 @@ namespace MyTelegramBot.Checkers.Messages
     {
         private readonly string[] commands = {"/product", "/cat"};
         private readonly IDataRepository _repo;
-        public ProductChecker(IServiceProvider provider,IDataRepository repo)//ILoggerFactory loggerFactory, IMyLogger filelogger, ITelegramApiRequest telegramRequest) 
+        public ProductChecker(IDataRepository repo, IServiceProvider provider)
             : base(provider) =>
             _repo = repo;
 

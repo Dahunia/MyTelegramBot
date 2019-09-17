@@ -1,7 +1,15 @@
+using AutoMapper;
+using MyTelegramBot.Dtos.Telegram;
+using MyTelegramBot.Models.Telegram;
+
 namespace MyTelegramBot.Helpers
 {
-    public class AutoMapper
+    public class AutoMapperProfiles : Profile
     {
-        
+        public AutoMapperProfiles()
+        {
+            CreateMap<FromDto, User>();
+            CreateMap<ChatDto, Chat>();
+        }
     }
 }

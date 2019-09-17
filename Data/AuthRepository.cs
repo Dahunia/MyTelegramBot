@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Models.Telegram;
 
@@ -15,14 +16,33 @@ namespace MyTelegramBot.Data
             throw new System.NotImplementedException();
         }
 
-        public Task<User> Register(User user, Chat chat)
+        public async Task<User> Register(User user)
         {
-            throw new System.NotImplementedException();
+            await _context.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+            return user;
         }
 
-        public Task<User> UserExists(string username, string chatId)
+         public async Task<Chat> Register(Chat chat)
         {
-            throw new System.NotImplementedException();
+            await _context.AddAsync(chat);
+            await _context.SaveChangesAsync();
+
+            return chat;
+        }
+
+        public async Task<bool> UserExists(long userId)
+        {
+            if (await _context.Users.AnyAsync(u => u.Id == userId))
+                return true;
+            return false;
+        }
+        public async Task<bool> ChatExists(long chatId)
+        {
+            if (await _context.Chats.AnyAsync(u => u.Id == chatId))
+                return true;
+            return false;
         }
     }
 }

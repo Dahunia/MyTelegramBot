@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using MyTelegramBot.Data.Interface;
 using MyTelegramBot.Data.Work;
 using MyTelegramBot.Dtos.Markets.Binance;
@@ -21,8 +20,7 @@ namespace MyTelegramBot.Checkers.Messages
         private readonly IDataRepository _repo;
         public SimpleCommandChecker(
             IDataRepository repo,
-            IServiceProvider provider)//ILoggerFactory loggerFactory, IMyLogger filelogger, ITelegramApiRequest telegramRequest) 
-            : base(provider)
+            IServiceProvider provider): base(provider)
             => _repo = repo;
         public override async Task<object> Checker(MessageDto incomingMessageDto)
         {

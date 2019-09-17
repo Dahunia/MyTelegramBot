@@ -7,3 +7,6 @@ Before run:
 2.1 log must be true
 
 "BaseEndpoint":"https://api.telegram.org/bot<token>/METHOD_NAME",
+
+>dotnet ef migrations remove
+>dotnet ef database update
