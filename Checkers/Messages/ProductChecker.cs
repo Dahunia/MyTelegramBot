@@ -22,7 +22,7 @@ namespace MyTelegramBot.Checkers.Messages
                 case "/cat":
                     var messageForSend = await CreateMessageForSend(incomingMessageDto);   
                     var response = await _telegramRequest.SendMessage(messageForSend);
-                    
+
                     return response;
             }
             return await base.Checker(incomingMessageDto);
@@ -30,18 +30,9 @@ namespace MyTelegramBot.Checkers.Messages
         private async Task<MessageForSendDto<InlineKeyboardMarkup>> CreateMessageForSend(MessageDto message)
         {
              var messageForSend = new MessageForSendDto<InlineKeyboardMarkup>() {
-                chat_id = message.Chat.Id
-            };
-            switch (message.Text.ToLower()) {
-                case "/cat":
-                    messageForSend.text = "Категории";
-                    
-                    var inlineKeyboard = new InlineKeyboardMarkup();
-                    
-                    //messageForSend.reply_markup = 
-                    //    GetInlineButtons(message.chat.id);
-                    break;
-            }
+                chat_id = message.Chat.Id,
+               // inlineKeyboard = new InlineKeyboardMarkup()
+             };
             return messageForSend;
         }
     }
