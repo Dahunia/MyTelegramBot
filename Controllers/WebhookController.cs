@@ -41,6 +41,7 @@ namespace MyTelegramBot.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(IncomingRequestDto incomingRequestDto)
         {
+            //TODO new line for new input request not response
             await LogInformation("INPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
 
             string checkResult = "";

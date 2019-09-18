@@ -9,7 +9,7 @@ namespace MyTelegramBot.Models.Telegram
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string UserName { get; set; }
-        public string LanguageCode { get; set; }
+        public string LanguageCode { get; set; } 
         public System.DateTime Created { get; set; }
         public System.DateTime LastActive { get; set; }
         public ICollection<Message> MessagesSent { get; set; } // Отправил

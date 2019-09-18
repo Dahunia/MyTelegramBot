@@ -6,11 +6,13 @@ namespace MyTelegramBot.Dtos.Telegram
 {
     public class MessageForSendDto<TButton> where TButton : class
     {
-        public long chat_id { get; set; }
-        //[JsonConverter(typeof(PlainJsonStringConverter))]
-        public string text { get; set; }
+        [JsonProperty("chat_id")]
+        public long ChatId { get; set; }
+        [JsonProperty("text")]
+        public string Text { get; set; }
         //public TelegramButtons reply_markup { get; set; }
         //public string reply_markup { get; set; }
-        public TButton reply_markup { get; set; }
+        [JsonProperty("reply_markup")]
+        public TButton ReplyMarkup { get; set; }
     }
 }

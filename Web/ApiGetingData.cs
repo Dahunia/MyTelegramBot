@@ -42,11 +42,20 @@ namespace MyTelegramBot.Web
             web.Proxy = new WebProxy(proxy);
             //var parameters = await GetParameters(entity);
             
-            var jsonData = JsonConvert.SerializeObject(entity);
-            var response = await web.UploadStringTaskAsync(url, "POST", jsonData);
-            
-            await LogInformation($"Using proxy {proxy}");
-            await LogInformation($"SEND TO USER JSON SERIALIZED DATA {jsonData}");
+            var jsonData = JsonConvert.SerializeObject(
+                entity, 
+                Formatting.None);
+                
+            string response = "";
+            try {
+                response = await web.UploadStringTaskAsync(url, "POST", jsonData);
+            } catch(Exception ex) {
+                await LogInformation("Error send: " + ex.Message);
+            }
+            finally {
+                await LogInformation($"Using proxy {proxy}");
+                await LogInformation($"SEND TO USER JSON SERIALIZED DATA {jsonData}");
+            }
             //await LogInformation($"Sent to url: {url} with count of parameters: {parameters.Count}");
             return response;
         }//return await web.UploadValuesTaskAsync(url, parameters);

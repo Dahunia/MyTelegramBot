@@ -16,7 +16,7 @@ namespace MyTelegramBot.Checkers.Messages
     {
         private const string Binance24hrUrl = "https://api.binance.com/api/v1/ticker/24hr?symbol=pair";
         private readonly string[] commands = 
-            {"/start", "/remove", "/inline", "/cat"};
+            {"/start", "/remove", "/inline", "cat"};
         private readonly IDataRepository _repo;
         public SimpleCommandChecker(
             IDataRepository repo,
@@ -45,43 +45,43 @@ namespace MyTelegramBot.Checkers.Messages
             switch (messageText.ToLower()) {
                 case "/start":
                     messageForSend = new MessageForSendDto<object>() {
-                            chat_id = chatId,
-                            text = "Наберите валютную пару Binance или " +
+                            ChatId = chatId,
+                            Text = "Наберите валютную пару Binance или " +
                                 "выберите из примерных предложенных.",
-                            reply_markup = GetButtons(chatId)
+                            ReplyMarkup = GetButtons(chatId)
                         };
                     break;
                 case "/remove":
                     messageForSend = new MessageForSendDto<object>() {
-                        chat_id = chatId,
-                        text = "Удаление клавиатуры",
-                        reply_markup = new TelegramRemoveButtons()
+                        ChatId = chatId,
+                        Text = "Удаление клавиатуры",
+                        ReplyMarkup = new TelegramRemoveButtons()
                     };
                     break;
                 case "/inline":
                    messageForSend = new MessageForSendDto<object>() {
-                        chat_id = chatId,
-                        text = "inline menu",
-                        reply_markup = GetInlineButtons(chatId)
+                        ChatId = chatId,
+                        Text = "inline menu",
+                        ReplyMarkup = GetInlineButtons(chatId)
                     };
                     break;
                 default:
                     string symbol = messageText.ToUpper();
                     string url = Binance24hrUrl.Replace("pair", symbol);
                     messageForSend = new MessageForSendDto<object>() {
-                        chat_id = chatId
+                        ChatId = chatId
                     };
                     try {        
                         var get24hrTicker = new ApiGetingData<_24hrTickerDto>(_logger, _filelogger);
                         var ticker = await get24hrTicker.GetDataAsync(url);
 
-                        messageForSend.text = ticker.ToString();
+                        messageForSend.Text = ticker.ToString();
 
                         await LogInformation(ticker.ToString());
                     } catch(Exception ex) {
                         await LogInformation(ex.Message);
 
-                        messageForSend.text  = $"Пары на Binance {messageText} не существует";
+                        messageForSend.Text  = $"Пары на Binance {messageText} не существует";
                     }
                     break;
             }

@@ -36,7 +36,7 @@ namespace MyTelegramBot.Data
         public bool Equals(Category c1, Category c2)
         {
             return c1.Id == c2.Id ||
-                (c1.CodeLanguage == c2.CodeLanguage &&
+                (c1.LanguageCode == c2.LanguageCode &&
                 c1.Name == c2.Name &&
                 c1.Products == c2.Products);
         }
@@ -59,7 +59,7 @@ namespace MyTelegramBot.Data
         public bool Equals(Product c1, Product c2)
         {
             return c1.Id == c2.Id || (
-                c1.CodeLanguage == c2.CodeLanguage &&
+                c1.LanguageCode == c2.LanguageCode &&
                 c1.Name == c2.Name &&
                 c1.Description == c2.Description &&
                 c1.Price == c2.Price &&

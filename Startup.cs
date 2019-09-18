@@ -79,7 +79,7 @@ namespace MyTelegramBot
             }
 
             //app.UseHttpsRedirection();
-            seed.SeedProducts();
+            //seed.SeedProducts();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

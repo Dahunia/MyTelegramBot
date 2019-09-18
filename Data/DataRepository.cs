@@ -16,10 +16,20 @@ namespace MyTelegramBot.Data
         public EntityEntry<T> Add<T>(T entity) where T : class => _context.Add(entity);
         public async Task<bool> SaveAll() => await _context.SaveChangesAsync() > 0;
         public void Delete<T>(T entity) where T : class => _context.Remove(entity);
-        public async Task<IEnumerable<Category>> GetCategories()
+        public async Task<User> GetUser(long userId)
         {
-            var categories = await _context.Categories.Include( c => c.Name)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user;
+        }
+        public async Task<IEnumerable<Category>> GetCategories(long userId)
+        {
+            var user = await GetUser(userId);
+            var categories = await _context.Categories
+                .Where(c => c.LanguageCode == (user.LanguageCode != "" ? user.LanguageCode : "ru"))
+                .Include(c => c.Name)
                 .ToListAsync();
+
             return categories;
         }
         public async Task<Category> GetCategory(int id)
@@ -32,7 +42,7 @@ namespace MyTelegramBot.Data
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<IEnumerable<Product>> GetProducts(long userId)
         {
             var products = await _context.Products.Include(p => p.Name)
                 .ToListAsync();

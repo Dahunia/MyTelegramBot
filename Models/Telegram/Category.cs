@@ -6,7 +6,7 @@ namespace MyTelegramBot.Models.Telegram
     {
         public int Id { get; set; }
         public string Key { get; set; }
-        public string CodeLanguage { get; set; }
+        public string LanguageCode { get; set; }
         public string Name { get; set; }
         public int Parent { get; set; }
         public List<Product> Products { get; set; }
