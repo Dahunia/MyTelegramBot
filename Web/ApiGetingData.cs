@@ -40,17 +40,23 @@ namespace MyTelegramBot.Web
             WebClient web = new WebClient();  
             web.Headers[HttpRequestHeader.ContentType] = "application/json";
             web.Proxy = new WebProxy(proxy);
+            web.Encoding = System.Text.Encoding.UTF8;
             //var parameters = await GetParameters(entity);
             
             var jsonData = JsonConvert.SerializeObject(
-                entity, 
-                Formatting.None);
+                entity 
+                ,Formatting.None
+                ,new JsonSerializerSettings {
+                    NullValueHandling = NullValueHandling.Ignore
+                }
+            );
                 
             string response = "";
             try {
                 response = await web.UploadStringTaskAsync(url, "POST", jsonData);
             } catch(Exception ex) {
                 await LogInformation("Error send: " + ex.Message);
+                //throw new Exception(ex.Message);
             }
             finally {
                 await LogInformation($"Using proxy {proxy}");
