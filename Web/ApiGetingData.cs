@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using MyTelegramBot.Interface;
+using MyTelegramBot.Models.Settings;
 using Newtonsoft.Json;
 
 namespace MyTelegramBot.Web
@@ -22,10 +23,16 @@ namespace MyTelegramBot.Web
 
         public async Task<T> GetDataAsync(
             string url,
-            string proxy = null)
+            Proxy proxy = null)
         {
             WebClient web = new WebClient();
-            web.Proxy = new WebProxy(proxy);
+            if (proxy != null) {
+                web.Proxy = new WebProxy(proxy.Address);
+                web.Proxy.Credentials = new NetworkCredential(
+                    proxy.Username, 
+                    proxy.Password
+                );  
+            }
 
             var data_byte = await web.DownloadDataTaskAsync(url);
             var data_str = System.Text.Encoding.UTF8.GetString(data_byte);
@@ -35,14 +42,20 @@ namespace MyTelegramBot.Web
         public async Task<string> SendDataAsync(
             T entity,
             string url,
-            string proxy = null) 
+            Proxy proxy = null) 
         {
             WebClient web = new WebClient();  
             web.Headers[HttpRequestHeader.ContentType] = "application/json";
-            web.Proxy = new WebProxy(proxy);
-            web.Encoding = System.Text.Encoding.UTF8;
+            //web.Encoding = System.Text.Encoding.UTF8;
+            if (proxy != null)
+            {
+                web.Proxy = new WebProxy(proxy.Address);
+                web.Proxy.Credentials = new NetworkCredential(
+                    proxy.Username, 
+                    proxy.Password
+                );                                                          
+            }
             //var parameters = await GetParameters(entity);
-            
             var jsonData = JsonConvert.SerializeObject(
                 entity 
                 ,Formatting.None

@@ -44,7 +44,9 @@ namespace MyTelegramBot.Web
 
             var response = await getRequest.GetDataAsync(
                 url,
-                _telegramConfig.Proxies.First()
+                _telegramConfig.WithProxy ? 
+                    _telegramConfig.Proxies.FirstOrDefault() :
+                    null
             );
     
             return response;
