@@ -3,7 +3,7 @@ using MyTelegramBot.Models.Telegram;
 
 namespace MyTelegramBot.Interface
 {
-    public interface IAuthRepository
+    public interface IAuthRepository: IBaseRepository
     {
         Task<User> Register(User user);
         Task<Chat> Register(Chat chat);

@@ -31,6 +31,7 @@ namespace MyTelegramBot.Checkers.Messages
             }
             else {
                 user.LastActive = DateTime.Now;
+                await _repo.SaveAllAsync();
             }
 
             if (!await _repo.ChatExists(incomingMessageDto.Chat.Id)) 
@@ -46,7 +47,7 @@ namespace MyTelegramBot.Checkers.Messages
                 var messageForCreate = _mapper.Map<Message>(incomingMessageDto);
 
                 var createdMessage = _dataRepository.Add(messageForCreate);
-                await _dataRepository.SaveAll();
+                await _dataRepository.SaveAllAsync();
             }
             
             return await base.Checker(incomingMessageDto);

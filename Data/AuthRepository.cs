@@ -5,12 +5,14 @@ using MyTelegramBot.Models.Telegram;
 
 namespace MyTelegramBot.Data
 {
-    public class AuthRepository : IAuthRepository
+    public class AuthRepository : BaseRepository, IAuthRepository
     {
-        private readonly DataContext _context;
+        //private readonly DataContext _context;
 
-        public AuthRepository(DataContext context) => _context = context;
-
+        public AuthRepository(DataContext context)
+        // => _context = context;
+        : base(context) {}
+ 
         public Task<User> Login(string user, string chat)
         {
             throw new System.NotImplementedException();
@@ -46,6 +48,11 @@ namespace MyTelegramBot.Data
         }
         public async Task<User> GetUser(long userId) =>
             await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-      
+
+/*         public async Task<bool> UpdateLastActive(User user)
+        {
+            user.LastActive = System.DateTime.Now;
+            _context.Update(user);
+        } */
     }
 }

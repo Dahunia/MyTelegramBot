@@ -42,7 +42,7 @@ namespace MyTelegramBot.Controllers
         public async Task<IActionResult> Index(IncomingRequestDto incomingRequestDto)
         {
             //TODO new line for new input request not response
-            await LogInformation("INPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
+            await LogInformation("\nINPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
 
             string checkResult = "";
             if (incomingRequestDto.message != null) {
@@ -52,7 +52,7 @@ namespace MyTelegramBot.Controllers
                 //checkResult = await _callbackChecker.Checker(incomingRequestDto.callback_query);
             }
 
-            await LogInformation($"SENT RESPONSE \n {checkResult}");
+            await LogInformation($"\nSENT RESPONSE \n {checkResult}");
             return Ok(checkResult);//StatusCode(201);
         }
         public async Task LogInformation(string message) 

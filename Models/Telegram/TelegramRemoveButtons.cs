@@ -7,7 +7,6 @@ namespace MyTelegramBot.Models.Telegram
         {
             remove_keyboard = true;
         }
-
         public bool remove_keyboard { get; set; }
     }
 }

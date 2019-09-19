@@ -1,14 +1,21 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 
 namespace MyTelegramBot.Dtos.Telegram
 {
     public class CallbackQueryDto
     {
-        public string id { get; set; }
-        public FromDto from { get; set; }
-        public MessageDto message { get; set; }
-        public string chat_instance { get; set; }
-        public string data { get; set; }
+        public long id { get; set; }
+        [JsonProperty("id")]
+        public long CallbackQueryId { get; set;}
+        [JsonProperty("from")]
+        public FromDto From { get; set; }
+        [JsonProperty("message")]
+        public MessageDto Message { get; set; }
+        [JsonProperty("chat_instance")]
+        public string ChatInstance { get; set; }
+        [JsonProperty("data")]
+        public string Data { get; set; }
     }
 }

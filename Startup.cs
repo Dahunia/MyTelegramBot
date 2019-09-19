@@ -35,9 +35,9 @@ namespace MyTelegramBot
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
          
-            services.AddDbContext<DataContext>(options =>
-            
-                options.UseSqlite("Data Source=ProductDatabase.db")//Configuration.GetConnectionString("DefaultConnection"))
+            services.AddDbContextPool<DataContext>(options =>    
+                //options.UseSqlite("Data Source=ProductDatabase.db")
+                Configuration.GetConnectionString("DefaultConnection")
             );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -46,8 +46,8 @@ namespace MyTelegramBot
             services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings"));
 
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            services.AddSingleton<IReceiver, FileReceiver>();
-            services.AddSingleton<IMyLogger, MyLogger>();
+            services.AddTransient<IReceiver, FileReceiver>();
+            services.AddTransient<IMyLogger, MyLogger>();
 
             services.AddTransient<IDataRepository, DataRepository>();
             services.AddTransient<IAuthRepository, AuthRepository>();

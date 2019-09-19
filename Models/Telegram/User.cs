@@ -13,6 +13,8 @@ namespace MyTelegramBot.Models.Telegram
         public System.DateTime Created { get; set; }
         public System.DateTime LastActive { get; set; }
         public ICollection<Message> MessagesSent { get; set; } // Отправил
+        public ICollection<CallbackQuery> CallbackQueriesSent { get; set; }
+        public ICollection<Result> ResultsSent { get; set ;}
         //public List<Chat> SentToChats { get; set; }
         //public List<Message> MessageReceived { get; set; } // Получил
     }

@@ -9,7 +9,7 @@ namespace MyTelegramBot.Interface
     {
         EntityEntry<T> Add<T>(T entity) where T: class;
         void Delete<T>(T entity) where T: class;
-        Task<bool> SaveAll();
+        Task<bool> SaveAllAsync();
         Task<IEnumerable<Product>> GetProducts(long userId);
         Task<Product> GetProduct(int id);
         Task<IEnumerable<Category>> GetCategories(long userId);

@@ -15,8 +15,8 @@ namespace MyTelegramBot.Checkers.Callback
             if (incomingCallbackDto != null)
             {
                 AnswerCallbackQueryDto answerQuery = new AnswerCallbackQueryDto {
-                    callback_query_id = incomingCallbackDto.id,
-                    text = incomingCallbackDto.data
+                    callback_query_id = incomingCallbackDto.id.ToString(),
+                    text = incomingCallbackDto.Data
                     //Sample Ожидание... или Ваши данные переданы
                 };
 

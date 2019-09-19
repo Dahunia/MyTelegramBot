@@ -5,8 +5,7 @@ namespace MyTelegramBot.Models.Telegram
     public class Message
     {
         public long Id { get; set; }
-        //[DisplayName("message_id")]
-        public long MessageId { get; set; }
+        //public long MessageId { get; set; }
         public ulong Date { get; set; }
         public long FromId { get; set; }
         public User From { get; set; }  // From whom - От кого

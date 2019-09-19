@@ -14,7 +14,7 @@ namespace MyTelegramBot.Data
 
         public DataRepository(DataContext context) => _context = context;
         public EntityEntry<T> Add<T>(T entity) where T : class => _context.Add(entity);
-        public async Task<bool> SaveAll() => await _context.SaveChangesAsync() > 0;
+        public async Task<bool> SaveAllAsync() => await _context.SaveChangesAsync() > 0;
         public void Delete<T>(T entity) where T : class => _context.Remove(entity);
         public async Task<User> GetUser(long userId)
         {
@@ -52,7 +52,7 @@ namespace MyTelegramBot.Data
 
         public async Task<bool> MessageExists(long messageId)
         {
-            if (await _context.Messages.AnyAsync(m => m.MessageId == messageId))
+            if (await _context.Messages.AnyAsync(m => m.Id == messageId))
                 return true;
             return false;
         }

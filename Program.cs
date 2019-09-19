@@ -11,9 +11,10 @@ namespace MyTelegramBot
         public static void Main(string[] args)
         {
             var config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile("hosting.json", optional: false)
                 .Build();
-
+ 
             CreateWebHostBuilder(args)
                 .UseConfiguration(config)
                 .Build()

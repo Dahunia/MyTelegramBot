@@ -1,11 +1,12 @@
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace MyTelegramBot.Interface
 {
     public interface IBaseRepository
     {
-        void Add<T>(T entity) where T: class;
+        EntityEntry<T> Add<T>(T entity) where T: class;
         void Delete<T>(T entity) where T: class;
-        Task<bool> SaveAll();
+        Task<bool> SaveAllAsync();
     }
 }
