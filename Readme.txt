@@ -9,4 +9,5 @@ Before run:
 "BaseEndpoint":"https://api.telegram.org/bot<token>/METHOD_NAME",
 
 >dotnet ef migrations remove
+>dotent ef migrations add -c DataContext "name"
 >dotnet ef database update

@@ -4,7 +4,8 @@ namespace MyTelegramBot.Dtos.Telegram
 {
     public class ResultDto
     {
-        //public long update_id { get; set; }
+        [JsonProperty("update_id")]
+        public long UpdateId { get; set; }
         [JsonProperty("message_id")]
         public long MessageId { get; set; }
         [JsonProperty("from")]

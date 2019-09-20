@@ -84,13 +84,13 @@ namespace MyTelegramBot.Web
             var update = await GetRequest<UpdateForCreationDto>(url);
 
             _logger.LogInformation(url + "\n");
-            
+          /*   
             if (update.result.Count() > 0 ) {
-                 _telegramConfig.LastUpdate = update.result.LastOrDefault().update_id + 1;
+                 _telegramConfig.LastUpdate = update.result.LastOrDefault().UpdateId + 1;
             }
             else { 
                 _telegramConfig.LastUpdate = 0;
-            }
+            } */
 
             return update;
         }   

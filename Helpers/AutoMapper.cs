@@ -11,6 +11,7 @@ namespace MyTelegramBot.Helpers
             CreateMap<FromDto, User>();
             CreateMap<ChatDto, Chat>();
             CreateMap<MessageDto, Message>();
+            CreateMap<UpdateForCreationDto, Update>();
         }
     }
 }

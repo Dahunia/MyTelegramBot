@@ -16,14 +16,36 @@ namespace MyTelegramBot.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.CallbackQuery", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ChatInstance");
+
+                    b.Property<string>("Data");
+
+                    b.Property<long>("FromId");
+
+                    b.Property<long>("MessageId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromId");
+
+                    b.HasIndex("MessageId");
+
+                    b.ToTable("CallbackQueries");
+                });
+
             modelBuilder.Entity("MyTelegramBot.Models.Telegram.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CodeLanguage");
-
                     b.Property<string>("Key");
+
+                    b.Property<string>("LanguageCode");
 
                     b.Property<string>("Name");
 
@@ -63,15 +85,13 @@ namespace MyTelegramBot.Migrations
 
                     b.Property<long>("FromId");
 
-                    b.Property<long>("MessageId");
-
                     b.Property<DateTime>("MessageSent");
 
                     b.Property<bool>("RecipientDeleted");
 
                     b.Property<bool>("SenderDeleted");
 
-                    b.Property<string>("Test");
+                    b.Property<string>("Text");
 
                     b.HasKey("Id");
 
@@ -89,11 +109,11 @@ namespace MyTelegramBot.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<string>("CodeLanguage");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("Key");
+
+                    b.Property<string>("LanguageCode");
 
                     b.Property<string>("Name");
 
@@ -104,6 +124,68 @@ namespace MyTelegramBot.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.Response", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateSent");
+
+                    b.Property<bool>("Ok");
+
+                    b.Property<long>("ResultId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResultId");
+
+                    b.ToTable("Responses");
+                });
+
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.Result", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("ChatId");
+
+                    b.Property<long>("Date");
+
+                    b.Property<long>("FromId");
+
+                    b.Property<long>("MessageId");
+
+                    b.Property<string>("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.HasIndex("FromId");
+
+                    b.ToTable("Results");
+                });
+
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.Update", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<long>("CalbackQueryId");
+
+                    b.Property<long?>("CallbackQueryId");
+
+                    b.Property<long>("MessageId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CallbackQueryId");
+
+                    b.HasIndex("MessageId");
+
+                    b.ToTable("Updates");
                 });
 
             modelBuilder.Entity("MyTelegramBot.Models.Telegram.User", b =>
@@ -150,6 +232,19 @@ namespace MyTelegramBot.Migrations
                     b.ToTable("UserSettings");
                 });
 
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.CallbackQuery", b =>
+                {
+                    b.HasOne("MyTelegramBot.Models.Telegram.User", "From")
+                        .WithMany("CallbackQueriesSent")
+                        .HasForeignKey("FromId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("MyTelegramBot.Models.Telegram.Message", "Message")
+                        .WithMany()
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("MyTelegramBot.Models.Telegram.Message", b =>
                 {
                     b.HasOne("MyTelegramBot.Models.Telegram.Chat", "Chat")
@@ -169,6 +264,39 @@ namespace MyTelegramBot.Migrations
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.Response", b =>
+                {
+                    b.HasOne("MyTelegramBot.Models.Telegram.Result", "Result")
+                        .WithMany()
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.Result", b =>
+                {
+                    b.HasOne("MyTelegramBot.Models.Telegram.Chat", "Chat")
+                        .WithMany("ResultsReceived")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("MyTelegramBot.Models.Telegram.User", "From")
+                        .WithMany("ResultsSent")
+                        .HasForeignKey("FromId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("MyTelegramBot.Models.Telegram.Update", b =>
+                {
+                    b.HasOne("MyTelegramBot.Models.Telegram.CallbackQuery", "CallbackQuery")
+                        .WithMany()
+                        .HasForeignKey("CallbackQueryId");
+
+                    b.HasOne("MyTelegramBot.Models.Telegram.Message", "Message")
+                        .WithMany()
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MyTelegramBot.Models.Telegram.UserSetting", b =>

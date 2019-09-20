@@ -47,7 +47,7 @@ namespace MyTelegramBot.Data
             builder.Entity<Result>()
                 .HasOne(u => u.From)
                 .WithMany(r => r.ResultsSent)
-                .HasForeignKey(u => u.From)
+                .HasForeignKey(u => u.FromId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Result>()

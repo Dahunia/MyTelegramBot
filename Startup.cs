@@ -37,7 +37,7 @@ namespace MyTelegramBot
          
             services.AddDbContextPool<DataContext>(options =>    
                 //options.UseSqlite("Data Source=ProductDatabase.db")
-                Configuration.GetConnectionString("DefaultConnection")
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -92,9 +92,3 @@ namespace MyTelegramBot
         }
     }
 }
-
-//Setting checker Telegram
-/*   var callbackChecker = (CallbackChecker)provider.GetService<IChecker>();
-var simpleChecker = (SimpleCommandChecker)provider.GetService<SimpleCommandChecker>();
-
-callbackChecker.SetNext(simpleChecker); */
