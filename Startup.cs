@@ -22,7 +22,6 @@ namespace MyTelegramBot
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -36,8 +35,8 @@ namespace MyTelegramBot
             });
          
             services.AddDbContextPool<DataContext>(options =>    
-                //options.UseSqlite("Data Source=ProductDatabase.db")
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"), x =>
+                    x.SuppressForeignKeyEnforcement())
             );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -45,7 +44,7 @@ namespace MyTelegramBot
             services.AddTransient<ITelegramApiRequest, TelegramApiRequest>();
             services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings"));
 
-            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+            services.Configure<FilePaths>(Configuration.GetSection("AppSettings"));
             services.AddTransient<IReceiver, FileReceiver>();
             services.AddTransient<IMyLogger, MyLogger>();
 
@@ -79,7 +78,7 @@ namespace MyTelegramBot
             }
 
             //app.UseHttpsRedirection();
-            //seed.SeedProducts();
+            seed.SeedProducts();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

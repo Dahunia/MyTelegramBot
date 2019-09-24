@@ -6,7 +6,7 @@ namespace MyTelegramBot.Dtos.Telegram
     {
         [JsonProperty("id")]
         public long Id { get; set; }
-        [JsonProperty("first_anme")]
+        [JsonProperty("first_name")]
         public string FirstName { get; set; }
         [JsonProperty("last_name")]
         public string LastName { get; set; }

@@ -11,9 +11,11 @@ namespace MyTelegramBot.Data
     {
         private readonly DataContext _context;
         public Seed(DataContext context) => _context = context;
-        public void SeedProducts() 
+        public void SeedProducts(
+            string categoriesFile = "Data/json/CategoriesSeedData.json", 
+            string productsFile = "Data/json/ProductsSeedData.json") 
         {
-            var categoriesData = System.IO.File.ReadAllText("Data/json/CategoriesSeedData.json");
+            var categoriesData = System.IO.File.ReadAllText(categoriesFile);
             var categories = JsonConvert.DeserializeObject<List<Category>>(categoriesData);
             var oldCategories = _context.Categories;
             var EqualityCompareCategory = new EqualityCompareCategory();
@@ -21,7 +23,7 @@ namespace MyTelegramBot.Data
             _context.AddRange(different);
             _context.SaveChanges();
 
-            var productsData = System.IO.File.ReadAllText("Data/json/ProductsSeedData.json");
+            var productsData = System.IO.File.ReadAllText(productsFile);
             var products = JsonConvert.DeserializeObject<List<Product>>(productsData);
             var oldProducts = _context.Products;
             var EqualityProduct = new EqualityCompareProduct();

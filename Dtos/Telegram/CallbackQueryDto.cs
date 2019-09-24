@@ -6,9 +6,9 @@ namespace MyTelegramBot.Dtos.Telegram
 {
     public class CallbackQueryDto
     {
-        public long id { get; set; }
+        //public long id { get; set; }
         [JsonProperty("id")]
-        public long CallbackQueryId { get; set;}
+        public long Id { get; set;}
         [JsonProperty("from")]
         public FromDto From { get; set; }
         [JsonProperty("message")]

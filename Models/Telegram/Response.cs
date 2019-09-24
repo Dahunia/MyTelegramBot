@@ -6,6 +6,6 @@ namespace MyTelegramBot.Models.Telegram
         public bool Ok { get; set; }
         public long ResultId { get; set; }
         public Result Result { get; set; }
-        public System.DateTime DateSent { get; set; }
+        public System.DateTime DateRecieved { get; set; }
     }
 }

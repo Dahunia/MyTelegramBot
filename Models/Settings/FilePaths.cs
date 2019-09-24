@@ -1,6 +1,6 @@
 namespace MyTelegramBot.Models.Settings
 {
-    public class AppSettings
+    public class FilePaths
     {
         public string FileLoggerName { get; set; }
     }

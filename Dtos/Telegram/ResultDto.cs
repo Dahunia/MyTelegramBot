@@ -13,7 +13,7 @@ namespace MyTelegramBot.Dtos.Telegram
         [JsonProperty("chat")]
         public ChatDto Chat { get; set; }
         [JsonProperty("date")]
-        public long Date { get; set; }
+        public ulong Date { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }
     }

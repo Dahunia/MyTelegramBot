@@ -9,40 +9,42 @@ namespace MyTelegramBot.Checkers.Messages
 {
     public class DataChecker : AbstractMessageChecker
     {
-        private readonly IAuthRepository _repo;
+        private readonly IAuthRepository _authRepository;
         private readonly IDataRepository _dataRepository;
         private readonly IMapper _mapper;
         public DataChecker(
-            IAuthRepository repo,
+            IAuthRepository authRepository,
             IDataRepository dataRepository,
             IServiceProvider provider,
             IMapper mapper)
-            : base(provider) => (_repo, _dataRepository, _mapper) = (repo, dataRepository, mapper);
+            : base(provider) => 
+                (_authRepository, _dataRepository, _mapper) =
+                (authRepository, dataRepository, mapper);
 
         public override async Task<string> Checker(MessageDto incomingMessageDto)
         {
-            var user = await _repo.GetUser(incomingMessageDto.From.Id);
+            var user = await _authRepository.GetUser(incomingMessageDto.From.Id);
             if (user == null) 
             {
                 var userDto = incomingMessageDto.From;
                 var userToCreate = _mapper.Map<User>(userDto);
 
-                var createdUser = await _repo.Register(userToCreate);
+                var createdUser = await _authRepository.Register(userToCreate);
             }
             else {
                 user.LastActive = DateTime.Now;
-                await _repo.SaveAllAsync();
+                await _authRepository.SaveAllAsync();
             }
 
-            if (!await _repo.ChatExists(incomingMessageDto.Chat.Id)) 
+            if (!await _authRepository.ChatExists(incomingMessageDto.Chat.Id)) 
             {
                 var chatDto = incomingMessageDto.Chat;
                 var chatToCreate = _mapper.Map<Chat>(chatDto);
 
-                var createdChat = await _repo.Register(chatToCreate);
+                var createdChat = await _authRepository.Register(chatToCreate);
             }
 
-            if (!await _dataRepository.MessageExists(incomingMessageDto.MessageId)) 
+            if (!await _dataRepository.MessageExists(incomingMessageDto.Id)) 
             {
                 var messageForCreate = _mapper.Map<Message>(incomingMessageDto);
 

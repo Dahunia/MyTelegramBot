@@ -32,5 +32,12 @@ namespace MyTelegramBot.Helpers
             //return body.Replace("\t", "").Replace("\n", "");
             //return Regex.Replace(body, "[^a-zA-Z0-9_.]", "", RegexOptions.Compiled);
         }
+
+        public static System.DateTime CalculateDateTime(this System.UInt64 dateUtc)
+        {
+            var dateNormal = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
+            dateNormal = dateNormal.AddSeconds(dateUtc).ToLocalTime();
+            return dateNormal;
+        }
     }
 }

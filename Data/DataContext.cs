@@ -7,7 +7,7 @@ namespace MyTelegramBot.Data
     {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-         public DbSet<Response> Responses { get; set; }
+        public DbSet<Response> Responses { get; set; }
         public DbSet<Result> Results { get; set; }
         public DbSet<Update> Updates { get; set; }
         public DbSet<Message> Messages { get; set; }
@@ -17,6 +17,7 @@ namespace MyTelegramBot.Data
         public DbSet<UserSetting> UserSettings { get; set; }
         public DataContext(DbContextOptions<DataContext> options)
             :base(options)
+        //{}
         => Database.EnsureCreated();
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -55,7 +56,6 @@ namespace MyTelegramBot.Data
                 .WithMany(r => r.ResultsReceived)
                 .HasForeignKey(c => c.ChatId)
                 .OnDelete(DeleteBehavior.Restrict);
-
         }
     }
 }

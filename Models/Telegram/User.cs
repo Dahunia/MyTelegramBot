@@ -5,6 +5,7 @@ namespace MyTelegramBot.Models.Telegram
     public class User
     {
         public long Id { get; set; }
+        //public long FromId { get; set; }
         public bool IsBot { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }

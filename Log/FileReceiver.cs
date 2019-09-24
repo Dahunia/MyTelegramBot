@@ -12,7 +12,7 @@ namespace MyTelegramBot.Log
     {
         public readonly string _fileName;
 
-        public FileReceiver(IOptions<AppSettings> _appConfig) {
+        public FileReceiver(IOptions<FilePaths> _appConfig) {
             _fileName = _appConfig.Value.FileLoggerName
                 .Replace("date", System.DateTime.Now.ToString("yyyy-MM-dd"));
         }

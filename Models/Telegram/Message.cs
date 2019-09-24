@@ -6,7 +6,7 @@ namespace MyTelegramBot.Models.Telegram
     {
         public long Id { get; set; }
         //public long MessageId { get; set; }
-        public ulong Date { get; set; }
+        public System.DateTime Date { get; set; }
         public long FromId { get; set; }
         public User From { get; set; }  // From whom - От кого
         public long ChatId { get; set; }

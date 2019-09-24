@@ -65,6 +65,8 @@ namespace MyTelegramBot.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<string>("Type");
+
                     b.Property<string>("UserName");
 
                     b.HasKey("Id");
@@ -79,7 +81,7 @@ namespace MyTelegramBot.Migrations
 
                     b.Property<long>("ChatId");
 
-                    b.Property<ulong>("Date");
+                    b.Property<DateTime>("Date");
 
                     b.Property<DateTime?>("DateRead");
 
@@ -164,6 +166,8 @@ namespace MyTelegramBot.Migrations
                     b.HasIndex("ChatId");
 
                     b.HasIndex("FromId");
+
+                    b.HasIndex("MessageId");
 
                     b.ToTable("Results");
                 });
@@ -285,6 +289,11 @@ namespace MyTelegramBot.Migrations
                         .WithMany("ResultsSent")
                         .HasForeignKey("FromId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("MyTelegramBot.Models.Telegram.Message", "Message")
+                        .WithMany()
+                        .HasForeignKey("MessageId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MyTelegramBot.Models.Telegram.Update", b =>
