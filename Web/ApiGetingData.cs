@@ -72,7 +72,7 @@ namespace MyTelegramBot.Web
                 //throw new Exception(ex.Message);
             }
             finally {
-                await LogInformation($"Using proxy {proxy}");
+                await LogInformation($"Using proxy {proxy.Address.ToString()}");
                 await LogInformation($"SEND TO USER JSON SERIALIZED DATA {jsonData}");
             }
             //await LogInformation($"Sent to url: {url} with count of parameters: {parameters.Count}");
@@ -85,7 +85,10 @@ namespace MyTelegramBot.Web
         public async Task LogInformation(string message) 
         {
             _logger?.LogInformation(message);
-            await _filelogger?.WriteInformationAsync(message);
+            if (_filelogger != null)
+            {
+                await _filelogger?.WriteInformationAsync(message);
+            }
         }
         private async Task<NameValueCollection> GetParameters(T entity) {
             var parameters = new NameValueCollection();

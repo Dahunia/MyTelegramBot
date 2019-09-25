@@ -41,7 +41,7 @@ namespace MyTelegramBot.Checkers.Messages
             }
             return await base.Checker(incomingMessageDto);
         }
-        private async Task<MessageForSendDto<object>> CreateMessageForSend(MessageDto message) 
+        public async Task<MessageForSendDto<object>> CreateMessageForSend(MessageDto message) 
         {
             MessageForSendDto<object> messageForSend;
             var chatId = message.Chat.Id;
@@ -84,7 +84,6 @@ namespace MyTelegramBot.Checkers.Messages
                         await LogInformation(ticker.ToString());
                     } catch(Exception ex) {
                         await LogInformation(ex.Message);
-
                         messageForSend.Text  = $"Пары на Binance {messageText} не существует";
                     }
                     break;

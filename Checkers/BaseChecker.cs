@@ -28,7 +28,10 @@ namespace MyTelegramBot.Checkers
         protected async Task LogInformation(string message) 
         {
             _logger?.LogInformation(message);
-            await _filelogger?.WriteInformationAsync(message);
+            if (_filelogger != null)
+            {
+                await _filelogger.WriteInformationAsync(message);
+            }
         }
     }
 

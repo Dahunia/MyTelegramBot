@@ -14,7 +14,6 @@ using MyTelegramBot.Checkers.Messages;
 using MyTelegramBot.Checkers.Callback;
 using AutoMapper;
 using MyTelegramBot.Helpers;
-using MyTelegramBot.Checkers;
 
 namespace MyTelegramBot
 {
