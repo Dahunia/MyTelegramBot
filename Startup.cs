@@ -44,8 +44,11 @@ namespace MyTelegramBot
             services.AddMemoryCache();
 
             // Setting Telegram
-            services.AddTransient<ITelegramApiRequest, TelegramApiRequest>();
-            services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings"));
+            var telegramConfig = new TelegramSettings();
+            Configuration.Bind("TelegramSettings", telegramConfig);
+            services.AddSingleton(telegramConfig);
+            services.AddTransient<ITelegramApiRequest, TelegramApiRequest>();  
+            //services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings");
 
             services.Configure<FilePaths>(Configuration.GetSection("FilePaths"));
             services.AddTransient<IReceiver, FileReceiver>();

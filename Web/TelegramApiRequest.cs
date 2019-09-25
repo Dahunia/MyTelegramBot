@@ -11,16 +11,17 @@ using Microsoft.Extensions.Options;
 namespace MyTelegramBot.Web
 {
     public class TelegramApiRequest : ITelegramApiRequest
-    {
-        private readonly TelegramSettings _telegramConfig;
+    {   
         private readonly ILogger<TelegramApiRequest> _logger;
-        private readonly IMyLogger _filelogger;
+        private readonly IMyLogger _filelogger;        
+        private readonly TelegramSettings _telegramConfig;
         public TelegramApiRequest(
-            IOptions<TelegramSettings> telegramConfig,
             ILogger<TelegramApiRequest> logger,
-            IMyLogger filelogger)
+            IMyLogger filelogger,
+            TelegramSettings telegramConfig)
+           // IOptions<TelegramSettings> telegramConfig)
         {
-            _telegramConfig = telegramConfig.Value;
+            _telegramConfig = telegramConfig;
             _logger = logger;
             _filelogger = filelogger;
         }
