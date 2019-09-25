@@ -68,6 +68,7 @@ namespace MyTelegramBot
             services.AddTransient<IMessageChecker>(provider => {
                 var _messageChecker = (IMessageChecker)provider.GetService<DataChecker>();
                 _messageChecker.SetNext( provider.GetService<SimpleCommandChecker>() );
+                
                 return _messageChecker;
             });
 
@@ -93,7 +94,7 @@ namespace MyTelegramBot
             }
 
             //app.UseHttpsRedirection();
-            seed.SeedProducts();
+            //seed.SeedProducts();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

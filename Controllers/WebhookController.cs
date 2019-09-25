@@ -30,13 +30,8 @@ namespace MyTelegramBot.Controllers
             _logger = logger;
             _filelogger = filelogger; 
             _messageChecker = messageChecker;
-            //_checker = checker;
 
-            //_messageChecker = provider.GetService<DataChecker>();
-            //_messageChecker
-            //    .SetNext( provider.GetService<SimpleCommandChecker>() );
-
-            //_callbackChecker = provider.GetService<CallbackChecker>();
+            _callbackChecker = null;
         }
 
         [HttpPost]
@@ -44,12 +39,14 @@ namespace MyTelegramBot.Controllers
         {
             //TODO new line for new input request not response
             await LogInformation("\nINPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
+            //var temp = HttpContext.Request.Cookies;
 
             string checkResult = "";
             if (incomingRequestDto.message != null) {
                 checkResult = await _messageChecker.Checker(incomingRequestDto.message);
             }
             if (incomingRequestDto.callback_query != null) {
+                
                 //checkResult = await _callbackChecker.Checker(incomingRequestDto.callback_query);
             }
 
@@ -58,8 +55,13 @@ namespace MyTelegramBot.Controllers
         }
         public async Task LogInformation(string message) 
         {
-            _logger.LogInformation(message);
-            await _filelogger.WriteInformationAsync(message);
+            _logger?.LogInformation(message);
+            await _filelogger?.WriteInformationAsync(message);
         }
     }
 }
+
+
+//_messageChecker = provider.GetService<DataChecker>();
+//_messageChecker.SetNext( provider.GetService<SimpleCommandChecker>() );
+//_callbackChecker = provider.GetService<CallbackChecker>();

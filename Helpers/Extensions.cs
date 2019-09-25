@@ -23,7 +23,7 @@ namespace MyTelegramBot.Helpers
                 return body;
             }
 
-            request.Body.Seek(0, System.IO.SeekOrigin.Begin);
+            //request.Body.Seek(0, System.IO.SeekOrigin.Begin);
             using(var reader = new System.IO.StreamReader(request.Body))//, Encoding.Default, true, 1024, true))
             {
                 body = reader.ReadToEnd();

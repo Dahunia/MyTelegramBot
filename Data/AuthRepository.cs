@@ -57,7 +57,7 @@ namespace MyTelegramBot.Data
             {
                 return user;
             }
-            else if((user = await _context.Users.FirstAsync(u => u.Id == userId)) != null)
+            else if((user = await _context.Users.FindAsync(userId)) != null)
             {   
                 _cache.Set(user.Id, user, GetCacheEntryOptions(5));
                 return user;
@@ -71,7 +71,7 @@ namespace MyTelegramBot.Data
             {
                 return chat;
             }
-            else if((chat = await _context.Chats.FirstAsync(u => u.Id == chatId)) != null)
+            else if((chat = await _context.Chats.FindAsync(chatId)) != null)
             {   
                 _cache.Set(chat.Id, chat, GetCacheEntryOptions(5));
                 return chat;
