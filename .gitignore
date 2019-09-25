@@ -1,7 +1,7 @@
-.vscode/
-bin/
-obj/
-Readme.txt/
-Migrations/
-logs/
-Migrations/
+.vscode
+bin
+obj
+Readme.txt
+Migrations
+logs
+Migrations
