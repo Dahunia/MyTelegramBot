@@ -9,6 +9,7 @@ using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
 using Newtonsoft.Json;
 using MyTelegramBot.Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace MyTelegramBot.Checkers.Messages
 {
@@ -19,8 +20,11 @@ namespace MyTelegramBot.Checkers.Messages
             {"/start", "/remove", "/inline", "cat"};
         private readonly IDataRepository _repo;
         public SimpleCommandChecker(
-            IDataRepository repo,
-            IServiceProvider provider): base(provider)
+            ILogger<SimpleCommandChecker> logger,
+            IMyLogger filelogger,
+            ITelegramApiRequest telegramApiRequest,
+            IDataRepository repo)
+            : base(logger, filelogger, telegramApiRequest)
             => _repo = repo;
         public override async Task<string> Checker(MessageDto incomingMessageDto)
         {

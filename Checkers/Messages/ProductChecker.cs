@@ -5,6 +5,7 @@ using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
 using System.Collections.Generic;
 using MyTelegramBot.Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace MyTelegramBot.Checkers.Messages
 {
@@ -12,8 +13,13 @@ namespace MyTelegramBot.Checkers.Messages
     {
         private readonly string[] commands = {"/product", "/cat"};
         private readonly IDataRepository _repo;
-        public ProductChecker(IDataRepository repo, IServiceProvider provider)
-            : base(provider) =>
+        public ProductChecker(
+            IDataRepository repo, 
+            IDataRepository dataRepository,
+            ILogger logger,
+            IMyLogger filelogger,
+            ITelegramApiRequest telegramApiRequest)
+            : base(logger, filelogger, telegramApiRequest) =>
             _repo = repo;
 
         public override async Task<string> Checker(MessageDto incomingMessageDto) 

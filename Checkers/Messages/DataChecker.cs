@@ -4,6 +4,7 @@ using AutoMapper;
 using MyTelegramBot.Interface;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
+using Microsoft.Extensions.Logging;
 
 namespace MyTelegramBot.Checkers.Messages
 {
@@ -13,14 +14,15 @@ namespace MyTelegramBot.Checkers.Messages
         private readonly IDataRepository _dataRepository;
         private readonly IMapper _mapper;
         public DataChecker(
+            ILogger<DataChecker> logger,
+            IMyLogger filelogger,
+            ITelegramApiRequest telegramApiRequest,
             IAuthRepository authRepository,
             IDataRepository dataRepository,
-            IServiceProvider provider,
             IMapper mapper)
-            : base(provider) => 
+            : base(logger, filelogger, telegramApiRequest) => 
                 (_authRepository, _dataRepository, _mapper) =
                 (authRepository, dataRepository, mapper);
-
         public override async Task<string> Checker(MessageDto incomingMessageDto)
         {
             var user = await _authRepository.GetUser(incomingMessageDto.From.Id);

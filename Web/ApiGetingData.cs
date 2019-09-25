@@ -84,8 +84,8 @@ namespace MyTelegramBot.Web
         }
         public async Task LogInformation(string message) 
         {
-            _logger.LogInformation(message);
-            await _filelogger.WriteInformationAsync(message);
+            _logger?.LogInformation(message);
+            await _filelogger?.WriteInformationAsync(message);
         }
         private async Task<NameValueCollection> GetParameters(T entity) {
             var parameters = new NameValueCollection();

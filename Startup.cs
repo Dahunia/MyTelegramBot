@@ -13,6 +13,8 @@ using Microsoft.EntityFrameworkCore;
 using MyTelegramBot.Checkers.Messages;
 using MyTelegramBot.Checkers.Callback;
 using AutoMapper;
+using MyTelegramBot.Helpers;
+using MyTelegramBot.Checkers;
 
 namespace MyTelegramBot
 {
@@ -39,23 +41,36 @@ namespace MyTelegramBot
                     x.SuppressForeignKeyEnforcement())
             );
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMemoryCache();
 
             // Setting Telegram
             services.AddTransient<ITelegramApiRequest, TelegramApiRequest>();
             services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings"));
 
-            services.Configure<FilePaths>(Configuration.GetSection("AppSettings"));
+            services.Configure<FilePaths>(Configuration.GetSection("FilePaths"));
             services.AddTransient<IReceiver, FileReceiver>();
             services.AddTransient<IMyLogger, MyLogger>();
 
             services.AddTransient<IDataRepository, DataRepository>();
             services.AddTransient<IAuthRepository, AuthRepository>();
-            services.AddTransient<CallbackChecker>();
-            services.AddTransient<DataChecker>();
-            services.AddTransient<SimpleCommandChecker>();
-
             // Setting BD
-            services.AddAutoMapper(typeof(Startup));
+            services.AddSingleton(provider => new MapperConfiguration(cfg => {
+                var scope = provider.GetRequiredService<IServiceScopeFactory>().CreateScope();
+                var context = scope.ServiceProvider.GetService<DataContext>();
+
+                cfg.AddProfile(new AutoMapperProfiles(context));
+            }).CreateMapper());
+            //services.AddAutoMapper(typeof(Startup));
+            // Messages
+            services.AddTransient<CallbackChecker>();
+            services.AddTransient<SimpleCommandChecker>();
+            services.AddTransient<DataChecker>();
+            services.AddTransient<IMessageChecker>(provider => {
+                var _messageChecker = (IMessageChecker)provider.GetService<DataChecker>();
+                _messageChecker.SetNext( provider.GetService<SimpleCommandChecker>() );
+                return _messageChecker;
+            });
+
             services.AddTransient<Seed>();
         }
 

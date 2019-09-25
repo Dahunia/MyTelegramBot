@@ -1,14 +1,19 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MyTelegramBot.Dtos.Telegram;
+using MyTelegramBot.Interface;
 using Newtonsoft.Json;
 
 namespace MyTelegramBot.Checkers.Callback
 {
     public class CallbackChecker : AbstractCallbackChecker
     {
-        public CallbackChecker(IServiceProvider provider)
-            : base(provider)
+        public CallbackChecker(
+            ILogger<CallbackChecker> logger,
+            IMyLogger filelogger,
+            ITelegramApiRequest telegramApiRequest)
+            : base(logger, filelogger, telegramApiRequest)
         {}
         public override async Task<object> Checker(CallbackQueryDto incomingCallbackDto)
         {

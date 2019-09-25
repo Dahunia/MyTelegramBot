@@ -83,7 +83,7 @@ namespace MyTelegramBot.Web
 
             var update = await GetRequest<UpdateForCreationDto>(url);
 
-            _logger.LogInformation(url + "\n");
+            await LogInformation(url + "\n");
           /*   
             if (update.result.Count() > 0 ) {
                  _telegramConfig.LastUpdate = update.result.LastOrDefault().UpdateId + 1;
@@ -93,6 +93,11 @@ namespace MyTelegramBot.Web
             } */
 
             return update;
+        }
+        protected async Task LogInformation(string message) 
+        {
+            _logger?.LogInformation(message);
+            await _filelogger?.WriteInformationAsync(message);
         }   
     }
 }

@@ -22,20 +22,21 @@ namespace MyTelegramBot.Controllers
         private readonly IMessageChecker _messageChecker;
         private readonly ICallbackChecker _callbackChecker;
         public WebhookController(
-             IServiceProvider provider
-            //,IChecker checker
+            //IServiceProvider provider
+            IMessageChecker messageChecker
             ,ILogger<WebhookController> logger
             ,IMyLogger filelogger)
         {
             _logger = logger;
             _filelogger = filelogger; 
+            _messageChecker = messageChecker;
             //_checker = checker;
 
-            _messageChecker = provider.GetService<DataChecker>();
-            _messageChecker
-                .SetNext( provider.GetService<SimpleCommandChecker>() );
+            //_messageChecker = provider.GetService<DataChecker>();
+            //_messageChecker
+            //    .SetNext( provider.GetService<SimpleCommandChecker>() );
 
-            _callbackChecker = provider.GetService<CallbackChecker>();
+            //_callbackChecker = provider.GetService<CallbackChecker>();
         }
 
         [HttpPost]

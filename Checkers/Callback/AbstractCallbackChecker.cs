@@ -1,6 +1,8 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 using MyTelegramBot.Dtos.Telegram;
+using MyTelegramBot.Interface;
 
 namespace MyTelegramBot.Checkers.Callback
 {
@@ -8,8 +10,12 @@ namespace MyTelegramBot.Checkers.Callback
     {
         private ICallbackChecker _nextChecker;
 
-        public AbstractCallbackChecker(IServiceProvider provider)
-            : base(provider)
+        public AbstractCallbackChecker(
+            ILogger logger,
+            IMyLogger filelogger,
+            ITelegramApiRequest telegramApiRequest
+        )
+            : base(logger, filelogger, telegramApiRequest)
         {}
 
         public ICallbackChecker SetNext(ICallbackChecker checker)
