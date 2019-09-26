@@ -1,7 +1,7 @@
 [
     {
         "Id": 1
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Coca-cola"
         ,"Description": "Coca-cola классическая. 1л"
         ,"CategoryId": "1"
@@ -9,7 +9,7 @@
     }
     , { 
         "Id": 2
-        ,"CodeLanguage": "en"
+        ,"LanguageCode": "en"
         ,"Name": "Coca-cola"
         ,"Description": "Coca-cola classic. 1л"
         ,"CategoryId": "2"
@@ -17,7 +17,7 @@
     }
     ,{
         "Id": 3
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Сок апельсиновый"
         ,"Description": "Сок апельсиновый. 1л"
         ,"CategoryId": "1"
@@ -25,7 +25,7 @@
     }
     ,{
         "Id": 4
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Молочный коктейль"
         ,"Description": "Молочный коктейль ванильный. 1л"
         ,"CategoryId": "1"
@@ -33,7 +33,7 @@
     }
     ,{
         "Id": 5
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Кофе крепкое"
         ,"Description": "Кофе крепкое. 1ст"
         ,"CategoryId": "2"
@@ -41,7 +41,7 @@
     }
     ,{
         "Id": 6
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Кофе со сливками"
         ,"Description": "Кофе со сливками. 1ст"
         ,"CategoryId": "3"
@@ -49,7 +49,7 @@
     }
     ,{
         "Id": 7
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Cуп пюре"
         ,"Description": "Суп пюре с грибами. 1 порция"
         ,"CategoryId": "5"
@@ -57,7 +57,7 @@
     }
     ,{
         "Id": 8
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Суп с лапшой"
         ,"Description": "Суп с домашней лапшой. 1 порция"
         ,"CategoryId": "5"
@@ -65,7 +65,7 @@
     }
     ,{
         "Id": 9
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Борщ"
         ,"Description": "Борщ наваристый. 1ст"
         ,"CategoryId": "5"
@@ -73,7 +73,7 @@
     }
     ,{
         "Id": 10
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Кофе со сливками и корицей"
         ,"Description": "Кофе со сливками. 1ст"
         ,"CategoryId": "3"
@@ -81,14 +81,14 @@
     }
     ,{
         "Id": 11
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Кофе со сливками"
         ,"Description": "Кофе со сливками. 1ст"
         ,"CategoryId": "3"
         ,"Price": "220"
     }
     ,{   "Id": 12
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "Простой бот для Whatsapp"
         ,"Description": 
             "-Ответы на команды пользователя;\n-Отправка по команде файлов, текста, локации\n-Помощь в размещении бот\n-Консультация по боту Whatsapp"
@@ -97,7 +97,7 @@
     }
     ,{
         "Id": 13
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "-Админпанель для бота Whatsapp"
         ,"Description": 
             "-Сохранение принятых сообщений в БД, -отображение БД в виде таблице, -поск по таблице, выгрузка в Excel(Word или др.)"
@@ -106,7 +106,7 @@
     }
     ,{
         "Id": 14
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "-Отправка писем на почту Whatsapp"
         ,"Description": 
             "-Возможность отпрвки письма на указаную почту-Редактирование почтовых адресов"
@@ -115,7 +115,7 @@
     }
     ,{
         "Id": 15
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "-Работа по распанию Whatsapp"
         ,"Description": 
             "-Возможность отравки письма(сообщения, файла) по расписанию-Возможность создавать периодическую отправку, например каждый 10 минут или в определенный день:час:минута"
@@ -124,7 +124,7 @@
     }
     ,{
         "Id": 16
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "-Рассылка сообщений в Whatsapp"
         ,"Description": 
             "Рассылка сообщений. 5000 сообщений"
@@ -132,7 +132,7 @@
         ,"Price": "3000"
     }
     ,{  "Id": 17
-        ,"CodeLanguage": "ru"
+        ,"LanguageCode": "ru"
         ,"Name": "-Дополнительные возможности Whatsapp"
         ,"Description": 
             "Выполнение каких-то дополнительных услуг"

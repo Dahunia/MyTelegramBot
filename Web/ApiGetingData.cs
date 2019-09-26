@@ -13,8 +13,8 @@ namespace MyTelegramBot.Web
 {
     public class ApiGetingData<T>
     {
-        private readonly IMyLogger _filelogger;
         private readonly ILogger _logger;
+        private readonly IMyLogger _filelogger;
         public ApiGetingData(ILogger logger, IMyLogger filelogger)
         {
             _logger = logger;
@@ -69,6 +69,7 @@ namespace MyTelegramBot.Web
                 response = await web.UploadStringTaskAsync(url, "POST", jsonData);
             } catch(Exception ex) {
                 await LogInformation("Error send: " + ex.Message);
+                response = ex.Message;
                 //throw new Exception(ex.Message);
             }
             finally {
@@ -87,7 +88,7 @@ namespace MyTelegramBot.Web
             _logger?.LogInformation(message);
             if (_filelogger != null)
             {
-                await _filelogger?.WriteInformationAsync(message);
+                await _filelogger.WriteInformationAsync(message);
             }
         }
         private async Task<NameValueCollection> GetParameters(T entity) {

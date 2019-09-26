@@ -22,15 +22,16 @@ namespace MyTelegramBot.Data
 
             return user;
         }
-        public async Task<IEnumerable<Category>> GetCategories(long userId)
+        public async Task<IEnumerable<Category>> GetCategories(
+            string languageCode="ru",
+            int parent = 0)
         {
-            var user = await GetUser(userId);
-            var categories = await _context.Categories
-                .Where(c => c.LanguageCode == (user.LanguageCode != "" ? user.LanguageCode : "ru"))
-                .Include(c => c.Name)
-                .ToListAsync();
+            return await Task.Run(() => {
+                var categories = _context.Categories
+                    .Where(c => c.LanguageCode == languageCode && c.Parent == parent);
 
-            return categories;
+                return categories;
+            });
         }
         public async Task<Category> GetCategory(int id)
         {

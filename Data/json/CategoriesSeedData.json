@@ -1,175 +1,175 @@
 [
     {
         "Id": 1,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Напитки"
         ,"Parent": "13"
     },
     {
         "Id": 2,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Juices"
         ,"Parent": "14"
     },
     {
         "Id": 3,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Кофе"
         ,"Parent": "13"
     },
     {
         "Id": 4,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Coffee"
         ,"Parent": "14"
     },
     {
         "Id": 5,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Супы"
         ,"Parent": "13"
     },
     {
         "Id": 6,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Soups"
         ,"Parent": "14"
     },
     {
         "Id": 7,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Услуги"
         ,"Parent": "0"
     },
     {
         "Id": 8,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Services"
         ,"Parent": "0"
     },
     {
         "Id": 9,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Портфолио"
         ,"Parent": "0"
     }
     , {
         "Id": 10,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Portfolio"
         ,"Parent": "0"
     }
     , {
         "Id": 11,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Примеры"
         ,"Parent": "0"
     }
     , {
         "Id": 12,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Samples"
         ,"Parent": "0"
     }
     , {
         "Id": 13,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Еда на заказ"
         ,"Parent": "0"
     }
     , {
         "Id": 14,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Food Ordering"
         ,"Parent": "0"
     }
     , {
         "Id": 15,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Написание ботова для Whatsapp"
         ,"Parent": "7"
     }
     , {
         "Id": 16,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Build a Whatsapp bot"
         ,"Parent": "8"
     }
     , {
         "Id": 17,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Написание ботова для Telegram"
         ,"Parent": "7"
     }
     , {
         "Id": 18,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Build a Telegram bot" 
         ,"Parent": "8"
     }
     , {
         "Id": 19,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Написание ботова для Viber"
         ,"Parent": "7"
     }
     , {
         "Id": 20,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Build a Viber bot"
         ,"Parent": "8"
     }
     , {
         "Id": 21,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Написание ботова для Vk"
         ,"Parent": "7"
     }
     , {
         "Id": 22,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Build a Vk bot"
         ,"Parent": "8"
     }
     , {
         "Id": 23,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Написание ботова для Instagram"
         ,"Parent": "7"
     }
     , {
         "Id": 24,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Работа с api Криптобирж, брокерских комп. и др"
         ,"Parent": "7"
     }
     , {
         "Id": 25,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Build and use API Services. A bot for trading on cryptoburges."
         ,"Parent": "8"
     }
     , {
         "Id": 26,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Написание парсеров(avito, gis и др.сайтов)"
         ,"Parent": "7"
     }
     , {
         "Id": 27,
-        "CodeLanguage": "ru",
+        "LanguageCode": "ru",
         "Name": "Написание приложений для Windows(Word, Excel и др)"
         ,"Parent": "7"
     }
     , {
         "Id": 28,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Build Windows programms(Word, Excel and so on)"
         ,"Parent": "8"
     }
     , {
         "Id": 29,
-        "CodeLanguage": "en",
+        "LanguageCode": "en",
         "Name": "Build a parser"
         ,"Parent": "8"
     }

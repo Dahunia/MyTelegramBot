@@ -6,6 +6,7 @@ using MyTelegramBot.Models.Telegram;
 using System.Collections.Generic;
 using MyTelegramBot.Helpers;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace MyTelegramBot.Checkers.Messages
 {
@@ -13,46 +14,61 @@ namespace MyTelegramBot.Checkers.Messages
     {
         private readonly string[] commands = {"/product", "/cat"};
         private readonly IDataRepository _repo;
+        private readonly IAuthRepository _authRepository;
         public ProductChecker(
-            IDataRepository repo, 
-            IDataRepository dataRepository,
-            ILogger logger,
+            ILogger<ProductChecker> logger,
             IMyLogger filelogger,
-            ITelegramApiRequest telegramApiRequest)
+            ITelegramApiRequest telegramApiRequest,
+            IDataRepository repo,
+            IAuthRepository authRepository)
             : base(logger, filelogger, telegramApiRequest) =>
-            _repo = repo;
+            (_repo, _authRepository) = (repo, authRepository);
 
         public override async Task<string> Checker(MessageDto incomingMessageDto) 
         {
-            switch(incomingMessageDto?.Text.ToLower()) 
+            if (commands.Contains(incomingMessageDto.Text.ToLower()))
+            {
+                var messageForSend = await CreateMessageForSend(incomingMessageDto);
+                var response = await _telegramRequest.SendMessage(messageForSend);
+              
+                await LogInformation("Was SENT TO USER\n" + messageForSend.GetDump());
+
+                return response;
+            }
+            return await base.Checker(incomingMessageDto);
+        }
+
+        public async Task<MessageForSendDto<object>> CreateMessageForSend(MessageDto messageDto)
+        {
+            MessageForSendDto<object> messageForSend = null;
+            var userId = messageDto.From.Id;
+            var languageCode = messageDto.From.LanguageCode;
+            var chatId = messageDto.Chat.Id;
+            //var user = await _authRepository.GetUser(userId);
+            switch(messageDto.Text.ToLower()) 
             {
                 case "/cat":
-                    var categories = await _repo.GetCategories(incomingMessageDto.From.Id);
+                    var categories = await _repo.GetCategories(languageCode);
                     var lineButtons = new List<InlineKeyboardButton>();
                     var inlineKeyboardMarkup = new InlineKeyboardMarkup();
                     
-                    int num = -1;
-                    foreach (var category in categories)
+                    int num = 0;
+                    foreach (var category in categories.Select(c => c.Name))
                     {
                         inlineKeyboardMarkup.AddButton(
-                            new InlineKeyboardButton(category.Name),
+                            new InlineKeyboardButton(category, null, "sample.ru"),
                             num++ / 2
                         );
                     }
 
-                    var messageForSend = new MessageForSendDto<InlineKeyboardMarkup>() {
-                        ChatId = incomingMessageDto.Chat.Id,
+                    messageForSend = new MessageForSendDto<object>() {
+                        ChatId = chatId,
                         Text = "Все категории",
                         ReplyMarkup = inlineKeyboardMarkup
                     }; 
-
-                    var response = await _telegramRequest.SendMessage(messageForSend);
-
-                    await LogInformation("SENT TO USER\n" + messageForSend.GetDump());
-                    
-                    return response;
+                    break;
             }
-            return await base.Checker(incomingMessageDto);
+            return messageForSend;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MyTelegramBot.Interface
         Task<bool> SaveAllAsync();
         Task<IEnumerable<Product>> GetProducts(long userId);
         Task<Product> GetProduct(int id);
-        Task<IEnumerable<Category>> GetCategories(long userId);
+        Task<IEnumerable<Category>> GetCategories(string languageCode = "ru", int parent = 0);
         Task<Category> GetCategory(int id);
         Task<bool> MessageExists(long messageId);
     }

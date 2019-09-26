@@ -2,12 +2,14 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
 using MyTelegramBot.Interface;
 using MyTelegramBot.Helpers;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Checkers.Messages;
 using MyTelegramBot.Checkers.Callback;
+using Newtonsoft.Json;
+using AutoMapper;
+using MyTelegramBot.Models.Telegram;
 
 namespace MyTelegramBot.Controllers
 {
@@ -17,19 +19,23 @@ namespace MyTelegramBot.Controllers
     {
         private readonly ILogger<WebhookController> _logger;
         private readonly IMyLogger _filelogger;
-        //private readonly TelegramSettings _telegramConfig;
-        //private readonly ITelegramApiRequest _telegramRequest;
         private readonly IMessageChecker _messageChecker;
         private readonly ICallbackChecker _callbackChecker;
+        private readonly IMapper _mapper;
+        private readonly IDataRepository _repo;
         public WebhookController(
             //IServiceProvider provider
             IMessageChecker messageChecker
+            ,IMapper mapper
+            ,IDataRepository repo
             ,ILogger<WebhookController> logger
             ,IMyLogger filelogger)
         {
             _logger = logger;
+            _mapper = mapper;
             _filelogger = filelogger; 
             _messageChecker = messageChecker;
+            _repo = repo;
 
             _callbackChecker = null;
         }
@@ -37,26 +43,38 @@ namespace MyTelegramBot.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(IncomingRequestDto incomingRequestDto)
         {
-            //TODO new line for new input request not response
-            await LogInformation("\nINPUT REQUEST \n" + HttpContext.Request.ReadRequestBody());
-            //var temp = HttpContext.Request.Cookies;
 
-            string checkResult = "";
+            string responseReceived = "";
             if (incomingRequestDto.message != null) {
-                checkResult = await _messageChecker.Checker(incomingRequestDto.message);
+                responseReceived = await _messageChecker.Checker(incomingRequestDto.message);
             }
             if (incomingRequestDto.callback_query != null) {
                 
-                //checkResult = await _callbackChecker.Checker(incomingRequestDto.callback_query);
+                //checkResul = await _callbackChecker.Checker(incomingRequestDto.callback_query);
             }
 
-            await LogInformation($"\nSENT RESPONSE \n {checkResult}");
-            return Ok(checkResult);//StatusCode(201);
+            //TODO new line for new input request not response 
+            //var temp = HttpContext.Request.Cookies;
+            var request = HttpContext.Request.ReadRequestBody();
+            var requestObject = JsonConvert.DeserializeObject(request);
+            await LogInformation("INCOMING REQUEST\n" + requestObject.GetDump());
+
+            var responseDto = JsonConvert.DeserializeObject<ResponseDto>(responseReceived);
+            if (responseDto != null) {
+                await LogInformation($"\nReceived RESPONSE after send \n {responseDto.GetDump()}");
+                var responseForCreation = _mapper.Map<Response>(responseDto);
+                _repo.Add(responseForCreation);
+                await _repo.SaveAllAsync();
+            }
+
+            return StatusCode(201);//Ok(checkResult);
         }
         public async Task LogInformation(string message) 
         {
             _logger?.LogInformation(message);
-            await _filelogger?.WriteInformationAsync(message);
+            if (_filelogger != null) {
+                await _filelogger.WriteInformationAsync(message);
+            }
         }
     }
 }

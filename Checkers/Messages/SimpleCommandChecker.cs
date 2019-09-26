@@ -30,7 +30,7 @@ namespace MyTelegramBot.Checkers.Messages
         {
             var userDto = incomingMessageDto.From;
 
-            if (commands.Contains(incomingMessageDto?.Text))
+            if (incomingMessageDto.Text != "")//commands.Contains(incomingMessageDto.Text))
             {
                 var messageForSend = await CreateMessageForSend(incomingMessageDto);
                 var response = await _telegramRequest.SendMessage(messageForSend);

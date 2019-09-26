@@ -46,7 +46,7 @@ namespace MyTelegramBot.Checkers.Messages
                 var createdChat = await _authRepository.Register(chatToCreate);
             }
 
-            await base.Checker(incomingMessageDto);
+            var response = await base.Checker(incomingMessageDto);
 
             if (!await _dataRepository.MessageExists(incomingMessageDto.Id)) 
             {
@@ -56,7 +56,7 @@ namespace MyTelegramBot.Checkers.Messages
                 await _dataRepository.SaveAllAsync();
             }
             
-            return "";//await base.Checker(incomingMessageDto);
+            return response;//await base.Checker(incomingMessageDto);
         }
     }
 }

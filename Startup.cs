@@ -50,8 +50,8 @@ namespace MyTelegramBot
             //services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings");
 
             services.Configure<FilePaths>(Configuration.GetSection("FilePaths"));
-            services.AddTransient<IReceiver, FileReceiver>();
-            services.AddTransient<IMyLogger, MyLogger>();
+            services.AddScoped<IReceiver, FileReceiver>();
+            services.AddScoped<IMyLogger, MyLogger>();
 
             services.AddTransient<IDataRepository, DataRepository>();
             services.AddTransient<IAuthRepository, AuthRepository>();
@@ -64,15 +64,20 @@ namespace MyTelegramBot
             }).CreateMapper());
             //services.AddAutoMapper(typeof(Startup));
             // Messages
-            services.AddTransient<CallbackChecker>();
-            services.AddTransient<SimpleCommandChecker>();
-            services.AddTransient<DataChecker>();
-            services.AddTransient<IMessageChecker>(provider => {
+            
+            services.AddScoped<DataChecker>();
+            services.AddScoped<ProductChecker>();
+            services.AddScoped<SimpleCommandChecker>();
+            services.AddScoped<IMessageChecker>(provider => {
                 var _messageChecker = (IMessageChecker)provider.GetService<DataChecker>();
-                _messageChecker.SetNext( provider.GetService<SimpleCommandChecker>() );
+                _messageChecker
+                    .SetNext(provider.GetService<ProductChecker>())
+                    .SetNext(provider.GetService<SimpleCommandChecker>());
                 
                 return _messageChecker;
             });
+
+            services.AddTransient<CallbackChecker>();
 
             services.AddTransient<Seed>();
         }
@@ -96,7 +101,7 @@ namespace MyTelegramBot
             }
 
             //app.UseHttpsRedirection();
-            //seed.SeedProducts();
+            seed.SeedProducts();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
