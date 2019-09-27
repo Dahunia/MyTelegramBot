@@ -33,7 +33,7 @@ namespace MyTelegramBot.Checkers.Callback
                 return await this._nextChecker.Checker(incomingCallbackDto);
             }
             else {
-                return null;
+                return "";
             }
         }
         protected async Task LogInformation(string message) 

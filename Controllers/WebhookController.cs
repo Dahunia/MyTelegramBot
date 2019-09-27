@@ -26,6 +26,7 @@ namespace MyTelegramBot.Controllers
         public WebhookController(
             //IServiceProvider provider
             IMessageChecker messageChecker
+            ,ICallbackChecker callbackChecker
             ,IMapper mapper
             ,IDataRepository repo
             ,ILogger<WebhookController> logger
@@ -35,24 +36,22 @@ namespace MyTelegramBot.Controllers
             _mapper = mapper;
             _filelogger = filelogger; 
             _messageChecker = messageChecker;
+            _callbackChecker = callbackChecker;
             _repo = repo;
-
-            _callbackChecker = null;
         }
 
         [HttpPost]
         public async Task<IActionResult> Index(IncomingRequestDto incomingRequestDto)
         {
-
             string responseReceived = "";
-            if (incomingRequestDto.message != null) {
+            if (incomingRequestDto.message != null) 
+            {
                 responseReceived = await _messageChecker.Checker(incomingRequestDto.message);
             }
-            if (incomingRequestDto.callback_query != null) {
-                
-                //checkResul = await _callbackChecker.Checker(incomingRequestDto.callback_query);
+            if (incomingRequestDto.callback_query != null) 
+            {    
+                responseReceived = await _callbackChecker.Checker(incomingRequestDto.callback_query);
             }
-
             //var temp = HttpContext.Request.Cookies;
             //Debug information
             var request = HttpContext.Request.ReadRequestBody();

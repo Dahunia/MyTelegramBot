@@ -32,7 +32,16 @@ namespace MyTelegramBot.Web
             string url = GetUrl("sendMessage");
             return await SendRequest(url, message);
         }
-        
+        public async Task<string> SendCallback(AnswerCallbackQueryDto answerCallbackQuery) 
+        {
+            string url = GetUrl("answerCallbackQuery");
+            return await SendRequest(url, answerCallbackQuery);
+        }
+        public async Task<string> ChangeMessage(MessageTextForEditDto messageTextForEdit)
+        {
+            string url = GetUrl("editMessageText");
+            return await SendRequest(url, messageTextForEdit);
+        }
         private string GetUrl(string method) {
             return _telegramConfig.BaseEndpoint
                 .Replace("<token>", _telegramConfig.Token)
@@ -64,11 +73,6 @@ namespace MyTelegramBot.Web
                     _telegramConfig.Proxies.FirstOrDefault() :
                     null
             );
-        }
-        public async Task<string> SendCallback(AnswerCallbackQueryDto answerCallbackQuery) 
-        {
-            string url = GetUrl("answerCallbackQuery");
-            return await SendRequest(url, answerCallbackQuery);
         }
         public async Task<UpdateForCreationDto> GetUpdate() 
         {

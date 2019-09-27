@@ -19,17 +19,38 @@ namespace MyTelegramBot.Checkers.Callback
         {
             if (incomingCallbackDto != null)
             {
-                AnswerCallbackQueryDto answerQuery = new AnswerCallbackQueryDto {
-                    callback_query_id = incomingCallbackDto.Id.ToString(),
-                    text = incomingCallbackDto.Data
-                    //Sample Ожидание... или Ваши данные переданы
-                };
+                var answerForSend = CreateAnswerForSend(incomingCallbackDto);                         
+                var response = await _telegramRequest.ChangeMessage(answerForSend);
 
-                await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(answerQuery));
-            
-                var response = await _telegramRequest.SendCallback(answerQuery);
+                await LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(answerForSend));
+                return response;
             }
             return await base.Checker(incomingCallbackDto);
+        }
+
+        private MessageTextForEditDto CreateAnswerForSend(CallbackQueryDto callbackQuery)
+        {
+            string answer = callbackQuery.Data;
+            var chatId = callbackQuery.Message.Chat.Id;
+            var replyMarkup = callbackQuery.Message.ReplyMarkup;
+            var answerForSend = new MessageTextForEditDto {
+                ChatId = chatId,
+                MessageId = callbackQuery.Message.Id,
+                Text = answer,
+                ReplyMarkup = replyMarkup
+            };
+            /* var answerQuery = new AnswerCallbackQueryDto 
+            {
+                    callback_query_id = callbackQuery.Id,
+                    text = callbackQuery.Data
+                    //Sample Ожидание... или Ваши данные переданы
+            }; */
+            switch(callbackQuery.Data)
+            {
+                default:
+                    break;
+            }
+            return answerForSend;
         }
     }
 }

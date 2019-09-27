@@ -77,7 +77,15 @@ namespace MyTelegramBot
                 return _messageChecker;
             });
 
-            services.AddTransient<CallbackChecker>();
+            services.AddScoped<DataCallbackChecker>();
+            services.AddScoped<CallbackChecker>();
+            services.AddScoped<ICallbackChecker>(provider => {
+                var _callbackChecker = (ICallbackChecker)provider.GetService<DataCallbackChecker>();
+                _callbackChecker
+                    .SetNext(provider.GetService<CallbackChecker>());
+
+                return _callbackChecker;
+            });
 
             services.AddTransient<Seed>();
         }
