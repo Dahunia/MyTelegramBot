@@ -6,17 +6,19 @@ using MyTelegramBot.Interface;
 
 namespace MyTelegramBot.Checkers.Callback
 {
-    public class AbstractCallbackChecker : BaseChecker, ICallbackChecker
+    public class AbstractCallbackChecker : ICallbackChecker
     {
         private ICallbackChecker _nextChecker;
+        protected readonly ILogger _logger;
+        protected readonly IMyLogger _filelogger;
+        protected readonly ITelegramApiRequest _telegramRequest;
 
         public AbstractCallbackChecker(
             ILogger logger,
             IMyLogger filelogger,
-            ITelegramApiRequest telegramApiRequest
-        )
-            : base(logger, filelogger, telegramApiRequest)
-        {}
+            ITelegramApiRequest telegramApiRequest) =>
+        (_logger, _filelogger, _telegramRequest) = 
+        (logger, filelogger, telegramApiRequest);
 
         public ICallbackChecker SetNext(ICallbackChecker checker)
         {
@@ -24,7 +26,7 @@ namespace MyTelegramBot.Checkers.Callback
 
             return checker;
         }
-        public virtual async Task<object> Checker(CallbackQueryDto incomingCallbackDto)
+        public virtual async Task<string> Checker(CallbackQueryDto incomingCallbackDto)
         {
             if (this._nextChecker != null)
             {
@@ -32,6 +34,14 @@ namespace MyTelegramBot.Checkers.Callback
             }
             else {
                 return null;
+            }
+        }
+        protected async Task LogInformation(string message) 
+        {
+            _logger?.LogInformation(message);
+            if (_filelogger != null)
+            {
+                await _filelogger.WriteInformationAsync(message);
             }
         }
     }

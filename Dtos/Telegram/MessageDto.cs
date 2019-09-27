@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MyTelegramBot.Models.Telegram;
 using Newtonsoft.Json;
 
 namespace MyTelegramBot.Dtos.Telegram
@@ -17,6 +18,8 @@ namespace MyTelegramBot.Dtos.Telegram
         public string Text { get; set; }
         [JsonProperty("entities")]
         public ICollection<EntityDto> Entities { get; set; }
+        [JsonProperty("reply_markup")]
+        public InlineKeyboardMarkup ReplyMarkup { get; set; }
         public System.DateTime MessageReceived { get; set; }
         public MessageDto() =>
             MessageReceived = System.DateTime.Now;

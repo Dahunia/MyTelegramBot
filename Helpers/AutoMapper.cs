@@ -3,6 +3,7 @@ using AutoMapper;
 using MyTelegramBot.Data;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Telegram;
+using Newtonsoft.Json;
 
 namespace MyTelegramBot.Helpers
 {
@@ -15,6 +16,13 @@ namespace MyTelegramBot.Helpers
             CreateMap<FromDto, User>();
             CreateMap<ChatDto, Chat>();
             CreateMap<EntityDto, Entity>();
+            CreateMap<CallbackQueryDto, CallbackQuery>()
+                .ForMember(dest => dest.From, opt => {
+                    opt.MapFrom(
+                        dto => context.Users.Find(dto.From.Id) != null ? null : dto.From
+                    );
+                })
+                .IncludeAllDerived();
             CreateMap<ResponseDto, Response>()
                 .IncludeAllDerived();
 
@@ -38,6 +46,11 @@ namespace MyTelegramBot.Helpers
                 .ForMember(dest => dest.From, opt => {
                     opt.MapFrom(
                         mdto => context.Users.Find(mdto.From.Id) != null ? null : mdto.From
+                    );
+                })
+                .ForMember(dest => dest.ReplyMarkup, opt => {
+                    opt.MapFrom(
+                        d => JsonConvert.SerializeObject(d.ReplyMarkup)
                     );
                 });
 

@@ -7,6 +7,6 @@ namespace MyTelegramBot.Checkers.Callback
     {
          ICallbackChecker SetNext(ICallbackChecker checker);
 
-         Task<object> Checker(CallbackQueryDto callbackForCreationDto);
+         Task<string> Checker(CallbackQueryDto callbackForCreationDto);
     }
 }

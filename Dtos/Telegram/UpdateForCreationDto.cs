@@ -8,6 +8,8 @@ namespace MyTelegramBot.Dtos.Telegram
         public long Id{ get; set; }
         [JsonProperty("message")]
         public MessageDto Message { get; set; }
+        [JsonProperty("callback_query")]
+        public CallbackQueryDto CallbackQuery { get; set; }
 
     }
 }

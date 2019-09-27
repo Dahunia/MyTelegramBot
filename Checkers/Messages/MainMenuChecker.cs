@@ -76,7 +76,7 @@ namespace MyTelegramBot.Checkers.Messages
         {
             return await Task.Run(() => {
                 List<InlineKeyboardButton> line = new List<InlineKeyboardButton>()
-                {
+                {   
                     new InlineKeyboardButton("Есть вопрос?", null, "?"),
                     new InlineKeyboardButton("О нас", null, "about")
                 };

@@ -15,7 +15,7 @@ namespace MyTelegramBot.Checkers.Callback
             ITelegramApiRequest telegramApiRequest)
             : base(logger, filelogger, telegramApiRequest)
         {}
-        public override async Task<object> Checker(CallbackQueryDto incomingCallbackDto)
+        public override async Task<string> Checker(CallbackQueryDto incomingCallbackDto)
         {
             if (incomingCallbackDto != null)
             {
@@ -29,7 +29,7 @@ namespace MyTelegramBot.Checkers.Callback
             
                 var response = await _telegramRequest.SendCallback(answerQuery);
             }
-            return base.Checker(incomingCallbackDto);
+            return await base.Checker(incomingCallbackDto);
         }
     }
 }

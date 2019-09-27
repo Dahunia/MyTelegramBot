@@ -16,6 +16,7 @@ namespace MyTelegramBot.Models.Telegram
         public System.DateTime MessageReceived { get; set; }
         public string Text { get; set; }
         public ICollection<Entity> Entities { get; set; }
+        public string ReplyMarkup { get; set; }
         public bool SenderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
     }
