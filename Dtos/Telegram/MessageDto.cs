@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace MyTelegramBot.Dtos.Telegram
@@ -14,8 +15,10 @@ namespace MyTelegramBot.Dtos.Telegram
         public System.UInt64 Date { get; set; }
         [JsonProperty("text")]
         public string Text { get; set; }
-        public System.DateTime MessageSent { get; set; }
+        [JsonProperty("entities")]
+        public ICollection<EntityDto> Entities { get; set; }
+        public System.DateTime MessageReceived { get; set; }
         public MessageDto() =>
-            MessageSent = System.DateTime.Now;
+            MessageReceived = System.DateTime.Now;
     }
 }

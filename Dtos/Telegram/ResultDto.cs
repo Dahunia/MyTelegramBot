@@ -7,6 +7,7 @@ namespace MyTelegramBot.Dtos.Telegram
         [JsonProperty("update_id")]
         public long UpdateId { get; set; }
         [JsonProperty("message_id")]
+        //public MessageDto Message { get; set; }
         public long MessageId { get; set; }
         [JsonProperty("from")]
         public FromDto From { get; set; }

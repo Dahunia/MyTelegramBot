@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace MyTelegramBot.Models.Telegram
@@ -12,8 +13,9 @@ namespace MyTelegramBot.Models.Telegram
         public long ChatId { get; set; }
         public Chat Chat { get; set; } // Where - Куда
         public System.DateTime? DateRead { get; set; }
-        public System.DateTime MessageSent { get; set; }
+        public System.DateTime MessageReceived { get; set; }
         public string Text { get; set; }
+        public ICollection<Entity> Entities { get; set; }
         public bool SenderDeleted { get; set; }
         public bool RecipientDeleted { get; set; }
     }

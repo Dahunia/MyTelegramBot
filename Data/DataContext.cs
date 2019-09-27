@@ -15,6 +15,7 @@ namespace MyTelegramBot.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<UserSetting> UserSettings { get; set; }
+        public DbSet<Entity> Entities { get; set; }
         public DataContext(DbContextOptions<DataContext> options)
             :base(options)
         //{}

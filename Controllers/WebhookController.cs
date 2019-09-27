@@ -53,8 +53,8 @@ namespace MyTelegramBot.Controllers
                 //checkResul = await _callbackChecker.Checker(incomingRequestDto.callback_query);
             }
 
-            //TODO new line for new input request not response 
             //var temp = HttpContext.Request.Cookies;
+            //Debug information
             var request = HttpContext.Request.ReadRequestBody();
             var requestObject = JsonConvert.DeserializeObject(request);
             await LogInformation("INCOMING REQUEST\n" + requestObject.GetDump());
@@ -78,7 +78,6 @@ namespace MyTelegramBot.Controllers
         }
     }
 }
-
 
 //_messageChecker = provider.GetService<DataChecker>();
 //_messageChecker.SetNext( provider.GetService<SimpleCommandChecker>() );

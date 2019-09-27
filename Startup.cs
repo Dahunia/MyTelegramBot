@@ -66,12 +66,12 @@ namespace MyTelegramBot
             // Messages
             
             services.AddScoped<DataChecker>();
-            services.AddScoped<ProductChecker>();
+            services.AddScoped<MainMenuChecker>();
             services.AddScoped<SimpleCommandChecker>();
             services.AddScoped<IMessageChecker>(provider => {
                 var _messageChecker = (IMessageChecker)provider.GetService<DataChecker>();
                 _messageChecker
-                    .SetNext(provider.GetService<ProductChecker>())
+                    .SetNext(provider.GetService<MainMenuChecker>())
                     .SetNext(provider.GetService<SimpleCommandChecker>());
                 
                 return _messageChecker;

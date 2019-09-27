@@ -23,5 +23,4 @@ namespace MyTelegramBot.Log
             await _receiver.WriteAsync($"\nINFO | {DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss")} | {info}");
         }
     }
-
 }

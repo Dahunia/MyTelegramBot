@@ -14,6 +14,7 @@ namespace MyTelegramBot.Helpers
             _context = context;
             CreateMap<FromDto, User>();
             CreateMap<ChatDto, Chat>();
+            CreateMap<EntityDto, Entity>();
             CreateMap<ResponseDto, Response>()
                 .IncludeAllDerived();
 
