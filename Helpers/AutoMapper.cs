@@ -22,6 +22,11 @@ namespace MyTelegramBot.Helpers
                         dto => context.Users.Find(dto.From.Id) != null ? null : dto.From
                     );
                 })
+                .ForMember(dest => dest.Message, opt => {
+                    opt.MapFrom(
+                        dto =>  context.Messages.Find(dto.Message.Id) != null ? null : dto.Message
+                    );
+                })
                 .IncludeAllDerived();
             CreateMap<ResponseDto, Response>()
                 .IncludeAllDerived();

@@ -15,5 +15,6 @@ namespace MyTelegramBot.Interface
         Task<IEnumerable<Category>> GetCategories(string languageCode = "ru", int parent = 0);
         Task<Category> GetCategory(int id);
         Task<bool> MessageExists(long messageId);
+        Task<bool> CallbackExists(string callbackId);
     }
 }

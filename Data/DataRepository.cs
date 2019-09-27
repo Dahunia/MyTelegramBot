@@ -57,5 +57,11 @@ namespace MyTelegramBot.Data
                 return true;
             return false;
         }
+        public async Task<bool> CallbackExists(string callbackId)
+        {
+            if (await _context.CallbackQueries.AnyAsync(c => string.Equals(c.Id, callbackId)))
+                return true;
+            return false;
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace MyTelegramBot.Dtos.Telegram
     {
         //public long id { get; set; }
         [JsonProperty("id")]
-        public long Id { get; set;}
+        public string Id { get; set;}
         [JsonProperty("from")]
          public FromDto From { get; set; }
         [JsonProperty("message")]

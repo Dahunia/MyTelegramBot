@@ -2,7 +2,7 @@ namespace MyTelegramBot.Models.Telegram
 {
     public class CallbackQuery
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
         //public long CallbackQueryId { get; set; }
         public long FromId { get; set; }
         public User From { get; set; }
