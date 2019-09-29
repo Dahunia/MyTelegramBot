@@ -14,15 +14,11 @@ namespace MyTelegramBot.Checkers.Messages
         private readonly IDataRepository _dataRepository;
         private readonly IMapper _mapper;
         public DataChecker(
-            ILogger<DataChecker> logger,
-            IMyLogger filelogger,
-            ITelegramApiRequest telegramApiRequest,
             IAuthRepository authRepository,
             IDataRepository dataRepository,
-            IMapper mapper)
-            : base(logger, filelogger, telegramApiRequest) => 
-                (_authRepository, _dataRepository, _mapper) =
-                (authRepository, dataRepository, mapper);
+            IMapper mapper) => 
+        (_authRepository, _dataRepository, _mapper) =
+        (authRepository, dataRepository, mapper);
         public override async Task<string> Checker(MessageDto incomingMessageDto)
         {
             var user = await _authRepository.GetUser(incomingMessageDto.From.Id);

@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
+using MyTelegramBot.Helpers;
 using MyTelegramBot.Interface;
 using MyTelegramBot.Models.Settings;
 using Newtonsoft.Json;
@@ -13,12 +13,10 @@ namespace MyTelegramBot.Web
 {
     public class ApiGetingData<T>
     {
-        private readonly ILogger _logger;
-        private readonly IMyLogger _filelogger;
-        public ApiGetingData(ILogger logger, IMyLogger filelogger)
+        private readonly IMyLogger<ApiGetingData<T>> _logger;
+        public ApiGetingData(IMyLogger<ApiGetingData<T>> logger)
         {
             _logger = logger;
-            _filelogger = filelogger;
         }
 
         public async Task<T> GetDataAsync(
@@ -66,15 +64,16 @@ namespace MyTelegramBot.Web
                 
             string response = "";
             try {
+                await _logger.LogInformation($"Using proxy {proxy.Address.ToString()}");
+                await _logger.LogInformation($"SEND TO USER JSON SERIALIZED DATA {jsonData}");
                 response = await web.UploadStringTaskAsync(url, "POST", jsonData);
             } catch(Exception ex) {
-                await LogInformation("Error send: " + ex.Message);
+                await _logger.LogInformation("Error send: " + ex.Message);
                 response = ex.Message;
                 //throw new Exception(ex.Message);
             }
             finally {
-                await LogInformation($"Using proxy {proxy.Address.ToString()}");
-                await LogInformation($"SEND TO USER JSON SERIALIZED DATA {jsonData}");
+                await _logger.LogInformation($"SEND TO USER in the form of a OBJECT: {entity.GetDump()}");
             }
             //await LogInformation($"Sent to url: {url} with count of parameters: {parameters.Count}");
             return response;
@@ -82,14 +81,6 @@ namespace MyTelegramBot.Web
         public Task<T> GetDataAsync(string urlApi, string[] parameters, string proxy)
         {
             throw new Exception();
-        }
-        public async Task LogInformation(string message) 
-        {
-            _logger?.LogInformation(message);
-            if (_filelogger != null)
-            {
-                await _filelogger.WriteInformationAsync(message);
-            }
         }
         private async Task<NameValueCollection> GetParameters(T entity) {
             var parameters = new NameValueCollection();
@@ -102,10 +93,10 @@ namespace MyTelegramBot.Web
                     &&
                     (property.PropertyType.ToString().StartsWith("System") 
                     || property.GetValue(entity, null) == null)) {
-                    await LogInformation($"Parameter: name->'{property.Name}', " + 
+                    await _logger.LogInformation($"Parameter: name->'{property.Name}', " + 
                     $"value->'{property.GetValue(entity, null)?.ToString()}'");
                 } else { 
-                await LogInformation($"Parameter: name->{property.Name}, " +
+                await _logger.LogInformation($"Parameter: name->{property.Name}, " +
                     $"value->{JsonConvert.SerializeObject(property.GetValue(entity, null))}");
                 }
                 parameters.Add(

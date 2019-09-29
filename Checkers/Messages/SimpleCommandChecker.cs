@@ -10,6 +10,7 @@ using MyTelegramBot.Models.Telegram;
 using Newtonsoft.Json;
 using MyTelegramBot.Helpers;
 using Microsoft.Extensions.Logging;
+using MyTelegramBot.Log;
 
 namespace MyTelegramBot.Checkers.Messages
 {
@@ -18,14 +19,19 @@ namespace MyTelegramBot.Checkers.Messages
         private const string Binance24hrUrl = "https://api.binance.com/api/v1/ticker/24hr?symbol=pair";
         private readonly string[] commands = 
             {"/start", "/remove", "/inline", "cat"};
-        private readonly IDataRepository _repo;
+        private readonly IMyLogger<SimpleCommandChecker> _logger;
+        private readonly IDataRepository _dataRepository;
+        private readonly ITelegramApiRequest _telegramRequest;
         public SimpleCommandChecker(
-            ILogger<SimpleCommandChecker> logger,
-            IMyLogger filelogger,
-            ITelegramApiRequest telegramApiRequest,
-            IDataRepository repo)
-            : base(logger, filelogger, telegramApiRequest)
-            => _repo = repo;
+            IMyLogger<SimpleCommandChecker> logger,
+            IDataRepository dataRepository,
+            ITelegramApiRequest telegramApiRequest
+            )
+        {
+            _logger = logger;
+            _dataRepository = dataRepository;
+            _telegramRequest = telegramApiRequest;
+        }
         public override async Task<string> Checker(MessageDto incomingMessageDto)
         {
             var userDto = incomingMessageDto.From;
@@ -35,7 +41,7 @@ namespace MyTelegramBot.Checkers.Messages
                 var messageForSend = await CreateMessageForSend(incomingMessageDto);
                 var response = await _telegramRequest.SendMessage(messageForSend);
               
-                await LogInformation("SENT TO USER\n" + messageForSend.GetDump());
+                await _logger.LogInformation("SENT TO USER\n" + messageForSend.GetDump());
 
                 return response;
             }
@@ -76,14 +82,15 @@ namespace MyTelegramBot.Checkers.Messages
                         ChatId = chatId
                     };
                     try {        
-                        var get24hrTicker = new ApiGetingData<_24hrTickerDto>(_logger, _filelogger);
+                        var apiLogger = _logger as MyLogger<ApiGetingData<_24hrTickerDto>>;
+                        var get24hrTicker = new ApiGetingData<_24hrTickerDto>(apiLogger);
                         var ticker = await get24hrTicker.GetDataAsync(url);
 
                         messageForSend.Text = ticker.ToString();
 
-                        await LogInformation(ticker.ToString());
+                        await _logger.LogInformation(ticker.ToString());
                     } catch(Exception ex) {
-                        await LogInformation(ex.Message);
+                        await _logger.LogInformation(ex.Message);
                         messageForSend.Text  = $"Пары на Binance {messageText} не существует";
                     }
                     break;

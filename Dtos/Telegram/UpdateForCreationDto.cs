@@ -10,6 +10,6 @@ namespace MyTelegramBot.Dtos.Telegram
         public MessageDto Message { get; set; }
         [JsonProperty("callback_query")]
         public CallbackQueryDto CallbackQuery { get; set; }
-
+        public ResponseDto response { get; set ;}
     }
 }

@@ -34,7 +34,12 @@ namespace MyTelegramBot.Helpers
             CreateMap<UpdateForCreationDto, Update>()
                 .ForMember(dest => dest.Message, opt => {
                     opt.MapFrom(
-                        udto =>  context.Messages.Find(udto.Message.Id) != null ? null : udto.Message
+                        dto =>  context.Messages.Find(dto.Message.Id) != null ? null : dto.Message
+                    );
+                })
+                .ForMember(dest => dest.CallbackQuery, opt => {
+                    opt.MapFrom(
+                        dto =>  context.CallbackQueries.Find(dto.CallbackQuery.Id) != null ? null : dto.CallbackQuery
                     );
                 })
                 .IncludeAllDerived();

@@ -18,7 +18,7 @@
     "MyTelegramBot": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://192.168.1.42:5020",
+      "applicationUrl": "http://192.168.1.82:5080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

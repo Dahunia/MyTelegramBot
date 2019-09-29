@@ -14,6 +14,7 @@ using MyTelegramBot.Checkers.Messages;
 using MyTelegramBot.Checkers.Callback;
 using AutoMapper;
 using MyTelegramBot.Helpers;
+using MyTelegramBot.Views.Telegram;
 
 namespace MyTelegramBot
 {
@@ -46,16 +47,17 @@ namespace MyTelegramBot
             var telegramConfig = new TelegramSettings();
             Configuration.Bind("TelegramSettings", telegramConfig);
             services.AddSingleton(telegramConfig);
-            services.AddTransient<ITelegramApiRequest, TelegramApiRequest>();  
+            services.AddScoped<ITelegramApiRequest, TelegramApiRequest>();  
             //services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings");
 
             services.Configure<FilePaths>(Configuration.GetSection("FilePaths"));
             services.AddScoped<IReceiver, FileReceiver>();
-            services.AddScoped<IMyLogger, MyLogger>();
+            services.AddScoped(typeof(IMyLogger<>), typeof(MyLogger<>));
 
-            services.AddTransient<IDataRepository, DataRepository>();
-            services.AddTransient<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDataRepository, DataRepository>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
             // Setting BD
+            services.AddScoped<ITelegramView, TelegramView>();
             services.AddSingleton(provider => new MapperConfiguration(cfg => {
                 var scope = provider.GetRequiredService<IServiceScopeFactory>().CreateScope();
                 var context = scope.ServiceProvider.GetService<DataContext>();
@@ -63,26 +65,28 @@ namespace MyTelegramBot
                 cfg.AddProfile(new AutoMapperProfiles(context));
             }).CreateMapper());
             //services.AddAutoMapper(typeof(Startup));
-            // Messages
             
+            // Messages         
             services.AddScoped<DataChecker>();
             services.AddScoped<MainMenuChecker>();
-            services.AddScoped<SimpleCommandChecker>();
+            //services.AddScoped<SimpleCommandChecker>();
             services.AddScoped<IMessageChecker>(provider => {
                 var _messageChecker = (IMessageChecker)provider.GetService<DataChecker>();
                 _messageChecker
-                    .SetNext(provider.GetService<MainMenuChecker>())
-                    .SetNext(provider.GetService<SimpleCommandChecker>());
+                    .SetNext(provider.GetService<MainMenuChecker>());
+                    //.SetNext(provider.GetService<SimpleCommandChecker>());
                 
                 return _messageChecker;
             });
 
             services.AddScoped<DataCallbackChecker>();
-            services.AddScoped<CallbackChecker>();
+            services.AddScoped<SettingChecker>();
+            services.AddScoped<CategoryCallbackChecker>();
             services.AddScoped<ICallbackChecker>(provider => {
                 var _callbackChecker = (ICallbackChecker)provider.GetService<DataCallbackChecker>();
                 _callbackChecker
-                    .SetNext(provider.GetService<CallbackChecker>());
+                    .SetNext(provider.GetService<SettingChecker>())
+                    .SetNext(provider.GetService<CategoryCallbackChecker>());
 
                 return _callbackChecker;
             });

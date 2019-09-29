@@ -9,11 +9,11 @@ namespace MyTelegramBot.Checkers
     public class BaseChecker
     {
         protected readonly ILogger _logger;
-        protected readonly IMyLogger _filelogger;
+        protected readonly IMyLogger<BaseChecker> _filelogger;
         protected readonly ITelegramApiRequest _telegramRequest;
         protected BaseChecker(
             ILogger logger,
-            IMyLogger filelogger,
+            IMyLogger<BaseChecker> filelogger,
             ITelegramApiRequest telegramApiRequest
         )
         {

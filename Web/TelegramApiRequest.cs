@@ -1,29 +1,28 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using MyTelegramBot.Interface;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Models.Settings;
+using MyTelegramBot.Log;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace MyTelegramBot.Web
 {
     public class TelegramApiRequest : ITelegramApiRequest
-    {   
-        private readonly ILogger<TelegramApiRequest> _logger;
-        private readonly IMyLogger _filelogger;        
+    {  
+        private readonly ILoggerFactory _loggerFactory;
         private readonly TelegramSettings _telegramConfig;
+        private readonly IReceiver _receiver;
         public TelegramApiRequest(
-            ILogger<TelegramApiRequest> logger,
-            IMyLogger filelogger,
+            ILoggerFactory loggerFactory,
+            IReceiver fileReciever,
             TelegramSettings telegramConfig)
            // IOptions<TelegramSettings> telegramConfig)
         {
+            _loggerFactory = loggerFactory;
+            _receiver = fileReciever;
             _telegramConfig = telegramConfig;
-            _logger = logger;
-            _filelogger = filelogger;
         }
 
         public async Task<string> SendMessage<TButton>(MessageForSendDto<TButton> message) 
@@ -49,8 +48,11 @@ namespace MyTelegramBot.Web
         }
 
         private async Task<T> GetRequest<T>(string url) {
-            
-            var getRequest = new ApiGetingData<T>(_logger, _filelogger);
+            var apiLogger = new MyLogger<ApiGetingData<T>>(
+                _receiver,
+                _loggerFactory.CreateLogger<ApiGetingData<T>>()
+            );
+            var getRequest = new ApiGetingData<T>(apiLogger);
 
             var response = await getRequest.GetDataAsync(
                 url,
@@ -63,8 +65,11 @@ namespace MyTelegramBot.Web
         } 
 
         private async Task<string> SendRequest<T>(string url, T entity) {
-
-            var sendRequest = new ApiGetingData<T>(_logger, _filelogger);
+            var apiLogger = new MyLogger<ApiGetingData<T>>(
+                _receiver,
+                _loggerFactory.CreateLogger<ApiGetingData<T>>()
+            );
+            var sendRequest = new ApiGetingData<T>(apiLogger);
 
             return await sendRequest.SendDataAsync(
                 entity,
@@ -88,7 +93,7 @@ namespace MyTelegramBot.Web
 
             var update = await GetRequest<UpdateForCreationDto>(url);
 
-            await LogInformation(url + "\n");
+            //await _logger.LogInformation(url + "\n");
           /*   
             if (update.result.Count() > 0 ) {
                  _telegramConfig.LastUpdate = update.result.LastOrDefault().UpdateId + 1;
@@ -99,13 +104,5 @@ namespace MyTelegramBot.Web
 
             return update;
         }
-        protected async Task LogInformation(string message) 
-        {
-            _logger?.LogInformation(message);
-            if (_filelogger != null)
-            {
-                await _filelogger.WriteInformationAsync(message);
-            }
-        }   
     }
 }

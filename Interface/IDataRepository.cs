@@ -13,6 +13,7 @@ namespace MyTelegramBot.Interface
         Task<IEnumerable<Product>> GetProducts(long userId);
         Task<Product> GetProduct(int id);
         Task<IEnumerable<Category>> GetCategories(string languageCode = "ru", int parent = 0);
+        Task<IEnumerable<Category>> GetAllCategories(int parent = 0);
         Task<Category> GetCategory(int id);
         Task<bool> MessageExists(long messageId);
         Task<bool> CallbackExists(string callbackId);

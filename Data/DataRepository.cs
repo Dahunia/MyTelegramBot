@@ -33,6 +33,16 @@ namespace MyTelegramBot.Data
                 return categories;
             });
         }
+        public async Task<IEnumerable<Category>> GetAllCategories(
+            int parent = 0)
+        {
+            return await Task.Run(() => {
+                var categories = _context.Categories
+                    .Where(c => c.Parent == parent);
+
+                return categories;
+            });
+        }
         public async Task<Category> GetCategory(int id)
         {
             return await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);

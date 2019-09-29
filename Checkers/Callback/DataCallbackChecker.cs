@@ -13,15 +13,14 @@ namespace MyTelegramBot.Checkers.Callback
         private readonly IDataRepository _dataRepository;
         private readonly IMapper _mapper;
         public DataCallbackChecker(
-            ILogger<DataCallbackChecker> logger,
-            IMyLogger filelogger,
-            ITelegramApiRequest telegramApiRequest,
             IAuthRepository authRepository,
             IDataRepository dataRepository,
             IMapper mapper)
-            : base(logger, filelogger, telegramApiRequest) => 
-                (_authRepository, _dataRepository, _mapper) =
-                (authRepository, dataRepository, mapper);
+        {
+            _authRepository = authRepository;
+            _dataRepository = dataRepository;
+            _mapper = mapper;
+        }
 
         public override async Task<string> Checker(CallbackQueryDto incomingCallbackDto)
         {
