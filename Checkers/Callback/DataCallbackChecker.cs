@@ -11,14 +11,18 @@ namespace MyTelegramBot.Checkers.Callback
     {
         private readonly IAuthRepository _authRepository;
         private readonly IDataRepository _dataRepository;
+        private readonly IBackwardRepository _backwardRepository;
         private readonly IMapper _mapper;
         public DataCallbackChecker(
             IAuthRepository authRepository,
+            IBackwardRepository backwardRepository,
             IDataRepository dataRepository,
             IMapper mapper)
+        :base(null, null, null)
         {
             _authRepository = authRepository;
             _dataRepository = dataRepository;
+            _backwardRepository = backwardRepository;
             _mapper = mapper;
         }
 
@@ -37,6 +41,8 @@ namespace MyTelegramBot.Checkers.Callback
                 await _authRepository.SaveAllAsync();
             }
             var response = await base.Checker(incomingCallbackDto);
+
+            await _backwardRepository.SetBackwardCommand(user.Id, incomingCallbackDto.Data);
 
             if (!await _dataRepository.CallbackExists(incomingCallbackDto.Id)) 
             {

@@ -9,12 +9,12 @@ using Microsoft.Extensions.Logging;
 
 namespace MyTelegramBot.Web
 {
-    public class TelegramApiRequest : ITelegramApiRequest
+    public class TelegramRequest : ITelegramRequest
     {  
         private readonly ILoggerFactory _loggerFactory;
         private readonly TelegramSettings _telegramConfig;
         private readonly IReceiver _receiver;
-        public TelegramApiRequest(
+        public TelegramRequest(
             ILoggerFactory loggerFactory,
             IReceiver fileReciever,
             TelegramSettings telegramConfig)
@@ -36,7 +36,7 @@ namespace MyTelegramBot.Web
             string url = GetUrl("answerCallbackQuery");
             return await SendRequest(url, answerCallbackQuery);
         }
-        public async Task<string> ChangeMessage(MessageTextForEditDto messageTextForEdit)
+        public async Task<string> SendChangeMessage(MessageTextForEditDto messageTextForEdit)
         {
             string url = GetUrl("editMessageText");
             return await SendRequest(url, messageTextForEdit);

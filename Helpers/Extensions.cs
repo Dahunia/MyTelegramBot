@@ -1,6 +1,9 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
+using MyTelegramBot.Dtos.Telegram;
+using MyTelegramBot.Models.Telegram;
+using Newtonsoft.Json;
 
 namespace MyTelegramBot.Helpers
 {
@@ -39,5 +42,39 @@ namespace MyTelegramBot.Helpers
             dateNormal = dateNormal.AddSeconds(dateUtc).ToLocalTime();
             return dateNormal;
         }
+
+        public static JsonSerializerSettings GetJsonSerializerSettings<T>(ref bool isError)
+            where T: class
+        {
+            return new JsonSerializerSettings() {
+                Error = (s, e) => {
+                    var purpose = e.CurrentObject as T;
+                }
+            };
+        }
+
+        public static bool isEqual(
+            this MessageTextForEditDto messageTextForEditDto,
+            MessageDto incomingMessageDto)
+        {
+            return (messageTextForEditDto.ChatId == incomingMessageDto.Chat.Id)
+                && (messageTextForEditDto.MessageId == incomingMessageDto.Id)
+                && (messageTextForEditDto.Text.ToLower().Equals(incomingMessageDto.Text))
+                && (messageTextForEditDto.ReplyMarkup == incomingMessageDto.ReplyMarkup);
+/*                 (JsonConvert.SerializeObject(messageTextForEditDto.ReplyMarkup).Equals(
+                    JsonConvert.SerializeObject(incomingMessageDto.)
+                ) */
+        }
+
+        public static bool isEqual<T>(
+            this MessageForSendDto<T> messageForSendDto,
+            MessageDto incomingMessageDto)
+        where T: class
+        {
+           return (messageForSendDto.Text == incomingMessageDto.Text)
+               && (messageForSendDto.ReplyMarkup == incomingMessageDto.ReplyMarkup)
+               && (messageForSendDto.ChatId == incomingMessageDto.Chat.Id);
+        }
+        
     }
 }

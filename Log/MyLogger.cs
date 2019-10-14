@@ -1,7 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using MyTelegramBot.Dtos.Telegram;
+using MyTelegramBot.Helpers;
 using MyTelegramBot.Interface;
+using MyTelegramBot.Models.Telegram;
+using Newtonsoft.Json;
 
 namespace MyTelegramBot.Log
 {
@@ -20,6 +24,42 @@ namespace MyTelegramBot.Log
         {
             _logger?.LogInformation(message);
             await WriteInformationAsync(message);
+        }
+        public async Task LogIncomingRequest(string request)
+        {
+            var requestObject = JsonConvert.DeserializeObject(request);
+            await LogInformation("INCOMING REQUEST\n" + requestObject.GetDump());
+        }
+        public async Task LogSerializedResponse(object answerForSend)
+        {
+            await LogInformation(
+                "RESPONSE serialized data\n" + 
+                JsonConvert.SerializeObject(answerForSend));
+        }
+        public async Task LogResponseFromTelegram(Response response)
+        {
+             var test = response.GetDump();
+            await LogInformation(
+                "RESPONSE FROM TELEGRAM\n" + response.GetDump());
+        }
+        public async Task LogResponseFromTelegram(ResponseDto responseDto)
+        {
+            var test = responseDto.GetDump();
+            await LogInformation(
+                "RESPONSE DTO FROM TELEGRAM\n" + responseDto.GetDump());
+        }
+        public async Task LogSentToUser<TButton>(MessageForSendDto<TButton> messageDto) 
+            where TButton: class
+        {
+            await LogInformation("Was SENT TO USER\n" + messageDto.GetDump());
+        }
+        public async Task LogSentToUser(MessageTextForEditDto messageDto)
+        {
+            await LogInformation("Was SENT TO USER\n" + messageDto.GetDump());
+        }
+        public async Task LogRecievedResponse(ResponseDto responseDto)
+        {
+            await LogInformation($"\nReceived RESPONSE after send \n {responseDto.GetDump()}");
         }
         public void WriteInformation(string info)
         {

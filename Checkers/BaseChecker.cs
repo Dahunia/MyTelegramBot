@@ -10,20 +10,20 @@ namespace MyTelegramBot.Checkers
     {
         protected readonly ILogger _logger;
         protected readonly IMyLogger<BaseChecker> _filelogger;
-        protected readonly ITelegramApiRequest _telegramRequest;
+        protected readonly ITelegramRequest _telegramRequest;
         protected BaseChecker(
             ILogger logger,
             IMyLogger<BaseChecker> filelogger,
-            ITelegramApiRequest telegramApiRequest
+            ITelegramRequest TelegramRequest
         )
         {
             _logger = logger;//loggerFactory.CreateLogger<BaseChecker>();
             _filelogger = filelogger;
-            _telegramRequest = telegramApiRequest;
+            _telegramRequest = TelegramRequest;
            /*  _logger = provider.GetService<ILoggerFactory>()
                 .CreateLogger<BaseChecker>();
             _filelogger = provider.GetService<IMyLogger>();
-            _telegramRequest = provider.GetService<ITelegramApiRequest>(); */
+            _telegramRequest = provider.GetService<ITelegramRequest>(); */
         }
         protected async Task LogInformation(string message) 
         {
@@ -38,6 +38,6 @@ namespace MyTelegramBot.Checkers
     /* public interface ICheckerInjection {
         ILogger<BaseChecker> Logger();
         IMyLogger Filelogger();
-        ITelegramApiRequest TelegramRequest();
+        ITelegramRequest TelegramRequest();
     } */
 }

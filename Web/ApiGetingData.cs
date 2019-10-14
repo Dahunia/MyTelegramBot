@@ -73,8 +73,8 @@ namespace MyTelegramBot.Web
                 //throw new Exception(ex.Message);
             }
             finally {
-                await _logger.LogInformation($"SEND TO USER in the form of a OBJECT: {entity.GetDump()}");
-            }
+                await _logger.LogInformation("Finished request to the telegram");//$"SEND TO USER in the form of a OBJECT: {entity.GetDump()}");
+            } 
             //await LogInformation($"Sent to url: {url} with count of parameters: {parameters.Count}");
             return response;
         }//return await web.UploadValuesTaskAsync(url, parameters);

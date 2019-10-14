@@ -3,11 +3,11 @@ using MyTelegramBot.Dtos.Telegram;
 
 namespace MyTelegramBot.Interface
 {
-    public interface ITelegramApiRequest
+    public interface ITelegramRequest
     {
         //Task<UpdateForCreationDto> GetUpdate();
         Task<string> SendMessage<TButton>(MessageForSendDto<TButton> message) where TButton: class;
         Task<string> SendCallback(AnswerCallbackQueryDto answerCallbackQuery);
-        Task<string> ChangeMessage(MessageTextForEditDto messageTextForEdit);
+        Task<string> SendChangeMessage(MessageTextForEditDto messageTextForEdit);
     }
 }

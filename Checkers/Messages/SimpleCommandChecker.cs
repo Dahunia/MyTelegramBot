@@ -17,33 +17,26 @@ namespace MyTelegramBot.Checkers.Messages
     public class SimpleCommandChecker : AbstractMessageChecker
     {
         private const string Binance24hrUrl = "https://api.binance.com/api/v1/ticker/24hr?symbol=pair";
+        private IMyLogger<AbstractMessageChecker> _logger;
         private readonly string[] commands = 
             {"/start", "/remove", "/inline", "cat"};
-        private readonly IMyLogger<SimpleCommandChecker> _logger;
-        private readonly IDataRepository _dataRepository;
-        private readonly ITelegramApiRequest _telegramRequest;
+        private readonly ITelegramView _view;
         public SimpleCommandChecker(
-            IMyLogger<SimpleCommandChecker> logger,
-            IDataRepository dataRepository,
-            ITelegramApiRequest telegramApiRequest
-            )
+            IMyLogger<AbstractMessageChecker> logger,
+            IBackwardRepository backwardRepository,
+            ITelegramRequest telegramRequest)
+        : base(logger, backwardRepository, telegramRequest)
         {
             _logger = logger;
-            _dataRepository = dataRepository;
-            _telegramRequest = telegramApiRequest;
         }
         public override async Task<string> Checker(MessageDto incomingMessageDto)
         {
             var userDto = incomingMessageDto.From;
 
-            if (incomingMessageDto.Text != "")//commands.Contains(incomingMessageDto.Text))
+            if (incomingMessageDto.Text != "")
             {
-                var messageForSend = await CreateMessageForSend(incomingMessageDto);
-                var response = await _telegramRequest.SendMessage(messageForSend);
-              
-                await _logger.LogInformation("SENT TO USER\n" + messageForSend.GetDump());
-
-                return response;
+                var otherView = await CreateMessageForSend(incomingMessageDto);
+                return await base.SendView(otherView, incomingMessageDto);
             }
             return await base.Checker(incomingMessageDto);
         }

@@ -47,15 +47,16 @@ namespace MyTelegramBot
             var telegramConfig = new TelegramSettings();
             Configuration.Bind("TelegramSettings", telegramConfig);
             services.AddSingleton(telegramConfig);
-            services.AddScoped<ITelegramApiRequest, TelegramApiRequest>();  
+            services.AddScoped<ITelegramRequest, TelegramRequest>();  
             //services.Configure<TelegramSettings>(Configuration.GetSection("TelegramSettings");
 
             services.Configure<FilePaths>(Configuration.GetSection("FilePaths"));
-            services.AddScoped<IReceiver, FileReceiver>();
-            services.AddScoped(typeof(IMyLogger<>), typeof(MyLogger<>));
+            services.AddSingleton<IReceiver, FileReceiver>();
+            services.AddSingleton(typeof(IMyLogger<>), typeof(MyLogger<>));
 
             services.AddScoped<IDataRepository, DataRepository>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IBackwardRepository, IBackwardRepository>();
             // Setting BD
             services.AddScoped<ITelegramView, TelegramView>();
             services.AddSingleton(provider => new MapperConfiguration(cfg => {
@@ -80,12 +81,12 @@ namespace MyTelegramBot
             });
 
             services.AddScoped<DataCallbackChecker>();
-            services.AddScoped<SettingChecker>();
+            services.AddScoped<SettingsChecker>();
             services.AddScoped<CategoryCallbackChecker>();
             services.AddScoped<ICallbackChecker>(provider => {
                 var _callbackChecker = (ICallbackChecker)provider.GetService<DataCallbackChecker>();
                 _callbackChecker
-                    .SetNext(provider.GetService<SettingChecker>())
+                    .SetNext(provider.GetService<SettingsChecker>())
                     .SetNext(provider.GetService<CategoryCallbackChecker>());
 
                 return _callbackChecker;

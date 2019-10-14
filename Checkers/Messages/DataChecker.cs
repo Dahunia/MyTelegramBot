@@ -12,13 +12,16 @@ namespace MyTelegramBot.Checkers.Messages
     {
         private readonly IAuthRepository _authRepository;
         private readonly IDataRepository _dataRepository;
+        private readonly IBackwardRepository _backwardRepository;
         private readonly IMapper _mapper;
         public DataChecker(
             IAuthRepository authRepository,
             IDataRepository dataRepository,
-            IMapper mapper) => 
-        (_authRepository, _dataRepository, _mapper) =
-        (authRepository, dataRepository, mapper);
+            IBackwardRepository backwardRepository,
+            IMapper mapper) 
+        :base(null, null, null) => 
+        (_authRepository, _dataRepository, _backwardRepository, _mapper) =
+        (authRepository, dataRepository, backwardRepository, mapper);
         public override async Task<string> Checker(MessageDto incomingMessageDto)
         {
             var user = await _authRepository.GetUser(incomingMessageDto.From.Id);
@@ -43,6 +46,8 @@ namespace MyTelegramBot.Checkers.Messages
             }
 
             var response = await base.Checker(incomingMessageDto);
+
+            await _backwardRepository.SetBackwardCommand(user.Id, incomingMessageDto.Text);
 
             if (!await _dataRepository.MessageExists(incomingMessageDto.Id)) 
             {

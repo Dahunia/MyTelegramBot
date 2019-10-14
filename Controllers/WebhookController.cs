@@ -21,7 +21,7 @@ namespace MyTelegramBot.Controllers
         private readonly IMessageChecker _messageChecker;
         private readonly ICallbackChecker _callbackChecker;
         private readonly IMapper _mapper;
-        private readonly IDataRepository _repo;
+        private readonly IDataRepository _dataRepository;
         public WebhookController(
             IMyLogger<WebhookController> logger
             ,IMessageChecker messageChecker
@@ -33,7 +33,7 @@ namespace MyTelegramBot.Controllers
             _logger = logger; 
             _messageChecker = messageChecker;
             _callbackChecker = callbackChecker;
-            _repo = repo;
+            _dataRepository = repo;
         }
 
         [HttpPost]
@@ -42,35 +42,53 @@ namespace MyTelegramBot.Controllers
             //var temp = HttpContext.Request.Cookies;
             //Debug information
             var request = HttpContext.Request.ReadRequestBody();
-            var requestObject = JsonConvert.DeserializeObject(request);
-            await _logger.LogInformation("INCOMING REQUEST\n" + requestObject.GetDump());
+            await _logger.LogIncomingRequest(request);  
             
             string responseReceived = "";
+
             if (incomingRequestDto.Message != null) 
             {
                 responseReceived = await _messageChecker.Checker(incomingRequestDto.Message);
             }
+            
             if (incomingRequestDto.CallbackQuery != null) 
             {    
                 responseReceived = await _callbackChecker.Checker(incomingRequestDto.CallbackQuery);
             }
 
-            if (incomingRequestDto != null)
-            {
-                var updateForCreation = _mapper.Map<Update>(incomingRequestDto);
-                _repo.Add(updateForCreation);
-                await _repo.SaveAllAsync();
-            }
+            await SaveRequestData(incomingRequestDto);
+            await SaveResponseData(responseReceived);
      
-            var responseDto = JsonConvert.DeserializeObject<ResponseDto>(responseReceived);
-            if (responseDto != null) {
-                await _logger.LogInformation($"\nReceived RESPONSE after send \n {responseDto.GetDump()}");
-                var responseForCreation = _mapper.Map<Response>(responseDto);
-                _repo.Add(responseForCreation);
-                await _repo.SaveAllAsync();
-            }
-
             return StatusCode(201);//Ok(checkResult);
+        }
+        private async Task SaveRequestData(UpdateForCreationDto incomingRequestDto)
+        {
+            await Task.Run(async () => {
+                if (!await _dataRepository.UpdateExists(incomingRequestDto.Id))
+                {
+                    var updateForCreation = _mapper.Map<Update>(incomingRequestDto);
+                    _dataRepository.Add(updateForCreation);
+                    await _dataRepository.SaveAllAsync();
+                }
+            });
+        }
+        private async Task SaveResponseData(string response = "")
+        {
+            await Task.Run(async () => {
+                await _logger.LogInformation($"\nRESPONSE FROM TELEGRAM \n{response}");
+                if (!response.Contains("error")) 
+                {
+                    var responseDto = JsonConvert.DeserializeObject<ResponseDto>(response);
+                    await _logger.LogResponseFromTelegram(responseDto);
+                    if (responseDto != null) 
+                    {
+                        var responseForCreation = _mapper.Map<Response>(responseDto);
+                        await _logger.LogResponseFromTelegram(responseForCreation);
+                        _dataRepository.Add(responseForCreation);
+                        await _dataRepository.SaveAllAsync();
+                    }
+                }
+            });
         }
     }
 }

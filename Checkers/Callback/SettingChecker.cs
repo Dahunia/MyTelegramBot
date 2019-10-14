@@ -1,56 +1,64 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using MyTelegramBot.Dtos.Telegram;
 using MyTelegramBot.Interface;
-using MyTelegramBot.Views.Telegram;
-using Newtonsoft.Json;
 
 namespace MyTelegramBot.Checkers.Callback
 {
-    public class SettingChecker : AbstractCallbackChecker
+    public class SettingsChecker : AbstractCallbackChecker
     {
-        private readonly IMyLogger<SettingChecker> _logger;
-        private readonly IDataRepository _repo;
+        //private readonly IMyLogger<SettingsChecker> _logger;
+        private readonly IBackwardRepository _backwardRepository;
         private readonly ITelegramView _view;
-        private readonly ITelegramApiRequest _telegramRequest;
+        //private readonly ITelegramRequest _telegramRequest;
          private readonly string[] commands = {@"/about", @"/?"};
-        public SettingChecker(
-            IMyLogger<SettingChecker> logger,
-            ITelegramApiRequest telegramApiRequest,
-            IDataRepository repo,
+        public SettingsChecker(
+            IMyLogger<AbstractCallbackChecker> logger,
+            ITelegramRequest telegramRequest,
+            IBackwardRepository backwardRepository,
             ITelegramView view)
+        : base(logger, backwardRepository, telegramRequest)
         { 
-            _logger = logger;
-            _repo = repo; 
+            //_logger = logger;
+            _backwardRepository = backwardRepository; 
             _view = view;
-            _telegramRequest = telegramApiRequest;
         }
         public override async Task<string> Checker(CallbackQueryDto incomingCallbackDto)
         {
-            var command = "";
-        
+            var messageTextForEdit = await CheckCallback(incomingCallbackDto);
+            return (messageTextForEdit != null) ? 
+                await base.SendView(messageTextForEdit, incomingCallbackDto):
+                await base.Checker(incomingCallbackDto);
+        }
+
+        public async Task<MessageTextForEditDto> CheckCallback(CallbackQueryDto incomingCallbackDto)
+        {
+            var command = incomingCallbackDto.Data.ToLower();
+            var userId = incomingCallbackDto.From.Id;
             MessageTextForEditDto messageTextForEdit = null;
-            if (commands.Contains(command = incomingCallbackDto.Data.ToLower()))
+
+            if (command.Equals(@"/backward")) 
             {
-                switch(command)
-                {   
-                    case @"/?":
-                        messageTextForEdit = 
-                            await _view.Question(incomingCallbackDto.Message);
-                        break;
-                    case @"/about": 
-                        messageTextForEdit = 
-                            await _view.About(incomingCallbackDto.Message);
-                        break;
+                messageTextForEdit = await _backwardRepository.GetBackwardMessageTextForEditView(userId);
+                if (messageTextForEdit == null) 
+                {
+                    command = await _backwardRepository.GetBackwardCommand(userId);
+                    incomingCallbackDto.Data = command;
                 }
-                //var answerForSend = await _view.MessageTextForEdit(incomingCallbackDto);                         
-                var response = await _telegramRequest.ChangeMessage(messageTextForEdit);
-                await _logger.LogInformation("RESPONSE TO USER\n" + JsonConvert.SerializeObject(messageTextForEdit));
-                return response;
             }
-            return await base.Checker(incomingCallbackDto);
+
+            if (commands.Contains(command))
+            {
+                switch (command)
+                {   
+                    case @"/?": 
+                        return await _view.QuestionView(incomingCallbackDto.Message);
+                    case @"/about": 
+                        return await _view.AboutView(incomingCallbackDto.Message);
+                };                   
+            }
+            return messageTextForEdit;
         }
     }
 }
